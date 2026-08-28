@@ -1,5 +1,6 @@
 const root = document.documentElement;
 const themeToggle = document.querySelector('.theme-toggle');
+const themeIcon = themeToggle?.querySelector('.theme-icon');
 const themeMeta = document.querySelector('meta[name="theme-color"]');
 
 function applyTheme(theme, persist = false) {
@@ -10,6 +11,7 @@ function applyTheme(theme, persist = false) {
     themeToggle.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
     themeToggle.title = theme === 'light' ? '切换到黑色主题' : '切换到白色主题';
   }
+  if (themeIcon) themeIcon.textContent = theme === 'light' ? '☾' : '☀';
 }
 
 applyTheme(root.dataset.theme || 'dark');
