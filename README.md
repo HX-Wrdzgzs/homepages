@@ -1,43 +1,27 @@
-# 余白の向こう。
+# HX-Wrdzgzs Personal Homepage
 
-HX-Wrdzgzs 的个人主页与数字实验室。
+HX-Wrdzgzs 的个人主页。
 
-这不是单纯的 GitHub 跳转页。主页直接展示项目背景、技术方向与当前关注，并为代表项目提供站内详情页；GitHub 作为源码、Issue、Release 和进一步技术细节入口。
+## 现在的结构
 
-## 当前内容
-
-- 中文主界面
-- 黑色 / 白色主题切换，并记忆本地选择
-- 响应系统 `prefers-color-scheme`
-- 代表项目站内详情页
-- 当前关注、技术与工具、实验室、关于与外部入口
-- 移动端响应式布局
+- 中文首页
+- 固定浅色主题，不提供深色模式
+- 11 个当前存在的个人公开项目
+- 项目分类筛选
+- 6 个站内项目介绍页
+- “最近在忙”“其他”“开发组”“关于”“链接”等区块
+- 桌面端侧边导航、移动端顶部导航
 - `prefers-reduced-motion` 支持
-- 中文 404 页面
 
-## 项目详情页
-
-```text
-projects/
-├── retro-monitor.html
-├── hx-ham.html
-├── mizukisync.html
-├── pjsk-gateway.html
-├── qso-archive.html
-└── gensokyo-web.html
-```
+个人项目只列当前仍存在、确实有内容的公开仓库；Profile 仓库和本主页仓库不计入项目数量。开发组仓库单独展示，不与个人项目混在一起。
 
 ## Cloudflare Pages
 
-无构建步骤的静态站点：
+这是无构建步骤的静态站：
 
 - Production branch: `main`
 - Framework preset: `None`
 - Build command: 留空
 - Build output directory: `/`
 
-入口文件为仓库根目录的 `index.html`。Cloudflare Pages 连接 `main` 后，每次直接提交都会触发新的生产部署。
-
-## 本地预览
-
-可以直接使用静态 HTTP Server 预览仓库根目录。站点没有 npm 依赖或构建产物目录。
+入口文件为仓库根目录的 `index.html`。Cloudflare Pages 连接 `main` 后，直接提交会触发生产部署。

@@ -1,36 +1,35 @@
-const filterButtons = [...document.querySelectorAll('.filter-chip')];
-const projectCards = [...document.querySelectorAll('.full-project')];
-
-filterButtons.forEach((button) => {
+document.querySelectorAll('.filter').forEach((button) => {
   button.addEventListener('click', () => {
-    const filter = button.dataset.filter || 'all';
-
-    filterButtons.forEach((item) => item.classList.toggle('is-active', item === button));
-
-    projectCards.forEach((card) => {
-      const visible = filter === 'all' || card.dataset.category === filter;
-      card.classList.toggle('is-hidden', !visible);
+    const filter = button.dataset.filter;
+    document.querySelectorAll('.filter').forEach((item) => item.classList.toggle('is-active', item === button));
+    document.querySelectorAll('.project-card').forEach((card) => {
+      card.hidden = filter !== 'all' && card.dataset.category !== filter;
     });
   });
 });
 
-const railLinks = [...document.querySelectorAll('.rail-nav a')];
-const homeSections = [...document.querySelectorAll('.home-main section[id]')];
-
-if ('IntersectionObserver' in window && railLinks.length && homeSections.length) {
+const reveals = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver((entries) => {
-    const current = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-    if (!current) return;
-    railLinks.forEach((link) => {
-      link.classList.toggle('is-active', link.getAttribute('href') === `#${current.target.id}`);
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
     });
-  }, {
-    rootMargin: '-28% 0px -58% 0px',
-    threshold: [0.05, 0.15, 0.3]
-  });
+  }, { threshold: 0.08 });
+  reveals.forEach((item) => observer.observe(item));
+} else {
+  reveals.forEach((item) => item.classList.add('is-visible'));
+}
 
-  homeSections.forEach((section) => observer.observe(section));
+const navLinks = [...document.querySelectorAll('.rail-nav a')];
+const sections = [...document.querySelectorAll('main section[id]')];
+if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    const current = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!current) return;
+    navLinks.forEach((link) => link.classList.toggle('is-active', link.getAttribute('href') === `#${current.target.id}`));
+  }, { rootMargin: '-30% 0px -55% 0px', threshold: [0.08, 0.2, 0.4] });
+  sections.forEach((section) => navObserver.observe(section));
 }

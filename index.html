@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,72 +9,51 @@
   <meta property="og:description" content="把我做过、在做和还在折腾的东西放在这里。" />
   <meta property="og:type" content="website" />
   <title>HX-Wrdzgzs · 个人主页</title>
-  <script>
-    (() => {
-      const saved = localStorage.getItem('theme');
-      document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    })();
-  </script>
-  <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./home.css" />
 </head>
-<body class="home-v3">
-  <div class="pointer-glow" aria-hidden="true"></div>
-
+<body>
   <aside class="side-rail" aria-label="侧边导航">
-    <div class="rail-top">
-      <a class="rail-brand" href="#top">
-        <strong>HX</strong>
-        <span>Wrdzgzs</span>
-      </a>
-
+    <div>
+      <a class="rail-brand" href="#top"><strong>HX</strong><span>Wrdzgzs</span></a>
       <nav class="rail-nav">
         <a href="#top" class="is-active"><span>01</span>首页</a>
         <a href="#now"><span>02</span>最近在忙</a>
         <a href="#projects"><span>03</span>项目</a>
-        <a href="#team"><span>04</span>开发组</a>
-        <a href="#about"><span>05</span>关于</a>
-        <a href="#links"><span>06</span>链接</a>
+        <a href="#other"><span>04</span>其他</a>
+        <a href="#team"><span>05</span>开发组</a>
+        <a href="#about"><span>06</span>关于</a>
+        <a href="#links"><span>07</span>链接</a>
       </nav>
     </div>
-
     <div class="rail-bottom">
-      <div class="rail-mini">
-        <span>业余无线电</span>
-        <strong>BA4THG</strong>
-      </div>
+      <div class="rail-mini"><span>业余无线电</span><strong>BA4THG</strong></div>
       <a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a>
-      <button class="theme-toggle" type="button" aria-label="切换黑白主题">
-        <span class="theme-icon">◐</span>
-        <span class="theme-label">切换主题</span>
-      </button>
     </div>
   </aside>
 
   <header class="mobile-header">
     <a class="mobile-brand" href="#top">HX-Wrdzgzs</a>
-    <div class="mobile-actions">
+    <nav>
       <a href="#projects">项目</a>
-      <button class="theme-toggle" type="button" aria-label="切换黑白主题"><span class="theme-icon">◐</span></button>
-    </div>
+      <a href="#about">关于</a>
+    </nav>
   </header>
 
   <main class="home-main" id="top">
-    <section class="home-hero home-shell section-reveal">
-      <div class="hero-main-copy">
+    <section class="home-hero home-shell reveal">
+      <div>
         <p class="section-no">01 / 首页</p>
         <h1>你好，我是<br><span>HX-Wrdzgzs。</span></h1>
         <p class="hero-lead">
           平时写点代码，维护几个 Bot 和网站，也折腾 Android、服务器、网络和无线电。
-          这个站就拿来放这些东西，不想让所有内容最后都只剩一个 GitHub 链接。
+          这里就放我自己做过、还在维护，或者最近又捡起来折腾的东西。
         </p>
         <div class="hero-buttons">
-          <a class="home-button primary" href="#projects">看看项目 ↓</a>
-          <a class="home-button" href="#about">关于我</a>
-          <a class="home-button" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a class="button primary" href="#projects">看看项目 ↓</a>
+          <a class="button" href="#about">关于我</a>
+          <a class="button" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a>
         </div>
       </div>
-
       <div class="hero-facts">
         <div><span>GitHub</span><strong>HX-Wrdzgzs</strong></div>
         <div><span>Callsign</span><strong>BA4THG</strong></div>
@@ -83,233 +62,215 @@
       </div>
     </section>
 
-    <section class="home-section home-shell section-reveal" id="now">
+    <section class="home-section home-shell reveal" id="now">
       <div class="section-head">
-        <div>
-          <p class="section-no">02 / 最近在忙</p>
-          <h2>最近又在折腾什么。</h2>
-        </div>
-        <p>不做“正在改变世界”的状态栏，写点真的。</p>
+        <div><p class="section-no">02 / 最近在忙</p><h2>最近在搞这些。</h2></div>
+        <p>不是状态面板，单纯记一下现在手上有什么。</p>
       </div>
-
       <div class="now-grid">
         <article class="now-card">
-          <span class="now-status">正在改</span>
+          <span class="badge">正在改</span>
           <h3>MizukiSync Android</h3>
-          <p>主要在重做界面和交互。之前那套能用，但我自己越看越不顺眼。</p>
-          <div class="now-tags"><span>Android</span><span>Kotlin</span><span>UI</span></div>
+          <p>继续重做界面和交互。旧版不是不能用，只是现在看着已经不太顺眼了。</p>
+          <div class="tags"><span>Android</span><span>Kotlin</span><span>UI</span></div>
         </article>
         <article class="now-card">
-          <span class="now-status">在维护</span>
+          <span class="badge">在维护</span>
           <h3>HX-HAM</h3>
-          <p>继续补点名录入、历史数据和 Excel 这条线，目标还是现场用起来别碍事。</p>
-          <div class="now-tags"><span>Windows</span><span>Radio</span><span>SQLite</span></div>
+          <p>点名录入、历史数据和 Excel 这条线继续补，现场用的时候尽量少添麻烦。</p>
+          <div class="tags"><span>Windows</span><span>Radio</span><span>SQLite</span></div>
         </article>
         <article class="now-card">
-          <span class="now-status">在用</span>
+          <span class="badge">在用</span>
           <h3>BA4THG</h3>
-          <p>通联记录、QSL 卡片和中继数据现在都有各自的站，慢慢把零散东西收回来。</p>
-          <div class="now-tags"><span>QSO</span><span>QSL</span><span>Repeater</span></div>
+          <p>QSO 长期档案和 QSL 卡片现在分开维护，记录、查询和展示各做各的。</p>
+          <div class="tags"><span>QSO</span><span>QSL</span><span>HAM</span></div>
         </article>
         <article class="now-card">
-          <span class="now-status">顺手做</span>
+          <span class="badge">长期</span>
           <h3>Bot / PJSK / 舞萌</h3>
-          <p>开发组这边还在继续维护 Bot、PJSK 和舞萌相关的插件、查询和数据服务。</p>
-          <div class="now-tags"><span>NoneBot</span><span>PJSK</span><span>maimai</span></div>
+          <p>开发组这边还在继续维护 Bot、PJSK 和舞萌相关插件，哪里出问题就继续补哪里。</p>
+          <div class="tags"><span>Bot</span><span>PJSK</span><span>maimai</span></div>
         </article>
       </div>
     </section>
 
-    <section class="home-section projects-section section-reveal" id="projects">
+    <section class="home-section projects-wrap reveal" id="projects">
       <div class="home-shell">
-        <div class="section-head project-head">
-          <div>
-            <p class="section-no">03 / 项目</p>
-            <h2>项目基本都放这。</h2>
-          </div>
-          <p>个人账号里有实际内容的公开项目都列出来。Profile 仓库和这个主页本身不算。</p>
+        <div class="section-head">
+          <div><p class="section-no">03 / 项目</p><h2>个人项目基本都在这。</h2></div>
+          <p>只列现在还存在、而且确实有内容的公开项目。Profile 仓库和这个主页本身不算。</p>
         </div>
 
-        <div class="project-filters" role="group" aria-label="项目分类">
-          <button class="filter-chip is-active" data-filter="all">全部 <span>12</span></button>
-          <button class="filter-chip" data-filter="radio">无线电 <span>5</span></button>
-          <button class="filter-chip" data-filter="bot">Bot / 音游 <span>4</span></button>
-          <button class="filter-chip" data-filter="tool">工具 <span>2</span></button>
-          <button class="filter-chip" data-filter="system">系统 / 硬件 <span>1</span></button>
+        <div class="filters" role="group" aria-label="项目分类">
+          <button class="filter is-active" data-filter="all">全部 <span>11</span></button>
+          <button class="filter" data-filter="radio">无线电 <span>4</span></button>
+          <button class="filter" data-filter="bot">Bot / 音游 <span>4</span></button>
+          <button class="filter" data-filter="tool">工具 <span>2</span></button>
+          <button class="filter" data-filter="system">系统 / 硬件 <span>1</span></button>
         </div>
 
-        <div class="all-projects">
-          <article class="full-project" data-category="radio">
-            <div class="project-top"><span class="project-kind">无线电 / Windows</span><span class="project-state">维护中</span></div>
+        <div class="project-grid">
+          <article class="project-card" data-category="radio">
+            <div class="project-meta"><span>无线电 / Windows</span><span>维护中</span></div>
             <h3>HX-HAM</h3>
-            <p>给中继点名用的 Windows 本地录入助手。现场快速输呼号、地点、设备这些东西，程序负责整理、记历史，再和 SQLite、Excel 对上。</p>
-            <div class="project-tags"><span>Python</span><span>SQLite</span><span>Excel</span></div>
+            <p>给中继点名用的 Windows 本地录入助手。快速输呼号、地点、设备这些东西，程序负责整理、记历史，再和 SQLite、Excel 对上。</p>
+            <div class="tags"><span>Python</span><span>SQLite</span><span>Excel</span></div>
             <div class="project-links"><a href="./projects/hx-ham.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/ham-checkin-assistant" target="_blank" rel="noreferrer">源码 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="radio">
-            <div class="project-top"><span class="project-kind">无线电 / Web</span><span class="project-state">在线</span></div>
+          <article class="project-card" data-category="radio">
+            <div class="project-meta"><span>无线电 / Web</span><span>在线</span></div>
             <h3>BA4THG 通联档案</h3>
-            <p>把 BA4THG 的 QSO 记录长期存下来，也提供按呼号查询和 QSL 相关入口。日常记录还是照旧用，网站主要负责归档和查询。</p>
-            <div class="project-tags"><span>Cloudflare Pages</span><span>D1</span><span>QSO</span></div>
+            <p>把 BA4THG 的 QSO 记录长期存下来，也提供按呼号查询和 QSL 相关入口。日常记录照旧用，网站主要负责归档和查询。</p>
+            <div class="tags"><span>Cloudflare Pages</span><span>D1</span><span>QSO</span></div>
             <div class="project-links"><a href="./projects/qso-archive.html">站内介绍 →</a><a href="https://qso.mizuki.top" target="_blank" rel="noreferrer">打开网站 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="radio">
-            <div class="project-top"><span class="project-kind">无线电 / Web</span><span class="project-state">在线</span></div>
+          <article class="project-card" data-category="radio">
+            <div class="project-meta"><span>无线电 / Web</span><span>公开</span></div>
             <h3>BA4THG QSL Card Archive</h3>
-            <p>QSL 卡片单独做了一个画廊。网页优先加载缩略图，点开再看完整尺寸，和 QSO 数据库分开维护。</p>
-            <div class="project-tags"><span>Static Web</span><span>WebP</span><span>QSL</span></div>
+            <p>QSL 卡片单独做了一个画廊。先加载缩略图，点开再看完整尺寸，和 QSO 数据库分开维护。</p>
+            <div class="tags"><span>Static Web</span><span>WebP</span><span>QSL</span></div>
             <div class="project-links"><a href="https://github.com/HX-Wrdzgzs/BA4THG-QSL" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="radio">
-            <div class="project-top"><span class="project-kind">无线电 / 数据</span><span class="project-state">在线</span></div>
-            <h3>中继数据协作站</h3>
-            <p>把中继数据从固件仓库里拆出来做成网站。公开查询、提交更新、核验和固件导出各走各的，数据有来源也能回头查。</p>
-            <div class="project-tags"><span>Cloudflare</span><span>D1</span><span>Repeater</span></div>
-            <div class="project-links"><a href="https://repeater.mizuki.top" target="_blank" rel="noreferrer">打开网站 ↗</a><a href="https://github.com/HX-Wrdzgzs/uv-k5-repeater-web" target="_blank" rel="noreferrer">源码 ↗</a></div>
-          </article>
-
-          <article class="full-project" data-category="radio">
-            <div class="project-top"><span class="project-kind">无线电 / 固件</span><span class="project-state">维护中</span></div>
+          <article class="project-card" data-category="radio">
+            <div class="project-meta"><span>无线电 / 固件</span><span>维护中</span></div>
             <h3>LOSEHU132 UV-K5 / UV-K6 固件</h3>
-            <p>自己维护的一份 UV-K5 / UV-K6 自定义固件。中文功能、一些扩展功能、发布包和中继数据都放在这里一起维护。</p>
-            <div class="project-tags"><span>C</span><span>Firmware</span><span>UV-K5</span></div>
+            <p>自己维护的一份 UV-K5 / UV-K6 自定义固件。中文功能、扩展功能和发布包都放在这个仓库里继续维护。</p>
+            <div class="tags"><span>C</span><span>Firmware</span><span>UV-K5</span></div>
             <div class="project-links"><a href="https://github.com/HX-Wrdzgzs/uv-k5-losehu132-wrdzgzs" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="bot">
-            <div class="project-top"><span class="project-kind">舞萌 / Android</span><span class="project-state">公开</span></div>
+          <article class="project-card" data-category="bot">
+            <div class="project-meta"><span>舞萌 / Android</span><span>公开</span></div>
             <h3>Amia Sync Android</h3>
-            <p>给舞萌 DX 用的 Android 第三方客户端。主要做玩家信息、成绩、曲库筛选和同步，后端负责把第三方接口整理一下再给客户端用。</p>
-            <div class="project-tags"><span>Kotlin</span><span>Android</span><span>FastAPI</span></div>
+            <p>给舞萌 DX 用的 Android 第三方客户端。做玩家信息、成绩、曲库筛选和同步，后端负责把第三方接口整理后再给客户端用。</p>
+            <div class="tags"><span>Kotlin</span><span>Android</span><span>FastAPI</span></div>
             <div class="project-links"><a href="./projects/mizukisync.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/Amia-Sync-Android" target="_blank" rel="noreferrer">源码 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="bot">
-            <div class="project-top"><span class="project-kind">PJSK / Web</span><span class="project-state">公开</span></div>
+          <article class="project-card" data-category="bot">
+            <div class="project-meta"><span>PJSK / Web</span><span>公开</span></div>
             <h3>HX PJSK Gateway</h3>
-            <p>PJSK 网页查询这边用的网关。网页发请求，机器人侧确认身份，再去数据节点拿结果，主要就是把这几边接起来。</p>
-            <div class="project-tags"><span>React</span><span>FastAPI</span><span>Redis</span></div>
+            <p>PJSK 网页查询用的网关。网页发请求，机器人侧确认身份，再去数据节点拿结果，主要就是把这几边接起来。</p>
+            <div class="tags"><span>React</span><span>FastAPI</span><span>Redis</span></div>
             <div class="project-links"><a href="./projects/pjsk-gateway.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/hx-pjsk-gateway" target="_blank" rel="noreferrer">源码 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="bot">
-            <div class="project-top"><span class="project-kind">Bot / OneBot</span><span class="project-state">维护</span></div>
+          <article class="project-card" data-category="bot">
+            <div class="project-meta"><span>Bot / OneBot</span><span>维护</span></div>
             <h3>Gensokyo-NewQQ</h3>
-            <p>我这边在用和维护的一份 Gensokyo-NewQQ 代码仓库。平时主要跟 QQ、OneBot 兼容、配置和实际运行问题打交道。</p>
-            <div class="project-tags"><span>Go</span><span>QQ Bot</span><span>OneBot</span></div>
+            <p>我这边在用和维护的一份 Gensokyo-NewQQ 代码仓库，平时主要处理 QQ、OneBot 兼容、配置和实际运行问题。</p>
+            <div class="tags"><span>Go</span><span>QQ Bot</span><span>OneBot</span></div>
             <div class="project-links"><a href="https://github.com/HX-Wrdzgzs/Gensokyo-NewQQ" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="bot">
-            <div class="project-top"><span class="project-kind">Bot / 文档</span><span class="project-state">公开</span></div>
+          <article class="project-card" data-category="bot">
+            <div class="project-meta"><span>Bot / 文档</span><span>公开</span></div>
             <h3>GensokyoNewQQWeb</h3>
-            <p>给 Gensokyo-NewQQ 配的文档站和项目入口。OneBot、配置、WebUI、API 这些内容集中放在这里，省得每次到处翻。</p>
-            <div class="project-tags"><span>VitePress</span><span>Vue</span><span>Docs</span></div>
+            <p>给 Gensokyo-NewQQ 单独做的文档站工程。配置、API、CQ 码和能力差异拆开写，比把所有东西塞进 README 好找一点。</p>
+            <div class="tags"><span>VitePress</span><span>Vue</span><span>Docs</span></div>
             <div class="project-links"><a href="./projects/gensokyo-web.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/GensokyoNewQQWeb" target="_blank" rel="noreferrer">源码 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="system">
-            <div class="project-top"><span class="project-kind">系统 / 硬件</span><span class="project-state">维护中</span></div>
+          <article class="project-card" data-category="system">
+            <div class="project-meta"><span>硬件 / 系统</span><span>公开</span></div>
             <h3>Retro Monitor</h3>
-            <p>电脑状态监控做到一半，顺手把 Home Assistant 和 ESP32-S3 也接进来了。现在是 Windows 采集、HA 管实体、小屏幕负责显示。</p>
-            <div class="project-tags"><span>C#</span><span>Home Assistant</span><span>ESP32-S3</span></div>
+            <p>从电脑硬件状态一路接到 Home Assistant 和 ESP32-S3 桌面终端。最开始只是想把电脑状态放到桌面小屏上。</p>
+            <div class="tags"><span>C#</span><span>Home Assistant</span><span>ESP32-S3</span></div>
             <div class="project-links"><a href="./projects/retro-monitor.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/retro-monitor" target="_blank" rel="noreferrer">源码 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="tool">
-            <div class="project-top"><span class="project-kind">工具 / Windows</span><span class="project-state">验证中</span></div>
+          <article class="project-card" data-category="tool">
+            <div class="project-meta"><span>Windows / 工具</span><span>验证中</span></div>
             <h3>InvoiceMailAssistant</h3>
-            <p>开票邮件助手。盯指定邮箱里的申请邮件，把公司、金额、联系方式这些字段解析出来，再安全写进原来的 Excel 登记表。</p>
-            <div class="project-tags"><span>.NET 8</span><span>WPF</span><span>SQLite</span></div>
+            <p>开票邮件助手。读指定企业邮箱里的开票申请邮件，把需要的字段整理出来，再写进现有 Excel 登记表。</p>
+            <div class="tags"><span>.NET 8</span><span>WPF</span><span>SQLite</span></div>
             <div class="project-links"><a href="https://github.com/HX-Wrdzgzs/InvoiceMailAssistant" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
           </article>
 
-          <article class="full-project" data-category="tool">
-            <div class="project-top"><span class="project-kind">工具 / 浏览器</span><span class="project-state">小工具</span></div>
+          <article class="project-card" data-category="tool">
+            <div class="project-meta"><span>浏览器 / 工具</span><span>公开</span></div>
             <h3>Edge Web Form Auto-Filler</h3>
-            <p>Edge 上的表单预填脚本。登录、检查和最后提交还是人来做，它只负责把那些反复要填的东西先填好。</p>
-            <div class="project-tags"><span>Edge</span><span>Automation</span><span>Form</span></div>
+            <p>一个很小的 Edge 表单辅助脚本。人工登录，自动把重复字段先填上，最后还是自己检查和提交。</p>
+            <div class="tags"><span>Edge</span><span>Form</span><span>Automation</span></div>
             <div class="project-links"><a href="https://github.com/HX-Wrdzgzs/Edge-Web-Form-Auto-Filler" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="home-section team-section section-reveal" id="team">
+    <section class="home-section home-shell reveal" id="other">
+      <div class="section-head">
+        <div><p class="section-no">04 / 其他</p><h2>不一定都有仓库。</h2></div>
+        <p>有些东西一直在用，但没必要为了放主页专门建一个 GitHub 项目。</p>
+      </div>
+      <div class="other-grid">
+        <article><span>SERVER</span><h3>服务器和虚拟化</h3><p>自用服务、虚拟机、部署、备份，还有各种“本来十分钟能搞完最后弄了一晚上”的问题。</p></article>
+        <article><span>NETWORK</span><h3>网络</h3><p>内网、远程访问、Cloudflare 和一些监控。出问题的时候会很烦，弄通以后又挺有意思。</p></article>
+        <article><span>BOT</span><h3>Bot 运行和维护</h3><p>除了写插件，也会处理部署、数据、协议兼容和线上问题。很多时间其实花在这些地方。</p></article>
+        <article><span>AUDIO</span><h3>音频实验</h3><p>偶尔折腾人声分离、模型和音频处理。现在更多还是自己测试，能留下来的结果再说。</p></article>
+      </div>
+    </section>
+
+    <section class="home-section team-wrap reveal" id="team">
       <div class="home-shell">
         <div class="section-head">
-          <div>
-            <p class="section-no">04 / 开发组</p>
-            <h2>Amia / Mizuki 这边。</h2>
-          </div>
-          <p>这部分是开发组的公开仓库，和上面的个人项目分开列，也不表示每个仓库都是我一个人写的。</p>
+          <div><p class="section-no">05 / 开发组</p><h2>Amia / Mizuki 这边。</h2></div>
+          <p>这是开发组的公开仓库，不等于每个仓库都是我一个人写的。这里只当作我平时会碰到的一部分东西。</p>
         </div>
-
-        <div class="team-repos">
+        <div class="team-grid">
           <a href="https://github.com/Amia-Mizuki-Dev-Team/MizukiBot" target="_blank" rel="noreferrer"><strong>MizukiBot</strong><span>Bot 主项目 ↗</span></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-maimaidx" target="_blank" rel="noreferrer"><strong>Amia-plugin-maimaidx</strong><span>舞萌 DX ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-maimaidx" target="_blank" rel="noreferrer"><strong>Amia-plugin-maimaidx</strong><span>舞萌插件 ↗</span></a>
           <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-pjskhelp" target="_blank" rel="noreferrer"><strong>Amia-plugin-pjskhelp</strong><span>PJSK ↗</span></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-meme" target="_blank" rel="noreferrer"><strong>Amia-plugin-meme</strong><span>插件 ↗</span></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-homo-qso" target="_blank" rel="noreferrer"><strong>Amia-plugin-homo-qso</strong><span>插件 ↗</span></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-help" target="_blank" rel="noreferrer"><strong>Amia-plugin-help</strong><span>帮助 ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-welcome" target="_blank" rel="noreferrer"><strong>Amia-plugin-welcome</strong><span>Welcome ↗</span></a>
           <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-group" target="_blank" rel="noreferrer"><strong>Amia-plugin-group</strong><span>群功能 ↗</span></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-welcome" target="_blank" rel="noreferrer"><strong>Amia-plugin-welcome</strong><span>欢迎 ↗</span></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-send" target="_blank" rel="noreferrer"><strong>Amia-plugin-send</strong><span>消息 ↗</span></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-permission" target="_blank" rel="noreferrer"><strong>Amia-plugin-permission</strong><span>权限 ↗</span></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-qbind" target="_blank" rel="noreferrer"><strong>Amia-plugin-qbind</strong><span>绑定 ↗</span></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-Develop-Mai" target="_blank" rel="noreferrer"><strong>Amia-Develop-Mai</strong><span>开发 ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-help" target="_blank" rel="noreferrer"><strong>Amia-plugin-help</strong><span>Help ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-send" target="_blank" rel="noreferrer"><strong>Amia-plugin-send</strong><span>Send ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-permission" target="_blank" rel="noreferrer"><strong>Amia-plugin-permission</strong><span>Permission ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-qbind" target="_blank" rel="noreferrer"><strong>Amia-plugin-qbind</strong><span>QBind ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-meme" target="_blank" rel="noreferrer"><strong>Amia-plugin-meme</strong><span>Meme ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-plugin-homo-qso" target="_blank" rel="noreferrer"><strong>Amia-plugin-homo-qso</strong><span>QSO ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team/Amia-Develop-Mai" target="_blank" rel="noreferrer"><strong>Amia-Develop-Mai</strong><span>舞萌相关 ↗</span></a>
         </div>
       </div>
     </section>
 
-    <section class="home-section about-home section-reveal" id="about">
-      <div class="home-shell about-layout">
-        <div>
-          <p class="section-no">05 / 关于</p>
-          <h2>做的东西挺杂，<br>大概就这样。</h2>
-        </div>
-        <div class="about-text">
-          <p>
-            我主要还是写软件，不过经常写着写着就跑去折腾服务器、Cloudflare、虚拟化、Android，或者拿对讲机试东西。
-            前一阵可能在改一个客户端，下一阵就开始查网络为什么又断了。
-          </p>
-          <p>
-            很多项目都是从“这个能不能自己弄一个”开始的。做出来确实能用，就继续维护；有些只是解决了当时的问题，也就留在那里。
-            所以我不太想在主页上列一长串“精通 / 熟悉”，直接看项目会更准一点。
-          </p>
-          <p>
-            站里会尽量把项目本身讲清楚。源码、Issue、Release 这种东西再去 GitHub，看个大概不用先离开这里。
-          </p>
+    <section class="home-section home-shell reveal" id="about">
+      <div class="about-layout">
+        <div><p class="section-no">06 / 关于</p><h2>大概就是<br>喜欢折腾东西。</h2></div>
+        <div class="about-copy">
+          <p>我做的东西跨度比较大：Android、Bot、网页、Windows 小工具、服务器和业余无线电都有。并不是特意凑技术栈，很多时候只是碰到了一个问题，就顺手往下做。</p>
+          <p>这个主页不会写成简历。项目能直接在这里说明白的就尽量在这里说，源码、Issue、Release 这些再去 GitHub 看。</p>
+          <div class="about-facts">
+            <div><span>GitHub</span><strong>HX-Wrdzgzs</strong></div>
+            <div><span>业余无线电</span><strong>BA4THG</strong></div>
+            <div><span>开发组</span><strong>Amia / Mizuki</strong></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="home-section link-section section-reveal" id="links">
+    <section class="home-section links-wrap reveal" id="links">
       <div class="home-shell link-layout">
-        <div>
-          <p class="section-no">06 / 其他地方</p>
-          <h2>还可以去这些地方。</h2>
-        </div>
-        <div class="big-links">
-          <a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span>GitHub</span><small>源码、Issue、Release</small><b>↗</b></a>
-          <a href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer"><span>Amia / Mizuki 开发组</span><small>组织与公开仓库</small><b>↗</b></a>
-          <a href="https://help.mizuki.top" target="_blank" rel="noreferrer"><span>Mizuki 文档</span><small>Bot 文档与说明</small><b>↗</b></a>
+        <div><p class="section-no">07 / 链接</p><h2>其他地方。</h2></div>
+        <div class="link-list">
+          <a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span>GitHub</span><small>代码和仓库</small><b>↗</b></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer"><span>Amia / Mizuki 开发组</span><small>组织仓库</small><b>↗</b></a>
+          <a href="https://help.mizuki.top" target="_blank" rel="noreferrer"><span>Mizuki Docs</span><small>文档站</small><b>↗</b></a>
           <a href="https://qso.mizuki.top" target="_blank" rel="noreferrer"><span>BA4THG 通联档案</span><small>QSO 查询与归档</small><b>↗</b></a>
-          <a href="https://repeater.mizuki.top" target="_blank" rel="noreferrer"><span>中继数据协作站</span><small>公开中继数据</small><b>↗</b></a>
         </div>
       </div>
     </section>
 
-    <footer class="home-footer home-shell">
+    <footer class="footer home-shell">
       <span>© 2026 HX-Wrdzgzs</span>
-      <span>BA4THG</span>
+      <span>余白の向こう。</span>
     </footer>
   </main>
 
-  <script src="./script.js"></script>
   <script src="./home.js"></script>
 </body>
 </html>
