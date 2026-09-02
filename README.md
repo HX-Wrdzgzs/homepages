@@ -1,27 +1,32 @@
 # HX-Wrdzgzs Personal Homepage
 
-HX-Wrdzgzs 的个人主页。
+个人主页静态站，部署到 Cloudflare Pages。
 
-## 现在的结构
+## 页面
 
-- 中文首页
-- 固定浅色主题，不提供深色模式
-- 11 个当前存在的个人公开项目
-- 项目分类筛选
-- 6 个站内项目介绍页
-- “最近在忙”“其他”“开发组”“关于”“链接”等区块
-- 桌面端侧边导航、移动端顶部导航
-- `prefers-reduced-motion` 支持
+- `index.html`：首页
+- `projects.html`：项目目录，支持搜索、筛选、分页和快速预览
+- `about.html`：关于
+- `projects/`：部分项目的站内详情页
+- `404.html`：404
 
-个人项目只列当前仍存在、确实有内容的公开仓库；Profile 仓库和本主页仓库不计入项目数量。开发组仓库单独展示，不与个人项目混在一起。
+## 样式与脚本
 
-## Cloudflare Pages
+- `home.css`：首页 / 项目页 / 关于页共用设计系统
+- `home.js`：导航、首页项目预览、进入动画等公共交互
+- `projects.js`：项目数据、搜索、筛选、分页、弹窗
+- `detail.css`：项目详情页公共样式
+- `DESIGN.md`：视觉、交互和文案规范
 
-这是无构建步骤的静态站：
+## 部署
 
-- Production branch: `main`
-- Framework preset: `None`
-- Build command: 留空
-- Build output directory: `/`
+Cloudflare Pages：
 
-入口文件为仓库根目录的 `index.html`。Cloudflare Pages 连接 `main` 后，直接提交会触发生产部署。
+```text
+Production branch: main
+Framework preset: None
+Build command: 留空
+Build output directory: /
+```
+
+纯静态站，不需要 npm 构建。

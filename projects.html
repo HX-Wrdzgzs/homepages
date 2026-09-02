@@ -2,100 +2,92 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#06101d" />
-  <meta name="description" content="HX-Wrdzgzs 的公开项目列表。" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#070d16" />
+  <meta name="description" content="HX-Wrdzgzs 的项目列表。" />
   <title>项目 · HX-Wrdzgzs</title>
   <link rel="stylesheet" href="./home.css" />
 </head>
-<body data-page="projects">
-  <aside class="side-rail">
-    <div>
-      <a class="rail-brand" href="./index.html"><strong>HX</strong><span>Wrdzgzs</span></a>
-      <nav class="rail-nav" aria-label="主导航">
-        <a data-page-link="home" href="./index.html"><span>01</span>首页</a>
-        <a data-page-link="projects" href="./projects.html"><span>02</span>项目</a>
-        <a data-page-link="about" href="./about.html"><span>03</span>关于</a>
+<body>
+  <header class="site-nav-wrap">
+    <div class="site-nav app-shell">
+      <a class="brand" href="./index.html"><span class="brand-mark">HX</span><span class="brand-name">Wrdzgzs</span></a>
+      <nav class="primary-nav" aria-label="主导航">
+        <a href="./index.html">首页</a>
+        <a href="./projects.html" aria-current="page">项目</a>
+        <a href="./about.html">关于</a>
+        <span class="nav-divider" aria-hidden="true"></span>
+        <a class="nav-github" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
       </nav>
-      <div class="rail-shortcuts"><span>其他入口</span><a href="https://qso.mizuki.top" target="_blank" rel="noreferrer">QSO 档案 ↗</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+      <button class="mobile-menu-button" type="button" aria-label="打开导航" aria-expanded="false"><span></span></button>
     </div>
-    <div class="rail-bottom"><div><span>公开项目</span><strong>11</strong></div><div><span>本地时间</span><strong id="site-clock">--:--</strong></div></div>
-  </aside>
-
-  <header class="mobile-header">
-    <a class="mobile-brand" href="./index.html">HX-Wrdzgzs</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">菜单</button>
-    <nav class="mobile-menu" id="mobile-menu" hidden><a data-page-link="home" href="./index.html">首页</a><a data-page-link="projects" href="./projects.html">项目</a><a data-page-link="about" href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
+    <nav class="mobile-nav app-shell" aria-label="移动端导航">
+      <a href="./index.html"><span>首页</span><span>01</span></a>
+      <a href="./projects.html" aria-current="page"><span>项目</span><span>02</span></a>
+      <a href="./about.html"><span>关于</span><span>03</span></a>
+      <a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span>GitHub</span><span>↗</span></a>
+    </nav>
   </header>
 
-  <main class="page-main">
-    <section class="page-hero page-shell reveal">
-      <div class="page-title">
-        <div><p class="eyebrow">02 / 项目</p><h1>项目都在<span>这里。</span></h1></div>
-        <p>个人账号里现在还存在、而且确实有内容的公开项目都放进来了。能站内看的先在这里看，源码、Issue 和 Release 再去 GitHub。</p>
-      </div>
+  <main>
+    <section class="page-hero app-shell reveal">
+      <p class="eyebrow"><span class="eyebrow-dot"></span> PROJECT DIRECTORY</p>
+      <h1 class="page-title">项目。</h1>
+      <p class="page-lead">个人账号里现在还存在、而且确实有内容的公开项目都放在这里。先看简介，想继续看再进站内详情或 GitHub。</p>
+      <div class="page-count"><span data-total-count>11</span> PUBLIC PROJECTS · SEARCH / FILTER / PAGINATION</div>
     </section>
 
-    <section class="projects-area page-shell reveal">
-      <div class="project-toolbar" id="project-toolbar">
-        <label class="search-box"><span class="sr-only">搜索项目</span><input id="project-search" type="search" autocomplete="off" placeholder="搜项目、技术或用途，例如 Android / HAM / SQLite" /></label>
+    <section class="project-toolbar" aria-label="项目筛选">
+      <div class="toolbar-inner app-shell">
+        <label class="search-box">
+          <span class="search-icon">⌕</span>
+          <input id="project-search" type="search" autocomplete="off" placeholder="搜索项目、技术栈或关键词" aria-label="搜索项目" />
+          <span class="search-hint">/ 搜索</span>
+        </label>
         <div class="filters" role="group" aria-label="项目分类">
-          <button class="filter is-active" data-filter="all">全部 <span>11</span></button>
-          <button class="filter" data-filter="radio">无线电 <span>4</span></button>
-          <button class="filter" data-filter="bot">Bot / 音游 <span>4</span></button>
-          <button class="filter" data-filter="tool">工具 <span>2</span></button>
-          <button class="filter" data-filter="system">系统 / 硬件 <span>1</span></button>
+          <button class="filter is-active" type="button" data-filter="all">全部</button>
+          <button class="filter" type="button" data-filter="radio">无线电</button>
+          <button class="filter" type="button" data-filter="bot">Bot / 音游</button>
+          <button class="filter" type="button" data-filter="tool">工具</button>
+          <button class="filter" type="button" data-filter="system">系统 / 硬件</button>
         </div>
       </div>
-
-      <div class="project-statusbar"><span>找到 <strong id="result-count">11</strong> 个项目</span><span id="page-status">第 1 / 3 页</span></div>
-      <div class="project-grid" id="project-grid">
-        <article class="project-card" data-category="radio" data-search="HX-HAM 业余无线电 Windows Python SQLite Excel 点名 主控">
-          <div class="project-meta"><span class="kind">无线电 / Windows</span><span>维护中</span></div><h3>HX-HAM</h3><p>给中继点名用的 Windows 本地录入助手。快速输呼号、地点、设备这些东西，程序负责整理、记历史，再和 SQLite、Excel 对上。</p><div class="tags"><span>Python</span><span>SQLite</span><span>Excel</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="./projects/hx-ham.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/ham-checkin-assistant" target="_blank" rel="noreferrer">源码 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="radio" data-search="BA4THG 通联档案 QSO Cloudflare Pages D1 QSL 无线电">
-          <div class="project-meta"><span class="kind">无线电 / Web</span><span>在线</span></div><h3>BA4THG 通联档案</h3><p>把 BA4THG 的 QSO 记录长期存下来，也提供按呼号查询和 QSL 相关入口。网站主要负责归档和查询。</p><div class="tags"><span>Cloudflare Pages</span><span>D1</span><span>QSO</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="./projects/qso-archive.html">站内介绍 →</a><a href="https://qso.mizuki.top" target="_blank" rel="noreferrer">打开网站 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="radio" data-search="BA4THG QSL Card Archive WebP Static Web 卡片 画廊 无线电">
-          <div class="project-meta"><span class="kind">无线电 / Web</span><span>公开</span></div><h3>BA4THG QSL Card Archive</h3><p>QSL 卡片单独做的一个画廊。先加载缩略图，点开再看完整尺寸，和 QSO 数据库分开维护。</p><div class="tags"><span>Static Web</span><span>WebP</span><span>QSL</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="https://github.com/HX-Wrdzgzs/BA4THG-QSL" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="radio" data-search="LOSEHU132 UV-K5 UV-K6 固件 Firmware C 中文 业余无线电">
-          <div class="project-meta"><span class="kind">无线电 / 固件</span><span>维护中</span></div><h3>LOSEHU132 UV-K5 / UV-K6 固件</h3><p>自己维护的一份 UV-K5 / UV-K6 自定义固件。中文功能、扩展功能和发布包都放在仓库里继续维护。</p><div class="tags"><span>C</span><span>Firmware</span><span>UV-K5</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="https://github.com/HX-Wrdzgzs/uv-k5-losehu132-wrdzgzs" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="bot" data-search="Amia Sync Android 舞萌 maimai Kotlin FastAPI 成绩 曲库">
-          <div class="project-meta"><span class="kind">舞萌 / Android</span><span>公开</span></div><h3>Amia Sync Android</h3><p>给舞萌 DX 用的 Android 第三方客户端。做玩家信息、成绩、曲库筛选和同步，后端负责把第三方接口整理后再给客户端用。</p><div class="tags"><span>Kotlin</span><span>Android</span><span>FastAPI</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="./projects/mizukisync.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/Amia-Sync-Android" target="_blank" rel="noreferrer">源码 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="bot" data-search="HX PJSK Gateway Project SEKAI React FastAPI Redis 网关 Bot">
-          <div class="project-meta"><span class="kind">PJSK / Web</span><span>公开</span></div><h3>HX PJSK Gateway</h3><p>PJSK 网页查询用的网关。网页发请求，机器人侧确认身份，再去数据节点拿结果，主要就是把这几边接起来。</p><div class="tags"><span>React</span><span>FastAPI</span><span>Redis</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="./projects/pjsk-gateway.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/hx-pjsk-gateway" target="_blank" rel="noreferrer">源码 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="bot" data-search="Gensokyo-NewQQ Go QQ Bot OneBot 机器人">
-          <div class="project-meta"><span class="kind">Bot / OneBot</span><span>维护</span></div><h3>Gensokyo-NewQQ</h3><p>我这边在用和维护的一份 Gensokyo-NewQQ 代码仓库，平时主要处理 QQ、OneBot 兼容、配置和实际运行问题。</p><div class="tags"><span>Go</span><span>QQ Bot</span><span>OneBot</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="https://github.com/HX-Wrdzgzs/Gensokyo-NewQQ" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="bot" data-search="GensokyoNewQQWeb VitePress Vue Docs 文档 OneBot API CQ码">
-          <div class="project-meta"><span class="kind">Bot / 文档</span><span>公开</span></div><h3>GensokyoNewQQWeb</h3><p>给 Gensokyo-NewQQ 单独做的文档站工程。配置、API、CQ 码和能力差异拆开写，比把所有东西塞进 README 好找一点。</p><div class="tags"><span>VitePress</span><span>Vue</span><span>Docs</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="./projects/gensokyo-web.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/GensokyoNewQQWeb" target="_blank" rel="noreferrer">源码 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="system" data-search="Retro Monitor C# Home Assistant ESP32-S3 Windows 硬件 监控 OLED">
-          <div class="project-meta"><span class="kind">硬件 / 系统</span><span>公开</span></div><h3>Retro Monitor</h3><p>从电脑硬件状态一路接到 Home Assistant 和 ESP32-S3 桌面终端。最开始只是想把电脑状态放到桌面小屏上。</p><div class="tags"><span>C#</span><span>Home Assistant</span><span>ESP32-S3</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="./projects/retro-monitor.html">站内介绍 →</a><a href="https://github.com/HX-Wrdzgzs/retro-monitor" target="_blank" rel="noreferrer">源码 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="tool" data-search="InvoiceMailAssistant .NET 8 WPF SQLite Excel Mail 企业邮箱 开票 邮件">
-          <div class="project-meta"><span class="kind">Windows / 工具</span><span>验证中</span></div><h3>InvoiceMailAssistant</h3><p>开票邮件助手。读指定企业邮箱里的开票申请邮件，把需要的字段整理出来，再写进现有 Excel 登记表。</p><div class="tags"><span>.NET 8</span><span>WPF</span><span>SQLite</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="https://github.com/HX-Wrdzgzs/InvoiceMailAssistant" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
-        </article>
-        <article class="project-card" data-category="tool" data-search="Edge Web Form Auto Filler 浏览器 表单 自动填写 辅助脚本">
-          <div class="project-meta"><span class="kind">浏览器 / 工具</span><span>公开</span></div><h3>Edge Web Form Auto-Filler</h3><p>减少重复填表的小脚本。人工登录，自动预填，最后还是自己复核和提交，不做无人值守批量提交。</p><div class="tags"><span>Edge</span><span>Form</span><span>Automation</span></div><div class="project-links"><button class="quick-view" type="button">快速看</button><a href="https://github.com/HX-Wrdzgzs/Edge-Web-Form-Auto-Filler" target="_blank" rel="noreferrer">查看仓库 ↗</a></div>
-        </article>
-      </div>
-
-      <div class="empty-state" id="empty-state" hidden>没搜到。换个关键词或者分类试试。</div>
-      <nav class="pagination" aria-label="项目分页"><button id="page-prev" type="button">←</button><div class="page-numbers" id="page-numbers"></div><button id="page-next" type="button">→</button></nav>
     </section>
 
-    <footer class="page-footer page-shell"><span>© 2026 HX-Wrdzgzs</span><a href="./index.html">回首页 →</a></footer>
+    <section class="project-results app-shell">
+      <div class="results-head"><span data-result-summary>11 个项目</span><span>6 / PAGE</span></div>
+      <div class="project-grid" id="project-grid" aria-live="polite"></div>
+      <div class="empty-state" id="empty-state" hidden><strong>没有找到。</strong><span>换个关键词或分类试试。</span></div>
+      <nav class="pagination" id="pagination" aria-label="项目分页"></nav>
+    </section>
+
+    <section class="cta-band app-shell reveal">
+      <div class="cta-inner">
+        <div><h2>开发组项目不和个人仓库混算。</h2><p>Amia · Mizuki 相关公开仓库会在各自 GitHub 组织里继续维护，这里只把个人账号下的公开项目作为主列表。</p></div>
+        <a class="button" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer">开发组 GitHub ↗</a>
+      </div>
+    </section>
   </main>
 
-  <dialog class="project-dialog" id="project-dialog">
-    <div class="dialog-inner"><div class="dialog-head"><div><div class="dialog-kicker" id="dialog-kicker"></div><h2 class="dialog-title" id="dialog-title"></h2></div><button class="dialog-close" type="button" aria-label="关闭">×</button></div><p class="dialog-desc" id="dialog-desc"></p><div class="dialog-tags" id="dialog-tags"></div><div class="dialog-actions" id="dialog-actions"></div></div>
-  </dialog>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop" id="project-modal" aria-hidden="true">
+    <article class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal-head"><span>PROJECT PREVIEW</span><button class="modal-close" type="button" aria-label="关闭">×</button></header>
+      <div class="modal-body">
+        <h2 id="modal-title"></h2>
+        <p class="modal-summary" data-modal-summary></p>
+        <div class="modal-section"><label>这是干什么的</label><p data-modal-detail></p></div>
+        <div class="modal-section"><label>技术 / 关键词</label><div class="card-tags" data-modal-tags></div></div>
+        <div class="modal-actions" data-modal-actions></div>
+      </div>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner app-shell">
+      <span>© 2026 HX-Wrdzgzs · BA4THG</span>
+      <div class="footer-links"><a href="./index.html">首页</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </div>
+  </footer>
   <script src="./home.js"></script>
   <script src="./projects.js"></script>
 </body>
