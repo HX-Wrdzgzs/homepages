@@ -1,3 +1,5 @@
+document.querySelectorAll('.sr-only').forEach((element) => { element.hidden = true; });
+
 const cards = [...document.querySelectorAll('.project-card')];
 const searchInput = document.querySelector('#project-search');
 const filterButtons = [...document.querySelectorAll('.filter')];
