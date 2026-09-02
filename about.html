@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#06101d" />
+  <meta name="description" content="关于 HX-Wrdzgzs：开发、服务器、网络与业余无线电。" />
+  <title>关于 · HX-Wrdzgzs</title>
+  <link rel="stylesheet" href="./home.css" />
+</head>
+<body data-page="about">
+  <aside class="side-rail">
+    <div>
+      <a class="rail-brand" href="./index.html"><strong>HX</strong><span>Wrdzgzs</span></a>
+      <nav class="rail-nav" aria-label="主导航">
+        <a data-page-link="home" href="./index.html"><span>01</span>首页</a>
+        <a data-page-link="projects" href="./projects.html"><span>02</span>项目</a>
+        <a data-page-link="about" href="./about.html"><span>03</span>关于</a>
+      </nav>
+      <div class="rail-shortcuts"><span>其他入口</span><a href="https://qso.mizuki.top" target="_blank" rel="noreferrer">QSO 档案 ↗</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </div>
+    <div class="rail-bottom"><div><span>业余无线电</span><strong>BA4THG</strong></div><div><span>本地时间</span><strong id="site-clock">--:--</strong></div></div>
+  </aside>
+
+  <header class="mobile-header">
+    <a class="mobile-brand" href="./index.html">HX-Wrdzgzs</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">菜单</button>
+    <nav class="mobile-menu" id="mobile-menu" hidden><a data-page-link="home" href="./index.html">首页</a><a data-page-link="projects" href="./projects.html">项目</a><a data-page-link="about" href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero page-shell reveal">
+      <div class="page-title"><div><p class="eyebrow">03 / 关于</p><h1>大概就是<br><span>喜欢折腾。</span></h1></div><p>平时主要写软件，也会碰服务器、网络、Bot、Android、硬件和无线电。项目跨度确实挺大，但基本都是自己真有需求，或者觉得值得做一遍。</p></div>
+    </section>
+
+    <section class="about-grid page-shell reveal">
+      <div class="about-sticky">
+        <h2>做过什么，<br>就放什么。</h2>
+        <p>不准备把这里写成简历。技术栈会变，手上的项目也会变，能跑起来、有人用、自己愿意继续维护，比列一长串“熟悉某某”有意思。</p>
+        <div class="actions"><a class="button primary" href="./projects.html">看项目 →</a><button class="button" type="button" data-copy="BA4THG">复制 BA4THG</button></div>
+      </div>
+
+      <div class="about-list">
+        <article class="about-row"><h3>软件 / Bot</h3><p>Python、Kotlin、C#、TypeScript 都会用。Bot 这边主要是 Amia / Mizuki、PJSK、舞萌相关插件和一些配套服务。</p><details><summary>再展开一点</summary><div>我更在意实际运行时的问题：接口改了怎么办、数据怎么对、失败怎么恢复、版本怎么往前兼容。代码好看当然重要，但先别让线上炸。</div></details></article>
+        <article class="about-row"><h3>服务器 / 网络</h3><p>平时会折腾虚拟化、Linux、Windows Server、Cloudflare、Tunnel、反代、备份和一些家里/工作室的服务。</p><details><summary>再展开一点</summary><div>这部分多数没有单独仓库，因为很多内容就是部署、迁移、恢复、网络和运维本身。能长期稳定跑着，比做一张漂亮架构图更重要。</div></details></article>
+        <article class="about-row"><h3>业余无线电</h3><p>呼号 BA4THG。除了正常通联，也自己做点名工具、QSO 档案、QSL 卡片和 UV-K5 / UV-K6 固件维护。</p><details><summary>再展开一点</summary><div>软件和无线电放在一起其实挺自然：记录、数据、设备、现场流程都有东西可以自己补。</div></details></article>
+        <article class="about-row"><h3>音频 / 其他</h3><p>偶尔会做音频分离、AI 歌声、Minecraft 服务器和一些临时小工具。不是每个东西最后都值得变成正式项目。</p></article>
+
+        <div class="link-stack">
+          <a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span>GitHub</span><span>HX-Wrdzgzs ↗</span></a>
+          <a href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer"><span>Amia / Mizuki 开发组</span><span>GitHub ↗</span></a>
+          <a href="https://qso.mizuki.top" target="_blank" rel="noreferrer"><span>BA4THG 通联档案</span><span>qso.mizuki.top ↗</span></a>
+          <a href="https://help.mizuki.top" target="_blank" rel="noreferrer"><span>Mizuki 文档</span><span>help.mizuki.top ↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer page-shell"><span>© 2026 HX-Wrdzgzs</span><a href="./projects.html">项目 →</a></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./home.js"></script>
+</body>
+</html>
