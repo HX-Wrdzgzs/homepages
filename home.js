@@ -1,3 +1,6 @@
+if (location.hash === '#projects') location.replace('./projects.html');
+if (location.hash === '#about') location.replace('./about.html');
+
 const page = document.body.dataset.page;
 document.querySelectorAll('[data-page-link]').forEach((link) => {
   link.classList.toggle('is-active', link.dataset.pageLink === page);
