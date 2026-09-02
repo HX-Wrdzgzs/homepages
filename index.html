@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#070d16" />
-  <meta name="description" content="HX-Wrdzgzs 的个人主页。项目、Android、Bot、服务器、网络与业余无线电。" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="HX-Wrdzgzs 的个人主页。公开项目、最近在做的东西，以及一些常用入口。" />
   <meta property="og:title" content="HX-Wrdzgzs · 个人主页" />
-  <meta property="og:description" content="我做过、还在维护和最近又捡起来折腾的东西。" />
+  <meta property="og:description" content="项目、开发记录和常用入口。" />
   <meta property="og:type" content="website" />
   <title>HX-Wrdzgzs · 个人主页</title>
   <link rel="stylesheet" href="./home.css" />
@@ -38,25 +38,25 @@
   <main>
     <section class="hero app-shell reveal">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="eyebrow-dot"></span> NANJING · DEVELOPER / AMATEUR RADIO</p>
-        <h1 class="page-title">写软件，折腾系统，<br><span class="accent">也玩无线电。</span></h1>
-        <p class="page-lead">我是 HX-Wrdzgzs。平时会写 Android、Bot 和一些小工具，也会管服务器、网络和自己的业余无线电项目。这个站主要拿来把这些东西放到一起。</p>
+        <p class="eyebrow"><span class="eyebrow-dot"></span> HX-Wrdzgzs / Personal site</p>
+        <h1 class="page-title">你好，我是<br><span class="accent">HX-Wrdzgzs。</span></h1>
+        <p class="page-lead">平时主要写 Python、Kotlin 和 C#，也会维护 Bot、服务器和几个自己用的网站。这里放我的公开项目和最近在做的东西。</p>
         <div class="hero-actions">
-          <a class="button primary" href="./projects.html">查看项目 <span>→</span></a>
-          <a class="button" href="./about.html">关于我</a>
-          <button class="button ghost" type="button" data-copy-callsign>复制呼号 BA4THG</button>
+          <a class="button primary" href="./projects.html">项目 <span>→</span></a>
+          <a class="button" href="./about.html">关于</a>
+          <a class="button ghost" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a>
         </div>
         <div class="hero-meta">
-          <span><i></i> 11 个公开个人项目</span>
-          <span><i></i> GitHub / HX-Wrdzgzs</span>
-          <span><i></i> Callsign / BA4THG</span>
+          <span>11 个公开项目</span>
+          <span>Android / Bot / Web / Tools</span>
+          <span>Infrastructure / Radio</span>
         </div>
       </div>
 
-      <div class="product-window" aria-label="当前项目预览">
+      <div class="product-window" aria-label="项目预览">
         <div class="window-bar">
           <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-          <span class="window-path">~/workspace/current</span>
+          <span class="window-path">当前项目</span>
           <span class="window-path">2026</span>
         </div>
         <div class="workspace">
@@ -64,7 +64,7 @@
             <div class="workspace-label">Projects</div>
             <button class="workspace-tab is-active" type="button" data-preview="mizuki">MizukiSync</button>
             <button class="workspace-tab" type="button" data-preview="ham">HX-HAM</button>
-            <button class="workspace-tab" type="button" data-preview="radio">BA4THG</button>
+            <button class="workspace-tab" type="button" data-preview="retro">Retro Monitor</button>
             <button class="workspace-tab" type="button" data-preview="amia">Amia</button>
           </aside>
           <div class="workspace-main">
@@ -75,17 +75,17 @@
               </div>
               <span class="status-pill"><i></i><span data-preview-state>重做中</span></span>
             </div>
-            <p class="workspace-desc" data-preview-desc>给舞萌 DX 用的 Android 客户端。最近主要在重写界面和交互，成绩、曲库和同步这几块也一起重新整理。</p>
+            <p class="workspace-desc" data-preview-desc>舞萌 DX 的 Android 客户端。最近主要在重做界面和交互，成绩、曲库和同步也在一起整理。</p>
             <div class="stack-row" data-preview-stack>
               <span class="tech-chip">Kotlin</span><span class="tech-chip">Android</span><span class="tech-chip">FastAPI</span>
             </div>
             <div class="workspace-flow">
-              <div class="flow-label">Current flow</div>
+              <div class="flow-label">流程</div>
               <div class="flow-line" data-preview-flow>
                 <div class="flow-node">玩家数据</div><div class="flow-node">同步服务</div><div class="flow-node">Android</div>
               </div>
             </div>
-            <div class="workspace-footer"><span data-preview-meta-left>CLIENT / MOBILE</span><span data-preview-meta-right>UI REWORK</span></div>
+            <div class="workspace-footer"><span data-preview-meta-left>客户端</span><span data-preview-meta-right>UI 重做</span></div>
           </div>
         </div>
       </div>
@@ -93,8 +93,8 @@
 
     <section class="section app-shell reveal">
       <div class="section-head">
-        <div><span class="section-index">01 / SELECTED</span><h2>现在比较常碰的几个项目。</h2></div>
-        <p>首页不把十几个仓库全塞出来，只放最常用的几个。完整列表、分类和搜索都在项目页。</p>
+        <div><span class="section-index">01 / 项目</span><h2>最近常改的几个。</h2></div>
+        <p>完整列表在项目页。</p>
       </div>
       <div class="feature-grid">
         <a class="feature-card" href="./projects/mizukisync.html">
@@ -106,42 +106,41 @@
         <a class="feature-card" href="./projects/hx-ham.html">
           <span class="feature-number">02</span><span class="arrow">↗</span>
           <h3>HX-HAM</h3>
-          <p>中继点名现场用的本地录入工具。先把数据稳稳记下来，再做后面的整理。</p>
+          <p>中继点名现场用的本地录入工具，数据先落 SQLite，需要时再同步到 Excel。</p>
           <div class="feature-tags"><span>PYTHON</span><span>SQLITE</span><span>EXCEL</span></div>
         </a>
         <a class="feature-card" href="./projects/retro-monitor.html">
           <span class="feature-number">03</span><span class="arrow">↗</span>
           <h3>Retro Monitor</h3>
-          <p>电脑硬件状态接到 Home Assistant，再送到 ESP32-S3 桌面终端。</p>
-          <div class="feature-tags"><span>C#</span><span>HA</span><span>ESP32-S3</span></div>
+          <p>把电脑硬件状态接到 Home Assistant，再送到 ESP32-S3 桌面终端。</p>
+          <div class="feature-tags"><span>C#</span><span>HOME ASSISTANT</span><span>ESP32-S3</span></div>
         </a>
       </div>
     </section>
 
     <section class="section app-shell reveal">
       <div class="section-head">
-        <div><span class="section-index">02 / NOW</span><h2>最近在做什么。</h2></div>
-        <p>不做自动生成的“实时状态”，就把现在手里确实在处理的东西写清楚。</p>
+        <div><span class="section-index">02 / 最近</span><h2>最近在做。</h2></div>
       </div>
       <div class="activity-list">
         <div class="activity-row">
           <div class="activity-state"><i></i> 正在改</div>
-          <div><h3>MizukiSync Android</h3><p>继续重做 UI 和交互，把成绩、曲库和设备相关页面重新整理。</p></div>
+          <div><h3>MizukiSync Android</h3><p>重做 UI 和交互，顺便整理成绩、曲库和设备相关页面。</p></div>
           <span class="meta">ANDROID / UI</span>
         </div>
         <div class="activity-row">
           <div class="activity-state"><i></i> 在维护</div>
-          <div><h3>HX-HAM</h3><p>点名录入、历史建议、SQLite 和 Excel 这条线继续补。</p></div>
+          <div><h3>HX-HAM</h3><p>继续补点名录入、历史建议、SQLite 和 Excel。</p></div>
           <span class="meta">WINDOWS / RADIO</span>
         </div>
         <div class="activity-row">
           <div class="activity-state"><i></i> 长期</div>
-          <div><h3>Amia · Mizuki</h3><p>Bot、PJSK 和舞萌相关插件继续维护，哪里有实际问题就补哪里。</p></div>
+          <div><h3>Amia · Mizuki</h3><p>维护 Bot、PJSK 和舞萌相关插件。</p></div>
           <span class="meta">BOT / RHYTHM GAME</span>
         </div>
         <div class="activity-row">
           <div class="activity-state"><i></i> 日常</div>
-          <div><h3>服务器 / 网络</h3><p>虚拟化、网络、Cloudflare 和自己的几个服务照常维护。</p></div>
+          <div><h3>服务器 / 网络</h3><p>维护自己的虚拟化环境、Cloudflare 和几个服务。</p></div>
           <span class="meta">INFRASTRUCTURE</span>
         </div>
       </div>
@@ -149,13 +148,12 @@
 
     <section class="section app-shell reveal">
       <div class="section-head">
-        <div><span class="section-index">03 / OTHER</span><h2>仓库之外，也会折腾这些。</h2></div>
-        <p>有些东西没有必要单独开仓库，但确实占了不少时间。</p>
+        <div><span class="section-index">03 / 其他</span><h2>平时也会碰这些。</h2></div>
       </div>
       <div class="secondary-grid">
         <div class="info-panel">
-          <h3>服务器、网络和自动化</h3>
-          <p>平时会维护自己的虚拟化环境、服务部署、Cloudflare、网络和一些自动化脚本。</p>
+          <h3>服务器和网络</h3>
+          <p>PVE、Linux、Cloudflare、DNS、Tunnel，还有一些日常自动化脚本。</p>
           <div class="topic-grid">
             <div class="topic"><strong>Virtualization</strong><span>PVE / VM / LXC</span></div>
             <div class="topic"><strong>Network</strong><span>DNS / Tunnel / Proxy</span></div>
@@ -165,9 +163,9 @@
         </div>
         <div class="info-panel">
           <h3>无线电和音频</h3>
-          <p>BA4THG 的 QSO / QSL、设备固件，还有一部分音频分离和模型实验也会放在这里提到。</p>
+          <p>QSO / QSL 相关网站、设备固件，以及音频分离和模型实验。</p>
           <div class="topic-grid">
-            <div class="topic"><strong>BA4THG</strong><span>HAM / QSO / QSL</span></div>
+            <div class="topic"><strong>Amateur Radio</strong><span>QSO / QSL / Tools</span></div>
             <div class="topic"><strong>Audio</strong><span>Separation / SVC</span></div>
           </div>
         </div>
@@ -176,7 +174,7 @@
 
     <section class="cta-band app-shell reveal">
       <div class="cta-inner">
-        <div><h2>项目都整理到单独页面了。</h2><p>可以按分类筛选、搜索、分页，也能先快速看简介，再决定要不要进详情页或 GitHub。</p></div>
+        <div><h2>其他项目</h2><p>项目页里可以搜索、分类和分页查看。</p></div>
         <a class="button primary" href="./projects.html">打开项目页 <span>→</span></a>
       </div>
     </section>
@@ -184,7 +182,7 @@
 
   <footer class="site-footer">
     <div class="footer-inner app-shell">
-      <span>© 2026 HX-Wrdzgzs · BA4THG</span>
+      <span>© 2026 HX-Wrdzgzs</span>
       <div class="footer-links"><a href="./projects.html">项目</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div>
     </div>
   </footer>
