@@ -35,41 +35,41 @@ const projectPreview = {
     kicker: 'ANDROID / MAIMAI DX',
     title: 'MizukiSync Android',
     state: '重做中',
-    desc: '给舞萌 DX 用的 Android 客户端。最近主要在重写界面和交互，成绩、曲库和同步这几块也一起重新整理。',
+    desc: '舞萌 DX 的 Android 客户端。最近主要在重做界面和交互，成绩、曲库和同步也在一起整理。',
     stack: ['Kotlin', 'Android', 'FastAPI'],
     flow: ['玩家数据', '同步服务', 'Android'],
-    metaLeft: 'CLIENT / MOBILE',
-    metaRight: 'UI REWORK'
+    metaLeft: '客户端',
+    metaRight: 'UI 重做'
   },
   ham: {
-    kicker: 'HAM / WINDOWS TOOL',
+    kicker: 'WINDOWS / RADIO',
     title: 'HX-HAM',
     state: '维护中',
-    desc: '中继点名现场用的本地录入助手。先把呼号和现场信息快速记下来，再交给 SQLite 和 Excel，网络功能只是补充。',
+    desc: '中继点名现场用的本地录入工具。数据先写进 SQLite，需要协作时再同步到 Excel。',
     stack: ['Python', 'SQLite', 'Excel'],
-    flow: ['现场输入', '本地整理', '记录归档'],
-    metaLeft: 'LOCAL FIRST',
-    metaRight: 'BA4THG'
+    flow: ['现场输入', '本地记录', 'Excel'],
+    metaLeft: 'Windows',
+    metaRight: '本地优先'
   },
-  radio: {
-    kicker: 'AMATEUR RADIO',
-    title: 'BA4THG',
-    state: '在用',
-    desc: 'QSO 长期档案和 QSL 卡片分开维护。记录、查询、展示各做各的，不把所有东西塞进同一个网站。',
-    stack: ['Cloudflare Pages', 'D1', 'QSL'],
-    flow: ['通联记录', '长期档案', '公开查询'],
-    metaLeft: 'CALLSIGN / BA4THG',
-    metaRight: '70CM / FM'
+  retro: {
+    kicker: 'HARDWARE / MONITOR',
+    title: 'Retro Monitor',
+    state: '公开',
+    desc: '把 Windows 硬件状态接到 Home Assistant，再送到 ESP32-S3 桌面终端。',
+    stack: ['C#', 'Home Assistant', 'ESP32-S3'],
+    flow: ['Windows', 'Home Assistant', 'ESP32-S3'],
+    metaLeft: '硬件监控',
+    metaRight: '桌面终端'
   },
   amia: {
     kicker: 'BOT / RHYTHM GAME',
     title: 'Amia · Mizuki',
-    state: '长期维护',
-    desc: '开发组这边继续维护 Bot、PJSK 和舞萌相关插件。项目多，所以主页只放入口，具体内容都放到项目页里看。',
+    state: '维护中',
+    desc: '开发组主要维护 Bot、PJSK、舞萌相关插件和公共组件。',
     stack: ['NoneBot', 'PJSK', 'maimai'],
     flow: ['QQ / OneBot', '插件', '数据服务'],
-    metaLeft: 'DEV TEAM',
-    metaRight: 'MULTI REPO'
+    metaLeft: '开发组',
+    metaRight: '多仓库'
   }
 };
 
@@ -98,18 +98,6 @@ function renderPreview(key) {
 }
 
 previewTabs.forEach((tab) => tab.addEventListener('click', () => renderPreview(tab.dataset.preview)));
-
-const callsignCopy = document.querySelector('[data-copy-callsign]');
-callsignCopy?.addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText('BA4THG');
-    const original = callsignCopy.textContent;
-    callsignCopy.textContent = '已复制 BA4THG';
-    setTimeout(() => { callsignCopy.textContent = original; }, 1300);
-  } catch {
-    callsignCopy.textContent = 'BA4THG';
-  }
-});
 
 const legacyTarget = location.hash;
 if (legacyTarget === '#projects' || legacyTarget === '#work') location.replace('./projects.html');
