@@ -33,7 +33,7 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
 const projectPreview = {
   mizuki: {
     kicker: 'ANDROID / MAIMAI DX',
-    title: 'MizukiSync Android',
+    title: 'Amia-Sync-Android',
     state: '重做中',
     desc: '舞萌 DX 的 Android 客户端。最近主要在重做界面和交互，成绩、曲库和同步也在一起整理。',
     stack: ['Kotlin', 'Android', 'FastAPI'],
@@ -45,15 +45,15 @@ const projectPreview = {
     kicker: 'WINDOWS / RADIO',
     title: 'ham-checkin-assistant',
     state: '维护中',
-    desc: '仓库里的程序叫 HX-HAM，用在中继点名现场。数据先写进 SQLite，需要协作时再同步到 Excel。',
+    desc: '中继点名现场用的本地录入工具。数据先写进 SQLite，需要协作时再同步到 Excel。',
     stack: ['Python', 'SQLite', 'Excel'],
     flow: ['现场输入', '本地记录', 'Excel'],
-    metaLeft: 'HX-HAM',
-    metaRight: 'Windows'
+    metaLeft: 'Windows',
+    metaRight: '本地录入'
   },
   retro: {
     kicker: 'HARDWARE / MONITOR',
-    title: 'Retro Monitor',
+    title: 'retro-monitor',
     state: '公开',
     desc: '把 Windows 硬件状态接到 Home Assistant，再送到 ESP32-S3 桌面终端。',
     stack: ['C#', 'Home Assistant', 'ESP32-S3'],
