@@ -1,3 +1,11 @@
+if(!document.querySelector('link[data-hx-layout]')){
+  const layout=document.createElement('link');
+  layout.rel='stylesheet';
+  layout.href='/layout.css?v=20260903-2';
+  layout.setAttribute('data-hx-layout','');
+  document.head.appendChild(layout);
+}
+
 const sidebar = document.querySelector('.site-sidebar');
 const sidebarOverlay = document.querySelector('.sidebar-overlay');
 const menuButton = document.querySelector('.mobile-menu-button');
@@ -5,8 +13,10 @@ const menuButton = document.querySelector('.mobile-menu-button');
 function setMenu(open){
   sidebar?.classList.toggle('is-open', open);
   sidebarOverlay?.classList.toggle('is-open', open);
+  sidebarOverlay?.setAttribute('aria-hidden', String(!open));
   menuButton?.classList.toggle('is-open', open);
   menuButton?.setAttribute('aria-expanded', String(open));
+  menuButton?.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
   document.body.style.overflow = open ? 'hidden' : '';
 }
 
