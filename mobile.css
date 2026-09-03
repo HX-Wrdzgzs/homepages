@@ -1,3 +1,14 @@
+.repo-name {
+  margin: -4px 0 12px;
+  color: var(--subtle);
+  font: 500 .68rem/1.4 var(--mono);
+  word-break: break-word;
+}
+
+.project-card > p {
+  line-height: 1.75;
+}
+
 @media (max-width: 700px) {
   .site-nav-wrap {
     border-bottom-color: rgba(212, 220, 231, .9);
