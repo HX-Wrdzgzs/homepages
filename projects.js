@@ -1,79 +1,79 @@
 const PROJECTS = [
   {
     id:'hx-ham', category:'radio', categoryLabel:'无线电 / Windows', state:'维护中', live:false,
-    name:'ham-checkin-assistant', tags:['Python','SQLite','Excel'],
-    summary:'中继点名现场用的 Windows 本地录入工具。',
-    detail:'现场先快速输入呼号、地点、设备等信息，程序再整理成结构化记录。数据先写进 SQLite，需要协作时再同步到 Excel。',
+    title:'中继点名助手', repoName:'ham-checkin-assistant', tags:['Python','SQLite','Excel'],
+    summary:'给中继点名现场用的 Windows 本地录入工具。现场先快速记呼号、地点、设备这些信息，后面再整理进 SQLite，需要协作时再同步到 Excel。',
+    detail:'重点是连续点名时别让录入拖慢现场。程序会把快速输入拆成结构化字段，历史记录可以给建议，识别不准的内容会保留下来给人确认。核心记录走本地 SQLite，Excel 只是协作输出。',
     detailUrl:'./projects/hx-ham.html', repo:'https://github.com/HX-Wrdzgzs/ham-checkin-assistant'
   },
   {
     id:'qso', category:'radio', categoryLabel:'无线电 / Web', state:'在线', live:true,
-    name:'BA4THG-QSO', tags:['Cloudflare Pages','D1','QSO'],
-    summary:'QSO 记录的长期归档和查询页面。',
-    detail:'把已经确认的通联记录长期保存下来，并提供按呼号查询。记录和公开展示分开处理。',
+    title:'QSO 通联档案', repoName:'BA4THG-QSO', tags:['Cloudflare Pages','D1','QSO'],
+    summary:'用来长期保存和查询通联记录的网站。近期记录可以从上游查询，确认后的数据会继续留在自己的 D1 里，不跟着上游一起消失。',
+    detail:'公开页面只在有人主动查询呼号时返回对应记录，后台维护和公开查询分开。旧的 ADIF、CSV、JSON 记录也可以导入，再做校验和去重。',
     detailUrl:'./projects/qso-archive.html', site:'https://qso.mizuki.top', repo:'https://github.com/HX-Wrdzgzs/BA4THG-QSO'
   },
   {
     id:'qsl', category:'radio', categoryLabel:'无线电 / Web', state:'公开', live:false,
-    name:'BA4THG-QSL', tags:['Static Web','WebP','QSL'],
-    summary:'QSL 卡片展示页。',
-    detail:'网页先加载 WebP 缩略图，点开时再看完整尺寸。和 QSO 数据库分开维护。',
+    title:'QSL 卡片档案', repoName:'BA4THG-QSL', tags:['Static Web','WebP','QSL'],
+    summary:'把做过的 QSL 卡片单独整理成一个展示页。缩略图先用 WebP 加载，点开以后再看完整尺寸，不和 QSO 数据库混在一个页面里。',
+    detail:'这个仓库主要负责卡片展示和静态资源。重点是让手机和桌面都能比较快地浏览，不需要为了看一张卡片先加载整套原图。',
     repo:'https://github.com/HX-Wrdzgzs/BA4THG-QSL'
   },
   {
     id:'uvk5', category:'radio', categoryLabel:'无线电 / 固件', state:'维护中', live:false,
-    name:'uv-k5-losehu132-wrdzgzs', tags:['C','Firmware','UV-K5'],
-    summary:'自己维护的一份 UV-K5 / UV-K6 固件分支。',
-    detail:'主要维护中文功能、自己会用到的扩展、构建产物和版本说明。',
+    title:'UV-K5 / UV-K6 固件', repoName:'uv-k5-losehu132-wrdzgzs', tags:['C','Firmware','UV-K5'],
+    summary:'自己维护的一份 UV-K5 / UV-K6 固件分支。主要保留中文功能、实际会用到的扩展、构建产物和版本说明。',
+    detail:'仓库基于社区项目继续维护，重点不是堆功能，而是把自己会用的功能、中文支持和可直接刷写的发布包整理好。',
     repo:'https://github.com/HX-Wrdzgzs/uv-k5-losehu132-wrdzgzs'
   },
   {
     id:'mizuki', category:'bot', categoryLabel:'舞萌 / Android', state:'重做中', live:false,
-    name:'Amia-Sync-Android', tags:['Kotlin','Android','FastAPI'],
-    summary:'舞萌 DX 的 Android 客户端。',
-    detail:'客户端负责玩家信息、成绩和曲库页面，服务端负责整理第三方接口和数据。最近主要在重做 UI 和交互。',
+    title:'Amia Sync Android', repoName:'Amia-Sync-Android', tags:['Kotlin','Android','FastAPI'],
+    summary:'给舞萌 DX 用的 Android 客户端。玩家信息、成绩和曲库都放到手机里看，最近主要在重做 UI、交互和数据展示。',
+    detail:'客户端负责移动端页面、缓存和交互，服务端负责把第三方接口与曲库数据整理成客户端更好处理的格式。现在功能已经有一套，主要是在重新收拾界面和使用流程。',
     detailUrl:'./projects/mizukisync.html', repo:'https://github.com/HX-Wrdzgzs/Amia-Sync-Android'
   },
   {
     id:'pjsk', category:'bot', categoryLabel:'PJSK / Web', state:'公开', live:false,
-    name:'hx-pjsk-gateway', tags:['React','FastAPI','Redis'],
-    summary:'PJSK 网页查询用的网关。',
-    detail:'网页发请求后，由机器人侧确认身份，再去数据节点取结果。网关负责把网页、机器人和数据服务接起来。',
+    title:'PJSK 查询网关', repoName:'hx-pjsk-gateway', tags:['React','FastAPI','Redis'],
+    summary:'给网页查询、机器人身份确认和数据节点之间做的一层中转。主要处理请求隔离、身份确认和结果回传。',
+    detail:'网页发出查询后，Gateway 先记录请求，再交给机器人侧确认身份，最后向数据节点取结果。多人同时使用时，每个请求都有自己的标识，避免结果串到别人那里。',
     detailUrl:'./projects/pjsk-gateway.html', repo:'https://github.com/HX-Wrdzgzs/hx-pjsk-gateway'
   },
   {
     id:'gensokyo', category:'bot', categoryLabel:'Bot / OneBot', state:'维护', live:false,
-    name:'Gensokyo-NewQQ', tags:['Go','QQ Bot','OneBot'],
-    summary:'我这边在用和维护的一份 Gensokyo-NewQQ 代码库。',
-    detail:'主要处理 QQ、OneBot 兼容、配置和实际运行时遇到的问题。',
+    title:'Gensokyo-NewQQ', repoName:'Gensokyo-NewQQ', tags:['Go','QQ Bot','OneBot'],
+    summary:'我这边在实际使用和维护的一份 Gensokyo-NewQQ 代码库。主要处理 QQ、OneBot 兼容、配置以及生产环境里遇到的问题。',
+    detail:'这个仓库不是单纯存一份上游代码，实际运行时遇到的消息格式、配置兼容和平台行为差异也会在这里继续处理。',
     repo:'https://github.com/HX-Wrdzgzs/Gensokyo-NewQQ'
   },
   {
     id:'gensokyo-web', category:'bot', categoryLabel:'Bot / 文档', state:'公开', live:false,
-    name:'GensokyoNewQQWeb', tags:['VitePress','Vue','Docs'],
-    summary:'Gensokyo-NewQQ 的文档站工程。',
-    detail:'配置、API、CQ 码和能力差异拆开写，方便直接查对应内容。',
+    title:'Gensokyo-NewQQ 文档站', repoName:'GensokyoNewQQWeb', tags:['VitePress','Vue','Docs'],
+    summary:'Gensokyo-NewQQ 的文档站工程。配置、API、CQ 码和能力差异拆开写，查某个功能时不用翻整份 README。',
+    detail:'文档站把运行配置、平台能力、接口和常见问题分开维护，方便实际部署时直接找到对应页面。',
     detailUrl:'./projects/gensokyo-web.html', repo:'https://github.com/HX-Wrdzgzs/GensokyoNewQQWeb'
   },
   {
     id:'retro', category:'system', categoryLabel:'系统 / 硬件', state:'公开', live:false,
-    name:'retro-monitor', tags:['C#','Home Assistant','ESP32-S3'],
-    summary:'电脑硬件状态到桌面小屏的一套监控方案。',
-    detail:'Windows 端采集硬件状态，经 Home Assistant 再把数据送到 ESP32-S3 桌面终端。',
+    title:'桌面硬件监控', repoName:'retro-monitor', tags:['C#','Home Assistant','ESP32-S3'],
+    summary:'把电脑硬件状态送到桌面小屏上显示的一套方案。Windows 端负责采集，Home Assistant 做中转，最后交给 ESP32-S3 终端。',
+    detail:'最开始只是想把温度、负载这些数据显示出来，后来把 Windows、Home Assistant 和 ESP32-S3 串成了一套完整链路。',
     detailUrl:'./projects/retro-monitor.html', repo:'https://github.com/HX-Wrdzgzs/retro-monitor'
   },
   {
     id:'invoice', category:'tool', categoryLabel:'Windows / 工具', state:'验证中', live:false,
-    name:'InvoiceMailAssistant', tags:['.NET 8','WPF','SQLite'],
-    summary:'开票邮件整理工具。',
-    detail:'读取指定企业邮箱里的开票申请邮件，把需要的字段整理后写进现有 Excel 登记表。',
+    title:'开票邮件助手', repoName:'InvoiceMailAssistant', tags:['.NET 8','WPF','SQLite'],
+    summary:'把企业邮箱里的开票申请邮件整理成 Excel 登记数据。目的是减少人工复制字段和重复核对。',
+    detail:'程序读取指定邮箱里的申请邮件，提取需要的字段，再写进原有登记表。现在主要还在验证邮件格式差异和 Excel 写入流程。',
     repo:'https://github.com/HX-Wrdzgzs/InvoiceMailAssistant'
   },
   {
     id:'form', category:'tool', categoryLabel:'浏览器 / 工具', state:'公开', live:false,
-    name:'Edge-Web-Form-Auto-Filler', tags:['Edge','JavaScript','Automation'],
-    summary:'给固定网页表单做的自动填写工具。',
-    detail:'把经常重复输入的字段保存下来，在目标网页里自动填入，减少重复操作。',
+    title:'网页表单自动填写', repoName:'Edge-Web-Form-Auto-Filler', tags:['Edge','JavaScript','Automation'],
+    summary:'给固定网页表单做的自动填写工具。把经常重复输入的字段先保存下来，到目标页面时再自动填进去。',
+    detail:'适合字段结构比较固定、但每天都要重复录入的页面。重点就是少打几遍同样的内容，不做复杂的通用 RPA。',
     repo:'https://github.com/HX-Wrdzgzs/Edge-Web-Form-Auto-Filler'
   }
 ];
@@ -112,7 +112,7 @@ function getFiltered(){
     const categoryMatch = state.filter === 'all' || project.category === state.filter;
     if (!categoryMatch) return false;
     if (!q) return true;
-    return normalized([project.name,project.categoryLabel,project.summary,project.detail,...project.tags].join(' ')).includes(q);
+    return normalized([project.title,project.repoName,project.categoryLabel,project.summary,project.detail,...project.tags].join(' ')).includes(q);
   });
 }
 function syncUrl(){
@@ -128,7 +128,8 @@ function cardTemplate(project){
   const siteButton = project.site ? `<a class="text-link" href="${project.site}" target="_blank" rel="noreferrer">打开网站 ↗</a>` : '';
   return `<article class="project-card" data-id="${project.id}">
     <div class="card-top"><span>${project.categoryLabel}</span><span class="card-state ${project.live?'live':''}"><i></i>${project.state}</span></div>
-    <h2>${project.name}</h2>
+    <h2>${project.title}</h2>
+    <div class="repo-name">${project.repoName}</div>
     <p>${project.summary}</p>
     <div class="card-tags">${tagHtml}</div>
     <div class="card-actions">
@@ -176,8 +177,8 @@ function render(){
 }
 function openModal(id){
   const project=PROJECTS.find((item)=>item.id===id); if(!project||!modalBackdrop) return;
-  modalTitle.textContent=project.name;
-  modalSummary.textContent=project.summary;
+  modalTitle.textContent=project.title;
+  modalSummary.textContent=`${project.repoName} · ${project.summary}`;
   modalDetail.textContent=project.detail;
   modalTags.innerHTML=project.tags.map((tag)=>`<span>${tag}</span>`).join('');
   const actions=[];
