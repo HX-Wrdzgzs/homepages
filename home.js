@@ -1,19 +1,32 @@
+const mobileCss = document.createElement('link');
+mobileCss.rel = 'stylesheet';
+mobileCss.href = './mobile.css';
+document.head.appendChild(mobileCss);
+
 const menuButton = document.querySelector('.mobile-menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
 
-menuButton?.addEventListener('click', () => {
-  const open = !menuButton.classList.contains('is-open');
+function setMenu(open) {
+  if (!menuButton || !mobileNav) return;
   menuButton.classList.toggle('is-open', open);
-  mobileNav?.classList.toggle('is-open', open);
+  mobileNav.classList.toggle('is-open', open);
   menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.setAttribute('aria-label', open ? '关闭导航' : '打开导航');
+}
+
+menuButton?.addEventListener('click', (event) => {
+  event.stopPropagation();
+  setMenu(!menuButton.classList.contains('is-open'));
 });
 
-mobileNav?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    menuButton?.classList.remove('is-open');
-    mobileNav.classList.remove('is-open');
-    menuButton?.setAttribute('aria-expanded', 'false');
-  });
+mobileNav?.addEventListener('click', (event) => event.stopPropagation());
+mobileNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+document.addEventListener('click', () => setMenu(false));
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') setMenu(false);
+});
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 700) setMenu(false);
 });
 
 const revealItems = document.querySelectorAll('.reveal');
@@ -38,18 +51,18 @@ const projectPreview = {
     desc: '舞萌 DX 的 Android 客户端。最近主要在重做界面和交互，成绩、曲库和同步也在一起整理。',
     stack: ['Kotlin', 'Android', 'FastAPI'],
     flow: ['玩家数据', '同步服务', 'Android'],
-    metaLeft: '客户端',
+    metaLeft: 'Android',
     metaRight: 'UI 重做'
   },
   ham: {
     kicker: 'WINDOWS / RADIO',
     title: 'ham-checkin-assistant',
     state: '维护中',
-    desc: '中继点名现场用的本地录入工具。数据先写进 SQLite，需要协作时再同步到 Excel。',
+    desc: '给中继点名现场用的 Windows 本地录入工具。数据先写进 SQLite，需要协作时再同步到 Excel。',
     stack: ['Python', 'SQLite', 'Excel'],
     flow: ['现场输入', '本地记录', 'Excel'],
     metaLeft: 'Windows',
-    metaRight: '本地录入'
+    metaRight: '本地记录'
   },
   retro: {
     kicker: 'HARDWARE / MONITOR',
