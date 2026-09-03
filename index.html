@@ -4,188 +4,111 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="HX-Wrdzgzs 的个人主页。公开项目、最近在做的东西，以及一些常用入口。" />
-  <meta property="og:title" content="HX-Wrdzgzs · 个人主页" />
-  <meta property="og:description" content="项目、开发记录和常用入口。" />
-  <meta property="og:type" content="website" />
+  <meta name="description" content="HX-Wrdzgzs 的个人主页。项目、开发记录和一些常用入口。" />
   <title>HX-Wrdzgzs · 个人主页</title>
   <link rel="stylesheet" href="./home.css" />
 </head>
 <body>
-  <header class="site-nav-wrap">
-    <div class="site-nav app-shell">
-      <a class="brand" href="./index.html" aria-label="HX-Wrdzgzs 首页">
-        <span class="brand-mark">HX</span>
-        <span class="brand-name">Wrdzgzs</span>
-      </a>
-      <nav class="primary-nav" aria-label="主导航">
-        <a href="./index.html" aria-current="page">首页</a>
-        <a href="./projects.html">项目</a>
-        <a href="./about.html">关于</a>
-        <span class="nav-divider" aria-hidden="true"></span>
-        <a class="nav-github" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-      </nav>
-      <button class="mobile-menu-button" type="button" aria-label="打开导航" aria-expanded="false"><span></span></button>
+  <aside class="site-sidebar" aria-label="网站菜单">
+    <a class="sidebar-brand" href="./index.html"><span class="sidebar-brand-mark">HX</span><span class="sidebar-brand-text">Wrdzgzs</span></a>
+    <div class="sidebar-scroll">
+      <section class="sidebar-group">
+        <p class="sidebar-label">导航</p>
+        <nav class="sidebar-nav">
+          <a class="sidebar-link" href="./index.html" aria-current="page"><span class="sidebar-icon">⌂</span><span>首页</span></a>
+          <a class="sidebar-link" href="./projects.html"><span class="sidebar-icon">&lt;&gt;</span><span>项目</span></a>
+          <a class="sidebar-link" href="./about.html"><span class="sidebar-icon">i</span><span>关于</span></a>
+        </nav>
+      </section>
+      <section class="sidebar-group">
+        <p class="sidebar-label">链接</p>
+        <nav class="sidebar-nav">
+          <a class="sidebar-link" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span class="sidebar-icon">GH</span><span>GitHub</span><span class="external">↗</span></a>
+          <a class="sidebar-link" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer"><span class="sidebar-icon">A</span><span>Amia · Mizuki</span><span class="external">↗</span></a>
+          <a class="sidebar-link" href="https://help.mizuki.top" target="_blank" rel="noreferrer"><span class="sidebar-icon">D</span><span>Mizuki Docs</span><span class="external">↗</span></a>
+        </nav>
+      </section>
     </div>
-    <nav class="mobile-nav app-shell" aria-label="移动端导航">
-      <a href="./index.html" aria-current="page"><span>首页</span><span>01</span></a>
-      <a href="./projects.html"><span>项目</span><span>02</span></a>
-      <a href="./about.html"><span>关于</span><span>03</span></a>
-      <a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span>GitHub</span><span>↗</span></a>
-    </nav>
+    <div class="sidebar-footer">个人主页<br>© 2026 HX-Wrdzgzs</div>
+  </aside>
+  <div class="sidebar-overlay" aria-hidden="true"></div>
+  <header class="mobile-header">
+    <a class="mobile-brand" href="./index.html"><span class="sidebar-brand-mark">HX</span><span>Wrdzgzs</span></a>
+    <button class="mobile-menu-button" type="button" aria-label="打开菜单" aria-expanded="false"><span class="menu-lines"><span></span></span></button>
   </header>
 
-  <main>
-    <section class="hero app-shell reveal">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="eyebrow-dot"></span> HX-Wrdzgzs / Personal site</p>
-        <h1 class="page-title">你好，我是<br><span class="accent">HX-Wrdzgzs。</span></h1>
-        <p class="page-lead">平时主要写 Python、Kotlin 和 C#，也会维护 Bot、服务器和几个自己用的网站。这里放我的公开项目和最近在做的东西。</p>
-        <div class="hero-actions">
-          <a class="button primary" href="./projects.html">项目 <span>→</span></a>
-          <a class="button" href="./about.html">关于</a>
-          <a class="button ghost" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a>
+  <div class="page-frame">
+    <main>
+      <section class="hero app-shell reveal">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> HX-Wrdzgzs / Personal site</p>
+          <h1 class="page-title">你好，我是<br><span class="accent">HX-Wrdzgzs。</span></h1>
+          <p class="page-lead">平时主要写 Python、Kotlin 和 C#。手里有 Android、Bot、Windows 工具和几个网站，服务器和网络也自己维护。这里把能公开的东西整理到一起。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="./projects.html">看项目 <span>→</span></a>
+            <a class="button" href="./about.html">关于我</a>
+            <a class="button ghost" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a>
+          </div>
+          <div class="hero-meta">
+            <span>11 个公开项目</span><span>Android / Bot / Web</span><span>Tools / Infrastructure</span>
+          </div>
         </div>
-        <div class="hero-meta">
-          <span>11 个公开项目</span>
-          <span>Android / Bot / Web / Tools</span>
-          <span>Infrastructure / Radio</span>
-        </div>
-      </div>
 
-      <div class="product-window" aria-label="项目预览">
-        <div class="window-bar">
-          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-          <span class="window-path">当前项目</span>
-          <span class="window-path">2026</span>
-        </div>
-        <div class="workspace">
-          <aside class="workspace-sidebar">
-            <div class="workspace-label">Projects</div>
-            <button class="workspace-tab is-active" type="button" data-preview="mizuki">Amia-Sync-Android</button>
-            <button class="workspace-tab" type="button" data-preview="ham">ham-checkin-assistant</button>
-            <button class="workspace-tab" type="button" data-preview="retro">retro-monitor</button>
-            <button class="workspace-tab" type="button" data-preview="amia">Amia</button>
-          </aside>
-          <div class="workspace-main">
-            <div class="workspace-top">
-              <div>
-                <p class="workspace-kicker" data-preview-kicker>ANDROID / MAIMAI DX</p>
-                <h2 class="workspace-title" data-preview-title>Amia-Sync-Android</h2>
+        <div class="product-window" aria-label="项目预览">
+          <div class="window-bar"><div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-path">最近在改</span><span class="window-path">2026</span></div>
+          <div class="workspace">
+            <aside class="workspace-sidebar">
+              <div class="workspace-label">Projects</div>
+              <button class="workspace-tab is-active" type="button" data-preview="mizuki">Amia-Sync-Android</button>
+              <button class="workspace-tab" type="button" data-preview="ham">ham-checkin-assistant</button>
+              <button class="workspace-tab" type="button" data-preview="retro">retro-monitor</button>
+              <button class="workspace-tab" type="button" data-preview="amia">Amia · Mizuki</button>
+            </aside>
+            <div class="workspace-main">
+              <div class="workspace-top">
+                <div><p class="workspace-kicker" data-preview-kicker>ANDROID / MAIMAI DX</p><h2 class="workspace-title" data-preview-title>Amia Sync Android</h2></div>
+                <span class="status-pill"><i></i><span data-preview-state>重做中</span></span>
               </div>
-              <span class="status-pill"><i></i><span data-preview-state>重做中</span></span>
+              <p class="workspace-desc" data-preview-desc>舞萌 DX 的 Android 客户端。玩家信息、成绩和曲库都在手机上看，最近主要在重做界面和交互。</p>
+              <div class="stack-row" data-preview-stack><span class="tech-chip">Kotlin</span><span class="tech-chip">Android</span><span class="tech-chip">FastAPI</span></div>
+              <div class="workspace-flow"><div class="flow-label">流程</div><div class="flow-line" data-preview-flow><div class="flow-node">玩家数据</div><div class="flow-node">同步服务</div><div class="flow-node">Android</div></div></div>
+              <div class="workspace-footer"><span data-preview-meta-left>Amia-Sync-Android</span><span data-preview-meta-right>UI 重做</span></div>
             </div>
-            <p class="workspace-desc" data-preview-desc>舞萌 DX 的 Android 客户端。最近主要在重做界面和交互，成绩、曲库和同步也在一起整理。</p>
-            <div class="stack-row" data-preview-stack>
-              <span class="tech-chip">Kotlin</span><span class="tech-chip">Android</span><span class="tech-chip">FastAPI</span>
-            </div>
-            <div class="workspace-flow">
-              <div class="flow-label">流程</div>
-              <div class="flow-line" data-preview-flow>
-                <div class="flow-node">玩家数据</div><div class="flow-node">同步服务</div><div class="flow-node">Android</div>
-              </div>
-            </div>
-            <div class="workspace-footer"><span data-preview-meta-left>客户端</span><span data-preview-meta-right>UI 重做</span></div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section app-shell reveal">
-      <div class="section-head">
-        <div><span class="section-index">01 / 项目</span><h2>最近常改的几个。</h2></div>
-        <p>完整列表在项目页。</p>
-      </div>
-      <div class="feature-grid">
-        <a class="feature-card" href="./projects/mizukisync.html">
-          <span class="feature-number">01</span><span class="arrow">↗</span>
-          <h3>Amia-Sync-Android</h3>
-          <p>舞萌 DX Android 客户端。现在主要在重做界面、交互和数据展示。</p>
-          <div class="feature-tags"><span>KOTLIN</span><span>ANDROID</span><span>FASTAPI</span></div>
-        </a>
-        <a class="feature-card" href="./projects/hx-ham.html">
-          <span class="feature-number">02</span><span class="arrow">↗</span>
-          <h3>ham-checkin-assistant</h3>
-          <p>中继点名现场用的本地录入工具，数据先落 SQLite，需要时再同步到 Excel。</p>
-          <div class="feature-tags"><span>PYTHON</span><span>SQLITE</span><span>EXCEL</span></div>
-        </a>
-        <a class="feature-card" href="./projects/retro-monitor.html">
-          <span class="feature-number">03</span><span class="arrow">↗</span>
-          <h3>retro-monitor</h3>
-          <p>把电脑硬件状态接到 Home Assistant，再送到 ESP32-S3 桌面终端。</p>
-          <div class="feature-tags"><span>C#</span><span>HOME ASSISTANT</span><span>ESP32-S3</span></div>
-        </a>
-      </div>
-    </section>
+      <section class="section app-shell reveal">
+        <div class="section-head"><div><span class="section-index">01 / 项目</span><h2>最近常改的几个。</h2></div><p>完整列表在项目页，可以搜索、分类和翻页。</p></div>
+        <div class="feature-grid">
+          <a class="feature-card" href="./projects/mizukisync.html"><span class="feature-number">01</span><span class="arrow">↗</span><h3>Amia Sync Android</h3><span class="feature-repo">Amia-Sync-Android</span><p>舞萌 DX 的 Android 客户端。最近主要在重做界面和交互，成绩和曲库相关页面也一起整理。</p><div class="feature-tags"><span>KOTLIN</span><span>ANDROID</span><span>FASTAPI</span></div></a>
+          <a class="feature-card" href="./projects/hx-ham.html"><span class="feature-number">02</span><span class="arrow">↗</span><h3>业余无线电点名助手</h3><span class="feature-repo">ham-checkin-assistant</span><p>中继点名现场用的 Windows 本地工具。录入先写 SQLite，需要协作时再同步到 Excel。</p><div class="feature-tags"><span>PYTHON</span><span>SQLITE</span><span>EXCEL</span></div></a>
+          <a class="feature-card" href="./projects/retro-monitor.html"><span class="feature-number">03</span><span class="arrow">↗</span><h3>Retro Monitor</h3><span class="feature-repo">retro-monitor</span><p>把 Windows 硬件状态接到 Home Assistant，再送到 ESP32-S3 桌面终端显示。</p><div class="feature-tags"><span>C#</span><span>HOME ASSISTANT</span><span>ESP32-S3</span></div></a>
+        </div>
+      </section>
 
-    <section class="section app-shell reveal">
-      <div class="section-head">
-        <div><span class="section-index">02 / 最近</span><h2>最近在做。</h2></div>
-      </div>
-      <div class="activity-list">
-        <div class="activity-row">
-          <div class="activity-state"><i></i> 正在改</div>
-          <div><h3>Amia-Sync-Android</h3><p>重做 UI 和交互，顺便整理成绩、曲库和设备相关页面。</p></div>
-          <span class="meta">ANDROID / UI</span>
+      <section class="section app-shell reveal">
+        <div class="section-head"><div><span class="section-index">02 / 最近</span><h2>最近在做。</h2></div></div>
+        <div class="activity-list">
+          <div class="activity-row"><div class="activity-state"><i></i> 正在改</div><div><h3>Amia-Sync-Android</h3><p>重做 UI 和交互，顺便整理成绩、曲库和设备相关页面。</p></div><span class="meta">ANDROID / UI</span></div>
+          <div class="activity-row"><div class="activity-state"><i></i> 在维护</div><div><h3>ham-checkin-assistant</h3><p>继续补点名录入、历史建议、SQLite 和 Excel 这几块。</p></div><span class="meta">WINDOWS / RADIO</span></div>
+          <div class="activity-row"><div class="activity-state"><i></i> 长期</div><div><h3>Amia · Mizuki</h3><p>维护 Bot、PJSK 和舞萌相关插件。</p></div><span class="meta">BOT / RHYTHM GAME</span></div>
+          <div class="activity-row"><div class="activity-state"><i></i> 日常</div><div><h3>服务器 / 网络</h3><p>维护自己的虚拟化环境、Cloudflare 和几个服务。</p></div><span class="meta">INFRASTRUCTURE</span></div>
         </div>
-        <div class="activity-row">
-          <div class="activity-state"><i></i> 在维护</div>
-          <div><h3>ham-checkin-assistant</h3><p>继续补点名录入、历史建议、SQLite 和 Excel。</p></div>
-          <span class="meta">WINDOWS / RADIO</span>
-        </div>
-        <div class="activity-row">
-          <div class="activity-state"><i></i> 长期</div>
-          <div><h3>Amia · Mizuki</h3><p>维护 Bot、PJSK 和舞萌相关插件。</p></div>
-          <span class="meta">BOT / RHYTHM GAME</span>
-        </div>
-        <div class="activity-row">
-          <div class="activity-state"><i></i> 日常</div>
-          <div><h3>服务器 / 网络</h3><p>维护自己的虚拟化环境、Cloudflare 和几个服务。</p></div>
-          <span class="meta">INFRASTRUCTURE</span>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section app-shell reveal">
-      <div class="section-head">
-        <div><span class="section-index">03 / 其他</span><h2>平时也会碰这些。</h2></div>
-      </div>
-      <div class="secondary-grid">
-        <div class="info-panel">
-          <h3>服务器和网络</h3>
-          <p>PVE、Linux、Cloudflare、DNS、Tunnel，还有一些日常自动化脚本。</p>
-          <div class="topic-grid">
-            <div class="topic"><strong>Virtualization</strong><span>PVE / VM / LXC</span></div>
-            <div class="topic"><strong>Network</strong><span>DNS / Tunnel / Proxy</span></div>
-            <div class="topic"><strong>Deployment</strong><span>Cloudflare / Linux</span></div>
-            <div class="topic"><strong>Automation</strong><span>Python / PowerShell</span></div>
-          </div>
+      <section class="section app-shell reveal">
+        <div class="section-head"><div><span class="section-index">03 / 其他</span><h2>平时也会碰这些。</h2></div></div>
+        <div class="secondary-grid">
+          <div class="info-panel"><h3>服务器和网络</h3><p>PVE、Linux、Cloudflare、DNS、Tunnel，还有一些日常自动化脚本。</p><div class="topic-grid"><div class="topic"><strong>Virtualization</strong><span>PVE / VM / LXC</span></div><div class="topic"><strong>Network</strong><span>DNS / Tunnel / Proxy</span></div><div class="topic"><strong>Deployment</strong><span>Cloudflare / Linux</span></div><div class="topic"><strong>Automation</strong><span>Python / PowerShell</span></div></div></div>
+          <div class="info-panel"><h3>无线电和音频</h3><p>QSO / QSL 相关网站、设备固件，以及音频分离和模型实验。</p><div class="topic-grid"><div class="topic"><strong>Amateur Radio</strong><span>QSO / QSL / Tools</span></div><div class="topic"><strong>Audio</strong><span>Separation / SVC</span></div></div></div>
         </div>
-        <div class="info-panel">
-          <h3>无线电和音频</h3>
-          <p>QSO / QSL 相关网站、设备固件，以及音频分离和模型实验。</p>
-          <div class="topic-grid">
-            <div class="topic"><strong>Amateur Radio</strong><span>QSO / QSL / Tools</span></div>
-            <div class="topic"><strong>Audio</strong><span>Separation / SVC</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="cta-band app-shell reveal">
-      <div class="cta-inner">
-        <div><h2>其他项目</h2><p>项目页里可以搜索、分类和分页查看。</p></div>
-        <a class="button primary" href="./projects.html">打开项目页 <span>→</span></a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner app-shell">
-      <span>© 2026 HX-Wrdzgzs</span>
-      <div class="footer-links"><a href="./projects.html">项目</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div>
-    </div>
-  </footer>
+      <section class="cta-band app-shell reveal"><div class="cta-inner"><div><h2>其他项目</h2><p>项目页里能直接看简介，也可以继续进详情或 GitHub。</p></div><a class="button primary" href="./projects.html">打开项目页 <span>→</span></a></div></section>
+    </main>
+    <footer class="site-footer"><div class="footer-inner app-shell"><span>© 2026 HX-Wrdzgzs</span><div class="footer-links"><a href="./projects.html">项目</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div></div></footer>
+  </div>
   <script src="./home.js"></script>
 </body>
 </html>

@@ -9,85 +9,66 @@
   <link rel="stylesheet" href="./home.css" />
 </head>
 <body>
-  <header class="site-nav-wrap">
-    <div class="site-nav app-shell">
-      <a class="brand" href="./index.html"><span class="brand-mark">HX</span><span class="brand-name">Wrdzgzs</span></a>
-      <nav class="primary-nav" aria-label="主导航">
-        <a href="./index.html">首页</a>
-        <a href="./projects.html" aria-current="page">项目</a>
-        <a href="./about.html">关于</a>
-        <span class="nav-divider" aria-hidden="true"></span>
-        <a class="nav-github" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-      </nav>
-      <button class="mobile-menu-button" type="button" aria-label="打开导航" aria-expanded="false"><span></span></button>
+  <aside class="site-sidebar" aria-label="网站菜单">
+    <a class="sidebar-brand" href="./index.html"><span class="sidebar-brand-mark">HX</span><span class="sidebar-brand-text">Wrdzgzs</span></a>
+    <div class="sidebar-scroll">
+      <section class="sidebar-group"><p class="sidebar-label">导航</p><nav class="sidebar-nav">
+        <a class="sidebar-link" href="./index.html"><span class="sidebar-icon">⌂</span><span>首页</span></a>
+        <a class="sidebar-link" href="./projects.html" aria-current="page"><span class="sidebar-icon">&lt;&gt;</span><span>项目</span></a>
+        <a class="sidebar-link" href="./about.html"><span class="sidebar-icon">i</span><span>关于</span></a>
+      </nav></section>
+      <section class="sidebar-group"><p class="sidebar-label">链接</p><nav class="sidebar-nav">
+        <a class="sidebar-link" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span class="sidebar-icon">GH</span><span>GitHub</span><span class="external">↗</span></a>
+        <a class="sidebar-link" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer"><span class="sidebar-icon">A</span><span>Amia · Mizuki</span><span class="external">↗</span></a>
+        <a class="sidebar-link" href="https://help.mizuki.top" target="_blank" rel="noreferrer"><span class="sidebar-icon">D</span><span>Mizuki Docs</span><span class="external">↗</span></a>
+      </nav></section>
     </div>
-    <nav class="mobile-nav app-shell" aria-label="移动端导航">
-      <a href="./index.html"><span>首页</span><span>01</span></a>
-      <a href="./projects.html" aria-current="page"><span>项目</span><span>02</span></a>
-      <a href="./about.html"><span>关于</span><span>03</span></a>
-      <a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span>GitHub</span><span>↗</span></a>
-    </nav>
-  </header>
+    <div class="sidebar-footer">个人主页<br>© 2026 HX-Wrdzgzs</div>
+  </aside>
+  <div class="sidebar-overlay" aria-hidden="true"></div>
+  <header class="mobile-header"><a class="mobile-brand" href="./index.html"><span class="sidebar-brand-mark">HX</span><span>Wrdzgzs</span></a><button class="mobile-menu-button" type="button" aria-label="打开菜单" aria-expanded="false"><span class="menu-lines"><span></span></span></button></header>
 
-  <main>
-    <section class="page-hero app-shell reveal">
-      <p class="eyebrow"><span class="eyebrow-dot"></span> PROJECTS</p>
-      <h1 class="page-title">项目</h1>
-      <p class="page-lead">这里是我个人账号下的公开项目。可以直接搜索，也可以按类型筛选。</p>
-      <div class="page-count"><span data-total-count>11</span> 个公开项目</div>
-    </section>
+  <div class="page-frame">
+    <main>
+      <section class="page-hero app-shell reveal">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> PROJECTS</p>
+        <h1 class="page-title">项目</h1>
+        <p class="page-lead">个人账号里能公开的项目都放在这里。卡片先写清楚是干什么的，仓库名放在标题下面；需要看源码时再去 GitHub。</p>
+        <div class="page-count"><span data-total-count>11</span> 个公开项目</div>
+      </section>
 
-    <section class="project-toolbar" aria-label="项目筛选">
-      <div class="toolbar-inner app-shell">
-        <label class="search-box">
-          <span class="search-icon">⌕</span>
-          <input id="project-search" type="search" autocomplete="off" placeholder="搜索项目或技术" aria-label="搜索项目" />
-          <span class="search-hint">/</span>
-        </label>
-        <div class="filters" role="group" aria-label="项目分类">
-          <button class="filter is-active" type="button" data-filter="all">全部</button>
-          <button class="filter" type="button" data-filter="radio">无线电</button>
-          <button class="filter" type="button" data-filter="bot">Bot / 音游</button>
-          <button class="filter" type="button" data-filter="tool">工具</button>
-          <button class="filter" type="button" data-filter="system">系统 / 硬件</button>
+      <section class="project-toolbar" aria-label="项目筛选">
+        <div class="toolbar-inner app-shell">
+          <label class="search-box"><span class="search-icon">⌕</span><input id="project-search" type="search" autocomplete="off" placeholder="搜索项目、仓库名或技术" aria-label="搜索项目" /><span class="search-hint">/</span></label>
+          <div class="filters" role="group" aria-label="项目分类">
+            <button class="filter is-active" type="button" data-filter="all">全部</button>
+            <button class="filter" type="button" data-filter="radio">无线电</button>
+            <button class="filter" type="button" data-filter="bot">Bot / 音游</button>
+            <button class="filter" type="button" data-filter="tool">工具</button>
+            <button class="filter" type="button" data-filter="system">系统 / 硬件</button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="project-results app-shell">
-      <div class="results-head"><span data-result-summary>11 个项目</span><span>每页 6 个</span></div>
-      <div class="project-grid" id="project-grid" aria-live="polite"></div>
-      <div class="empty-state" id="empty-state" hidden><strong>没找到。</strong><span>换个关键词或分类试试。</span></div>
-      <nav class="pagination" id="pagination" aria-label="项目分页"></nav>
-    </section>
+      <section class="project-results app-shell">
+        <div class="results-head"><span data-result-summary>11 个项目</span><span>每页 6 个</span></div>
+        <div class="project-grid" id="project-grid" aria-live="polite"></div>
+        <div class="empty-state" id="empty-state" hidden><strong>没找到。</strong><span>换个关键词或分类试试。</span></div>
+        <nav class="pagination" id="pagination" aria-label="项目分页"></nav>
+      </section>
 
-    <section class="cta-band app-shell reveal">
-      <div class="cta-inner">
-        <div><h2>Amia · Mizuki</h2><p>开发组的公开仓库放在单独的 GitHub 组织里。</p></div>
-        <a class="button" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer">开发组 GitHub ↗</a>
-      </div>
-    </section>
-  </main>
+      <section class="cta-band app-shell reveal"><div class="cta-inner"><div><h2>Amia · Mizuki 开发组</h2><p>开发组的公开仓库单独放在组织账号里。</p></div><a class="button" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer">打开组织 GitHub ↗</a></div></section>
+    </main>
 
-  <div class="modal-backdrop" id="project-modal" aria-hidden="true">
-    <article class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <header class="modal-head"><span>项目简介</span><button class="modal-close" type="button" aria-label="关闭">×</button></header>
-      <div class="modal-body">
-        <h2 id="modal-title"></h2>
-        <p class="modal-summary" data-modal-summary></p>
-        <div class="modal-section"><label>说明</label><p data-modal-detail></p></div>
-        <div class="modal-section"><label>技术</label><div class="card-tags" data-modal-tags></div></div>
-        <div class="modal-actions" data-modal-actions></div>
-      </div>
-    </article>
-  </div>
-
-  <footer class="site-footer">
-    <div class="footer-inner app-shell">
-      <span>© 2026 HX-Wrdzgzs</span>
-      <div class="footer-links"><a href="./index.html">首页</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    <div class="modal-backdrop" id="project-modal" aria-hidden="true">
+      <article class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <header class="modal-head"><span>项目简介</span><button class="modal-close" type="button" aria-label="关闭">×</button></header>
+        <div class="modal-body"><h2 id="modal-title"></h2><span class="modal-repo" data-modal-repo></span><p class="modal-summary" data-modal-summary></p><div class="modal-section"><label>再多说一点</label><p data-modal-detail></p></div><div class="modal-section"><label>技术 / 关键词</label><div class="card-tags" data-modal-tags></div></div><div class="modal-actions" data-modal-actions></div></div>
+      </article>
     </div>
-  </footer>
+
+    <footer class="site-footer"><div class="footer-inner app-shell"><span>© 2026 HX-Wrdzgzs</span><div class="footer-links"><a href="./index.html">首页</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div></div></footer>
+  </div>
   <script src="./home.js"></script>
   <script src="./projects.js"></script>
 </body>

@@ -9,101 +9,44 @@
   <link rel="stylesheet" href="./home.css" />
 </head>
 <body>
-  <header class="site-nav-wrap">
-    <div class="site-nav app-shell">
-      <a class="brand" href="./index.html"><span class="brand-mark">HX</span><span class="brand-name">Wrdzgzs</span></a>
-      <nav class="primary-nav" aria-label="主导航">
-        <a href="./index.html">首页</a>
-        <a href="./projects.html">项目</a>
-        <a href="./about.html" aria-current="page">关于</a>
-        <span class="nav-divider" aria-hidden="true"></span>
-        <a class="nav-github" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-      </nav>
-      <button class="mobile-menu-button" type="button" aria-label="打开导航" aria-expanded="false"><span></span></button>
+  <aside class="site-sidebar" aria-label="网站菜单">
+    <a class="sidebar-brand" href="./index.html"><span class="sidebar-brand-mark">HX</span><span class="sidebar-brand-text">Wrdzgzs</span></a>
+    <div class="sidebar-scroll">
+      <section class="sidebar-group"><p class="sidebar-label">导航</p><nav class="sidebar-nav">
+        <a class="sidebar-link" href="./index.html"><span class="sidebar-icon">⌂</span><span>首页</span></a>
+        <a class="sidebar-link" href="./projects.html"><span class="sidebar-icon">&lt;&gt;</span><span>项目</span></a>
+        <a class="sidebar-link" href="./about.html" aria-current="page"><span class="sidebar-icon">i</span><span>关于</span></a>
+      </nav></section>
+      <section class="sidebar-group"><p class="sidebar-label">链接</p><nav class="sidebar-nav">
+        <a class="sidebar-link" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span class="sidebar-icon">GH</span><span>GitHub</span><span class="external">↗</span></a>
+        <a class="sidebar-link" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer"><span class="sidebar-icon">A</span><span>Amia · Mizuki</span><span class="external">↗</span></a>
+        <a class="sidebar-link" href="https://help.mizuki.top" target="_blank" rel="noreferrer"><span class="sidebar-icon">D</span><span>Mizuki Docs</span><span class="external">↗</span></a>
+      </nav></section>
     </div>
-    <nav class="mobile-nav app-shell" aria-label="移动端导航">
-      <a href="./index.html"><span>首页</span><span>01</span></a>
-      <a href="./projects.html"><span>项目</span><span>02</span></a>
-      <a href="./about.html" aria-current="page"><span>关于</span><span>03</span></a>
-      <a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span>GitHub</span><span>↗</span></a>
-    </nav>
-  </header>
+    <div class="sidebar-footer">个人主页<br>© 2026 HX-Wrdzgzs</div>
+  </aside>
+  <div class="sidebar-overlay" aria-hidden="true"></div>
+  <header class="mobile-header"><a class="mobile-brand" href="./index.html"><span class="sidebar-brand-mark">HX</span><span>Wrdzgzs</span></a><button class="mobile-menu-button" type="button" aria-label="打开菜单" aria-expanded="false"><span class="menu-lines"><span></span></span></button></header>
 
-  <main class="app-shell">
-    <section class="about-hero reveal">
-      <div>
-        <p class="eyebrow"><span class="eyebrow-dot"></span> ABOUT</p>
-        <h1 class="page-title">关于</h1>
-        <p class="page-lead">我平时主要做软件开发，也会维护自己的 Bot、服务器和网络。这里放一些基本信息，项目本身都在项目页。</p>
-      </div>
-      <div class="about-facts">
-        <div class="about-fact"><span>GitHub</span><strong>HX-Wrdzgzs</strong></div>
-        <div class="about-fact"><span>常用语言</span><strong>Python / Kotlin / C#</strong></div>
-        <div class="about-fact"><span>主要方向</span><strong>App / Bot / Web / Infrastructure</strong></div>
-        <div class="about-fact"><span>其他</span><strong>Amateur Radio / Audio</strong></div>
-      </div>
-    </section>
+  <div class="page-frame">
+    <main class="app-shell">
+      <section class="about-hero reveal">
+        <div><p class="eyebrow"><span class="eyebrow-dot"></span> ABOUT</p><h1 class="page-title">关于</h1><p class="page-lead">目前写得比较多的是 Python、Kotlin 和 C#。项目里有 Android 客户端、Bot、Windows 工具和网站；服务器、虚拟化和网络主要是给这些东西提供运行环境。</p></div>
+        <div class="about-facts"><div class="about-fact"><span>GitHub</span><strong>HX-Wrdzgzs</strong></div><div class="about-fact"><span>常用语言</span><strong>Python / Kotlin / C#</strong></div><div class="about-fact"><span>主要方向</span><strong>App / Bot / Web / Tools</strong></div><div class="about-fact"><span>平时也做</span><strong>Infrastructure / Radio / Audio</strong></div></div>
+      </section>
 
-    <section class="about-copy reveal">
-      <h2>01 / 简单介绍</h2>
-      <div class="prose">
-        <p>目前写得比较多的是 Python、Kotlin 和 C#。</p>
-        <p>项目里有 Android 客户端、Bot、Windows 工具和网站；服务器、虚拟化和网络这部分主要是给这些服务做运行环境。</p>
-        <p>有些项目会长期维护，有些只是解决一个具体问题。能公开的代码基本都放在 GitHub。</p>
-      </div>
-    </section>
+      <section class="about-copy reveal"><h2>01 / 简单介绍</h2><div class="prose"><p>我平时会维护几套自己真正用得到的东西，所以项目跨度看起来比较大。</p><p>有些是移动端和 Bot，有些是给工作流或无线电场景做的小工具。服务器、网络和 Cloudflare 这部分更多是日常运维，不会为了显得“技术栈很长”单独包装成项目。</p><p>能公开的代码基本都在 GitHub。这个站主要负责把项目说明、入口和最近在做的东西整理得更容易看。</p></div></section>
 
-    <section class="about-copy reveal">
-      <h2>02 / 平时会做</h2>
-      <div class="work-grid">
-        <article class="work-card"><small>SOFTWARE</small><h3>应用和工具</h3><p>Android、Windows 工具、Web 页面和一些自动化程序。</p></article>
-        <article class="work-card"><small>INFRASTRUCTURE</small><h3>服务器和网络</h3><p>PVE、Linux、Cloudflare、部署、DNS 和日常维护。</p></article>
-        <article class="work-card"><small>OTHER</small><h3>无线电和音频</h3><p>QSO / QSL、点名工具、设备固件，以及音频处理实验。</p></article>
-      </div>
-    </section>
+      <section class="about-copy reveal"><h2>02 / 平时会做</h2><div class="work-grid"><article class="work-card"><small>SOFTWARE</small><h3>应用和工具</h3><p>Android、Windows 工具、Web 页面和自动化程序。</p></article><article class="work-card"><small>INFRASTRUCTURE</small><h3>服务器和网络</h3><p>PVE、Linux、Cloudflare、部署、DNS 和日常维护。</p></article><article class="work-card"><small>OTHER</small><h3>无线电和音频</h3><p>QSO / QSL、点名工具、设备固件，以及音频处理实验。</p></article></div></section>
 
-    <section class="about-copy reveal">
-      <h2>03 / 常用</h2>
-      <div class="prose">
-        <div class="topic-grid">
-          <div class="topic"><strong>Python</strong><span>BOT / TOOL / AUTOMATION</span></div>
-          <div class="topic"><strong>Kotlin</strong><span>ANDROID</span></div>
-          <div class="topic"><strong>C# / .NET</strong><span>WINDOWS</span></div>
-          <div class="topic"><strong>TypeScript</strong><span>WEB</span></div>
-          <div class="topic"><strong>SQLite / MySQL</strong><span>DATA</span></div>
-          <div class="topic"><strong>Cloudflare</strong><span>PAGES / D1 / TUNNEL</span></div>
-          <div class="topic"><strong>PVE / Linux</strong><span>INFRA</span></div>
-          <div class="topic"><strong>Git / GitHub</strong><span>CODE / RELEASE</span></div>
-        </div>
-      </div>
-    </section>
+      <section class="about-copy reveal"><h2>03 / 常用</h2><div class="prose"><div class="topic-grid"><div class="topic"><strong>Python</strong><span>BOT / TOOL / AUTOMATION</span></div><div class="topic"><strong>Kotlin</strong><span>ANDROID</span></div><div class="topic"><strong>C# / .NET</strong><span>WINDOWS</span></div><div class="topic"><strong>TypeScript</strong><span>WEB</span></div><div class="topic"><strong>SQLite / MySQL</strong><span>DATA</span></div><div class="topic"><strong>Cloudflare</strong><span>PAGES / D1 / TUNNEL</span></div><div class="topic"><strong>PVE / Linux</strong><span>INFRA</span></div><div class="topic"><strong>Git / GitHub</strong><span>CODE / RELEASE</span></div></div></div></section>
 
-    <section class="about-copy reveal">
-      <h2>04 / Amia · Mizuki</h2>
-      <div class="prose">
-        <p>Bot、舞萌、PJSK 和公共插件主要放在 Amia · Mizuki 开发组的组织仓库里。</p>
-        <a class="button" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer">打开开发组 GitHub ↗</a>
-      </div>
-    </section>
+      <section class="about-copy reveal"><h2>04 / Amia · Mizuki</h2><div class="prose"><p>Bot、舞萌、PJSK 和公共插件主要放在开发组的组织仓库里。</p><a class="button" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer">打开开发组 GitHub ↗</a></div></section>
 
-    <section class="about-copy reveal">
-      <h2>05 / 链接</h2>
-      <div class="prose">
-        <div class="link-list">
-          <a class="link-row" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span>GITHUB</span><strong>HX-Wrdzgzs</strong><i>↗</i></a>
-          <a class="link-row" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer"><span>DEVELOPMENT</span><strong>Amia · Mizuki Dev Team</strong><i>↗</i></a>
-          <a class="link-row" href="https://help.mizuki.top" target="_blank" rel="noreferrer"><span>DOCS</span><strong>Mizuki Docs</strong><i>↗</i></a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner app-shell">
-      <span>© 2026 HX-Wrdzgzs</span>
-      <div class="footer-links"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div>
-    </div>
-  </footer>
+      <section class="about-copy reveal"><h2>05 / 链接</h2><div class="prose"><div class="link-list"><a class="link-row" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span>GITHUB</span><strong>HX-Wrdzgzs</strong><i>↗</i></a><a class="link-row" href="https://github.com/Amia-Mizuki-Dev-Team" target="_blank" rel="noreferrer"><span>DEVELOPMENT</span><strong>Amia · Mizuki Dev Team</strong><i>↗</i></a><a class="link-row" href="https://help.mizuki.top" target="_blank" rel="noreferrer"><span>DOCS</span><strong>Mizuki Docs</strong><i>↗</i></a></div></div></section>
+    </main>
+    <footer class="site-footer"><div class="footer-inner app-shell"><span>© 2026 HX-Wrdzgzs</span><div class="footer-links"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div></div></footer>
+  </div>
   <script src="./home.js"></script>
 </body>
 </html>
