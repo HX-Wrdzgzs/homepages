@@ -1,8 +1,8 @@
 const PROJECTS = [
   {
     id:'hx-ham', category:'radio', categoryLabel:'无线电 / Windows', state:'维护中', live:false,
-    name:'HX-HAM', tags:['Python','SQLite','Excel'],
-    summary:'中继点名现场用的 Windows 本地录入工具。',
+    name:'ham-checkin-assistant', tags:['Python','SQLite','Excel'],
+    summary:'HX-HAM 的 GitHub 仓库。程序用于中继点名现场录入。',
     detail:'现场先快速输入呼号、地点、设备等信息，程序再整理成结构化记录。数据先写进 SQLite，需要协作时再同步到 Excel。',
     detailUrl:'./projects/hx-ham.html', repo:'https://github.com/HX-Wrdzgzs/ham-checkin-assistant'
   },
