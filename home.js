@@ -43,13 +43,13 @@ const projectPreview = {
   },
   ham: {
     kicker: 'WINDOWS / RADIO',
-    title: 'HX-HAM',
+    title: 'ham-checkin-assistant',
     state: '维护中',
-    desc: '中继点名现场用的本地录入工具。数据先写进 SQLite，需要协作时再同步到 Excel。',
+    desc: '仓库里的程序叫 HX-HAM，用在中继点名现场。数据先写进 SQLite，需要协作时再同步到 Excel。',
     stack: ['Python', 'SQLite', 'Excel'],
     flow: ['现场输入', '本地记录', 'Excel'],
-    metaLeft: 'Windows',
-    metaRight: '本地优先'
+    metaLeft: 'HX-HAM',
+    metaRight: 'Windows'
   },
   retro: {
     kicker: 'HARDWARE / MONITOR',
