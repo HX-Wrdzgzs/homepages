@@ -2,41 +2,41 @@ const PROJECTS = [
   {
     id:'hx-ham', category:'radio', categoryLabel:'无线电 / Windows', state:'维护中', live:false,
     name:'ham-checkin-assistant', tags:['Python','SQLite','Excel'],
-    summary:'HX-HAM 的 GitHub 仓库。程序用于中继点名现场录入。',
+    summary:'中继点名现场用的 Windows 本地录入工具。',
     detail:'现场先快速输入呼号、地点、设备等信息，程序再整理成结构化记录。数据先写进 SQLite，需要协作时再同步到 Excel。',
     detailUrl:'./projects/hx-ham.html', repo:'https://github.com/HX-Wrdzgzs/ham-checkin-assistant'
   },
   {
     id:'qso', category:'radio', categoryLabel:'无线电 / Web', state:'在线', live:true,
-    name:'BA4THG 通联档案', tags:['Cloudflare Pages','D1','QSO'],
+    name:'BA4THG-QSO', tags:['Cloudflare Pages','D1','QSO'],
     summary:'QSO 记录的长期归档和查询页面。',
     detail:'把已经确认的通联记录长期保存下来，并提供按呼号查询。记录和公开展示分开处理。',
     detailUrl:'./projects/qso-archive.html', site:'https://qso.mizuki.top', repo:'https://github.com/HX-Wrdzgzs/BA4THG-QSO'
   },
   {
     id:'qsl', category:'radio', categoryLabel:'无线电 / Web', state:'公开', live:false,
-    name:'BA4THG QSL Card Archive', tags:['Static Web','WebP','QSL'],
+    name:'BA4THG-QSL', tags:['Static Web','WebP','QSL'],
     summary:'QSL 卡片展示页。',
     detail:'网页先加载 WebP 缩略图，点开时再看完整尺寸。和 QSO 数据库分开维护。',
     repo:'https://github.com/HX-Wrdzgzs/BA4THG-QSL'
   },
   {
     id:'uvk5', category:'radio', categoryLabel:'无线电 / 固件', state:'维护中', live:false,
-    name:'LOSEHU132 UV-K5 / UV-K6 固件', tags:['C','Firmware','UV-K5'],
+    name:'uv-k5-losehu132-wrdzgzs', tags:['C','Firmware','UV-K5'],
     summary:'自己维护的一份 UV-K5 / UV-K6 固件分支。',
     detail:'主要维护中文功能、自己会用到的扩展、构建产物和版本说明。',
     repo:'https://github.com/HX-Wrdzgzs/uv-k5-losehu132-wrdzgzs'
   },
   {
     id:'mizuki', category:'bot', categoryLabel:'舞萌 / Android', state:'重做中', live:false,
-    name:'MizukiSync Android', tags:['Kotlin','Android','FastAPI'],
+    name:'Amia-Sync-Android', tags:['Kotlin','Android','FastAPI'],
     summary:'舞萌 DX 的 Android 客户端。',
     detail:'客户端负责玩家信息、成绩和曲库页面，服务端负责整理第三方接口和数据。最近主要在重做 UI 和交互。',
     detailUrl:'./projects/mizukisync.html', repo:'https://github.com/HX-Wrdzgzs/Amia-Sync-Android'
   },
   {
     id:'pjsk', category:'bot', categoryLabel:'PJSK / Web', state:'公开', live:false,
-    name:'HX PJSK Gateway', tags:['React','FastAPI','Redis'],
+    name:'hx-pjsk-gateway', tags:['React','FastAPI','Redis'],
     summary:'PJSK 网页查询用的网关。',
     detail:'网页发请求后，由机器人侧确认身份，再去数据节点取结果。网关负责把网页、机器人和数据服务接起来。',
     detailUrl:'./projects/pjsk-gateway.html', repo:'https://github.com/HX-Wrdzgzs/hx-pjsk-gateway'
@@ -57,7 +57,7 @@ const PROJECTS = [
   },
   {
     id:'retro', category:'system', categoryLabel:'系统 / 硬件', state:'公开', live:false,
-    name:'Retro Monitor', tags:['C#','Home Assistant','ESP32-S3'],
+    name:'retro-monitor', tags:['C#','Home Assistant','ESP32-S3'],
     summary:'电脑硬件状态到桌面小屏的一套监控方案。',
     detail:'Windows 端采集硬件状态，经 Home Assistant 再把数据送到 ESP32-S3 桌面终端。',
     detailUrl:'./projects/retro-monitor.html', repo:'https://github.com/HX-Wrdzgzs/retro-monitor'
@@ -71,7 +71,7 @@ const PROJECTS = [
   },
   {
     id:'form', category:'tool', categoryLabel:'浏览器 / 工具', state:'公开', live:false,
-    name:'Edge Web Form Auto Filler', tags:['Edge','JavaScript','Automation'],
+    name:'Edge-Web-Form-Auto-Filler', tags:['Edge','JavaScript','Automation'],
     summary:'给固定网页表单做的自动填写工具。',
     detail:'把经常重复输入的字段保存下来，在目标网页里自动填入，减少重复操作。',
     repo:'https://github.com/HX-Wrdzgzs/Edge-Web-Form-Auto-Filler'
