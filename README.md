@@ -1,32 +1,22 @@
 # HX-Wrdzgzs Personal Homepage
 
-个人主页静态站，部署到 Cloudflare Pages。
-
-## 页面
-
-- `index.html`：首页
-- `projects.html`：项目目录，支持搜索、筛选、分页和快速预览
-- `about.html`：关于
-- `projects/`：部分项目的站内详情页
-- `404.html`：404
-
-## 样式与脚本
-
-- `home.css`：首页 / 项目页 / 关于页共用设计系统
-- `home.js`：导航、首页项目预览、进入动画等公共交互
-- `projects.js`：项目数据、搜索、筛选、分页、弹窗
-- `detail.css`：项目详情页公共样式
-- `DESIGN.md`：视觉、交互和文案规范
+个人主页静态站，生产环境由 Cloudflare Pages 部署。
 
 ## 部署
 
-Cloudflare Pages：
+- Production branch: `main`
+- Build command: 留空
+- Build output directory: `/`
 
-```text
-Production branch: main
-Framework preset: None
-Build command: 留空
-Build output directory: /
-```
+## 结构
 
-纯静态站，不需要 npm 构建。
+- `index.html`：首页
+- `projects.html`：项目列表、搜索、筛选与分页
+- `about.html`：关于
+- `home.css`：页面视觉
+- `layout.css`：侧栏、移动端抽屉、项目卡辅助布局、站点/友链卡片
+- `home.js`：菜单与首页交互
+- `projects.js`：项目数据、搜索、筛选、分页和快速预览
+- `_headers`：Cloudflare Pages 缓存重新验证策略
+
+基础布局 CSS 直接由 HTML 引用，不依赖 JavaScript 动态加载。静态资源 URL 使用版本参数，避免 Cloudflare Pages 更新后浏览器继续使用旧版 CSS/JS。
