@@ -1,7 +1,7 @@
 if(!document.querySelector('link[data-hx-layout]')){
   const layout=document.createElement('link');
   layout.rel='stylesheet';
-  layout.href='/layout.css?v=20260905-1';
+  layout.href='/layout.css?v=20260905-4';
   layout.setAttribute('data-hx-layout','');
   document.head.appendChild(layout);
 }
@@ -24,13 +24,13 @@ function ensureSidebarExtras(){
     const group=document.createElement('section');
     group.className='sidebar-group';
     group.setAttribute('data-sidebar-friends','');
-    group.innerHTML='<p class="sidebar-label">友链</p><nav class="sidebar-nav"><a class="sidebar-link" href="https://ba4slt.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4S</span><span>BA4SLT</span><span class="external">↗</span></a><a class="sidebar-link" href="https://www.bd4rfg.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4R</span><span>BD4RFG</span><span class="external">↗</span></a><a class="sidebar-link" href="https://www.ba4sbf.cn/friends/" target="_blank" rel="noreferrer"><span class="sidebar-icon">4B</span><span>BA4SBF</span><span class="external">↗</span></a></nav>';
+    group.innerHTML='<p class="sidebar-label">友链</p><nav class="sidebar-nav"><a class="sidebar-link" href="https://ba4slt.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4S</span><span>BA4SLT</span><span class="external">↗</span></a><a class="sidebar-link" href="https://www.bd4rfg.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4R</span><span>BD4RFG</span><span class="external">↗</span></a><a class="sidebar-link" href="https://ba4sbf.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4B</span><span>BA4SBF</span><span class="external">↗</span></a></nav>';
     scroll.appendChild(group);
   }
 
   const friendGrid=document.querySelector('.friend-link-grid');
-  if(friendGrid&&!friendGrid.querySelector('a[href="https://www.ba4sbf.cn/friends/"]')){
-    friendGrid.insertAdjacentHTML('beforeend','<a class="site-link-card" href="https://www.ba4sbf.cn/friends/" target="_blank" rel="noreferrer"><span class="site-link-type">FRIEND</span><h3>BA4SBF</h3><p>ba4sbf.cn/friends/</p><span class="site-link-arrow">↗</span></a>');
+  if(friendGrid&&!friendGrid.querySelector('a[href="https://ba4sbf.cn"]')){
+    friendGrid.insertAdjacentHTML('beforeend','<a class="site-link-card" href="https://ba4sbf.cn" target="_blank" rel="noreferrer"><span class="site-link-type">FRIEND</span><h3>BA4SBF</h3><p>ba4sbf.cn</p><span class="site-link-arrow">↗</span></a>');
   }
 }
 ensureSidebarExtras();
