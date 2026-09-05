@@ -1,7 +1,7 @@
 if(!document.querySelector('link[data-hx-layout]')){
   const layout=document.createElement('link');
   layout.rel='stylesheet';
-  layout.href='/layout.css?v=20260903-2';
+  layout.href='/layout.css?v=20260905-1';
   layout.setAttribute('data-hx-layout','');
   document.head.appendChild(layout);
 }
@@ -9,6 +9,26 @@ if(!document.querySelector('link[data-hx-layout]')){
 const sidebar = document.querySelector('.site-sidebar');
 const sidebarOverlay = document.querySelector('.sidebar-overlay');
 const menuButton = document.querySelector('.mobile-menu-button');
+
+function ensureSidebarExtras(){
+  const scroll=sidebar?.querySelector('.sidebar-scroll');
+  if(!scroll)return;
+  if(!scroll.querySelector('[data-sidebar-sites]')){
+    const group=document.createElement('section');
+    group.className='sidebar-group';
+    group.setAttribute('data-sidebar-sites','');
+    group.innerHTML='<p class="sidebar-label">站点</p><nav class="sidebar-nav"><a class="sidebar-link" href="https://hx.mizuki.top" target="_blank" rel="noreferrer"><span class="sidebar-icon">HX</span><span>Hong Xing</span><span class="external">↗</span></a><a class="sidebar-link" href="https://qso.mizuki.top" target="_blank" rel="noreferrer"><span class="sidebar-icon">Q</span><span>QSO 档案</span><span class="external">↗</span></a><a class="sidebar-link" href="https://qsl.mizuki.top" target="_blank" rel="noreferrer"><span class="sidebar-icon">QSL</span><span>QSL 卡片</span><span class="external">↗</span></a><a class="sidebar-link" href="https://help.mizuki.top/status" target="_blank" rel="noreferrer"><span class="sidebar-icon">S</span><span>服务状态</span><span class="external">↗</span></a></nav>';
+    scroll.appendChild(group);
+  }
+  if(!scroll.querySelector('[data-sidebar-friends]')){
+    const group=document.createElement('section');
+    group.className='sidebar-group';
+    group.setAttribute('data-sidebar-friends','');
+    group.innerHTML='<p class="sidebar-label">友链</p><nav class="sidebar-nav"><a class="sidebar-link" href="https://ba4slt.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4S</span><span>BA4SLT</span><span class="external">↗</span></a><a class="sidebar-link" href="https://www.bd4rfg.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4R</span><span>BD4RFG</span><span class="external">↗</span></a></nav>';
+    scroll.appendChild(group);
+  }
+}
+ensureSidebarExtras();
 
 function setMenu(open){
   sidebar?.classList.toggle('is-open', open);
@@ -36,6 +56,7 @@ const projectPreview={
   mizuki:{kicker:'ANDROID / MAIMAI DX',title:'Amia Sync Android',state:'重做中',desc:'舞萌 DX 的 Android 客户端。玩家信息、成绩和曲库都在手机上看，最近主要在重做界面和交互。',stack:['Kotlin','Android','FastAPI'],flow:['玩家数据','同步服务','Android'],metaLeft:'Amia-Sync-Android',metaRight:'UI 重做'},
   ham:{kicker:'WINDOWS / RADIO',title:'业余无线电点名助手',state:'维护中',desc:'中继点名现场用的 Windows 本地录入工具。先把记录写进 SQLite，需要协作时再同步到 Excel。',stack:['Python','SQLite','Excel'],flow:['现场输入','本地记录','Excel'],metaLeft:'ham-checkin-assistant',metaRight:'Windows'},
   retro:{kicker:'HARDWARE / MONITOR',title:'Retro Monitor',state:'公开',desc:'把 Windows 硬件状态接到 Home Assistant，再送到 ESP32-S3 桌面终端。',stack:['C#','Home Assistant','ESP32-S3'],flow:['Windows','Home Assistant','ESP32-S3'],metaLeft:'retro-monitor',metaRight:'硬件监控'},
+  hongxing:{kicker:'WEB / HONG XING',title:'Hong Xing 官网',state:'在线',desc:'hx.mizuki.top 的源码。项目、更新、生命周期、基础设施和相关服务都放在这个站里。',stack:['Static Web','Cloudflare Pages','HTML/CSS/JS'],flow:['HongXingWeb','Cloudflare Pages','hx.mizuki.top'],metaLeft:'HongXingWeb',metaRight:'hx.mizuki.top'},
   amia:{kicker:'BOT / RHYTHM GAME',title:'Amia · Mizuki',state:'维护中',desc:'开发组这边主要维护 Bot、PJSK、舞萌相关插件和公共组件。',stack:['NoneBot','PJSK','maimai'],flow:['QQ / OneBot','插件','数据服务'],metaLeft:'Amia-Mizuki-Dev-Team',metaRight:'多仓库'}
 };
 const previewTabs=document.querySelectorAll('.workspace-tab[data-preview]');
