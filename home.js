@@ -6,9 +6,9 @@ if(!document.querySelector('link[data-hx-layout]')){
   document.head.appendChild(layout);
 }
 
-const sidebar = document.querySelector('.site-sidebar');
-const sidebarOverlay = document.querySelector('.sidebar-overlay');
-const menuButton = document.querySelector('.mobile-menu-button');
+const sidebar=document.querySelector('.site-sidebar');
+const sidebarOverlay=document.querySelector('.sidebar-overlay');
+const menuButton=document.querySelector('.mobile-menu-button');
 
 function ensureSidebarExtras(){
   const scroll=sidebar?.querySelector('.sidebar-scroll');
@@ -27,7 +27,6 @@ function ensureSidebarExtras(){
     group.innerHTML='<p class="sidebar-label">友链</p><nav class="sidebar-nav"><a class="sidebar-link" href="https://ba4slt.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4S</span><span>BA4SLT</span><span class="external">↗</span></a><a class="sidebar-link" href="https://www.bd4rfg.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4R</span><span>BD4RFG</span><span class="external">↗</span></a><a class="sidebar-link" href="https://ba4sbf.cn" target="_blank" rel="noreferrer"><span class="sidebar-icon">4B</span><span>BA4SBF</span><span class="external">↗</span></a></nav>';
     scroll.appendChild(group);
   }
-
   const friendGrid=document.querySelector('.friend-link-grid');
   if(friendGrid&&!friendGrid.querySelector('a[href="https://ba4sbf.cn"]')){
     friendGrid.insertAdjacentHTML('beforeend','<a class="site-link-card" href="https://ba4sbf.cn" target="_blank" rel="noreferrer"><span class="site-link-type">FRIEND</span><h3>BA4SBF</h3><p>ba4sbf.cn</p><span class="site-link-arrow">↗</span></a>');
@@ -36,13 +35,13 @@ function ensureSidebarExtras(){
 ensureSidebarExtras();
 
 function setMenu(open){
-  sidebar?.classList.toggle('is-open', open);
-  sidebarOverlay?.classList.toggle('is-open', open);
-  sidebarOverlay?.setAttribute('aria-hidden', String(!open));
-  menuButton?.classList.toggle('is-open', open);
-  menuButton?.setAttribute('aria-expanded', String(open));
-  menuButton?.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
-  document.body.style.overflow = open ? 'hidden' : '';
+  sidebar?.classList.toggle('is-open',open);
+  sidebarOverlay?.classList.toggle('is-open',open);
+  sidebarOverlay?.setAttribute('aria-hidden',String(!open));
+  menuButton?.classList.toggle('is-open',open);
+  menuButton?.setAttribute('aria-expanded',String(open));
+  menuButton?.setAttribute('aria-label',open?'关闭菜单':'打开菜单');
+  document.body.style.overflow=open?'hidden':'';
 }
 
 menuButton?.addEventListener('click',()=>setMenu(!sidebar?.classList.contains('is-open')));
@@ -79,131 +78,149 @@ const legacyTarget=location.hash;
 if(legacyTarget==='#projects'||legacyTarget==='#work')location.replace('./projects.html');
 if(legacyTarget==='#about')location.replace('./about.html');
 
-// Hero: lightweight WebGL2 pixel field inspired by shader-driven conference visuals.
+// Hero particle field: one explicit rasterized SVG path, sampled on a regular square grid.
 (()=>{
   const canvas=document.querySelector('[data-hero-shader]');
   if(!canvas)return;
-  const gl=canvas.getContext('webgl2',{alpha:true,antialias:false,premultipliedAlpha:true,powerPreference:'high-performance'});
-  if(!gl){canvas.hidden=true;return;}
+  const ctx=canvas.getContext('2d',{alpha:true});
+  if(!ctx||typeof Path2D==='undefined'){canvas.hidden=true;return;}
 
-  const vertex=`#version 300 es
-  in vec2 a_position;
-  void main(){gl_Position=vec4(a_position,0.0,1.0);}`;
-
-  const fragment=`#version 300 es
-  precision highp float;
-  uniform vec2 u_resolution;
-  uniform float u_time;
-  out vec4 outColor;
-
-  float hash21(vec2 p){
-    p=fract(p*vec2(123.34,456.21));
-    p+=dot(p,p+45.32);
-    return fract(p.x*p.y);
-  }
-
-  float noise(vec2 p){
-    vec2 i=floor(p),f=fract(p);
-    f=f*f*(3.0-2.0*f);
-    float a=hash21(i);
-    float b=hash21(i+vec2(1.0,0.0));
-    float c=hash21(i+vec2(0.0,1.0));
-    float d=hash21(i+vec2(1.0,1.0));
-    return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);
-  }
-
-  float blob(vec2 p,vec2 c,vec2 s){
-    vec2 q=(p-c)/s;
-    return exp(-dot(q,q)*2.2);
-  }
-
-  void main(){
-    vec2 uv=gl_FragCoord.xy/u_resolution.xy;
-    float aspect=u_resolution.x/max(u_resolution.y,1.0);
-    vec2 p=vec2((uv.x-.5)*aspect,uv.y-.5);
-
-    // A loose asymmetric topology rather than a literal map: dense core, broken perimeter.
-    float shape=0.0;
-    shape+=blob(p,vec2(.16,.18),vec2(.31,.23))*1.10;
-    shape+=blob(p,vec2(.38,.02),vec2(.24,.30))*.92;
-    shape+=blob(p,vec2(.03,-.12),vec2(.22,.27))*.78;
-    shape+=blob(p,vec2(.53,.25),vec2(.15,.16))*.72;
-    shape-=blob(p,vec2(.25,.10),vec2(.10,.09))*.45;
-
-    float drift=noise(p*4.6+vec2(u_time*.055,-u_time*.035));
-    float detail=noise(p*10.0+vec2(-u_time*.08,u_time*.045));
-    float wave=.5+.5*sin(p.x*8.0-p.y*5.0+u_time*.75);
-    float field=shape*.74+drift*.23+detail*.11+wave*.045;
-
-    // Coarser cells and a hard square profile make the particle structure readable at a glance.
-    float grid=43.0;
-    vec2 g=uv*vec2(grid*aspect,grid);
-    vec2 id=floor(g);
-    vec2 cell=fract(g)-.5;
-    float rnd=hash21(id);
-    float threshold=.43+(rnd-.5)*.27;
-    float alive=smoothstep(threshold,threshold+.045,field);
-
-    float box=max(abs(cell.x),abs(cell.y));
-    float sq=1.0-smoothstep(.30,.36,box);
-    float core=pow(clamp(shape,0.0,1.0),.48);
-    float pulse=.78+.22*sin(u_time*1.35+rnd*6.2831);
-    float dropout=step(.12+.18*(1.0-core),hash21(id+floor(u_time*.45)));
-    float alpha=sq*alive*dropout*mix(.42,1.0,core)*pulse;
-
-    // Deliberately detached squares make the dissolving perimeter unmistakable.
-    float dustBand=(1.0-smoothstep(.30,.82,shape))*smoothstep(.16,.70,drift);
-    float dust=sq*step(.91,rnd)*dustBand*(.55+.45*sin(u_time*1.7+rnd*11.0));
-    alpha=max(alpha,dust*.82);
-
-    // A few bright micro-particles sit on top of the larger field.
-    float spark=sq*step(.982,hash21(id+17.3))*smoothstep(.32,.72,field);
-    alpha=max(alpha,spark);
-
-    vec3 blue=mix(vec3(.18,.45,1.0),vec3(.035,.16,.52),clamp(uv.y*.62+detail*.38,0.0,1.0));
-    outColor=vec4(blue,alpha*.92);
-  }`;
-
-  const compile=(type,source)=>{
-    const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);
-    if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){console.warn('hero shader compile failed',gl.getShaderInfoLog(shader));gl.deleteShader(shader);return null;}
-    return shader;
-  };
-  const vs=compile(gl.VERTEX_SHADER,vertex),fs=compile(gl.FRAGMENT_SHADER,fragment);
-  if(!vs||!fs){canvas.hidden=true;return;}
-  const program=gl.createProgram();gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);
-  gl.deleteShader(vs);gl.deleteShader(fs);
-  if(!gl.getProgramParameter(program,gl.LINK_STATUS)){console.warn('hero shader link failed',gl.getProgramInfoLog(program));canvas.hidden=true;return;}
-
-  const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
-  gl.useProgram(program);
-  const position=gl.getAttribLocation(program,'a_position');gl.enableVertexAttribArray(position);gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
-  const resolution=gl.getUniformLocation(program,'u_resolution');
-  const time=gl.getUniformLocation(program,'u_time');
-  gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
-
-  let width=0,height=0,raf=0;
+  const MASK_PATH='M 72 298 C 93 222 161 173 252 176 C 304 105 404 78 489 126 C 564 72 690 87 752 166 C 842 157 917 214 926 302 C 982 351 973 431 925 475 C 966 560 922 654 837 679 C 806 761 708 807 623 762 C 557 831 449 838 374 782 C 286 820 184 782 151 705 C 77 676 39 602 67 532 C 17 474 24 382 84 339 C 76 326 71 312 72 298 Z';
+  const silhouette=new Path2D(MASK_PATH);
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const maskCanvas=document.createElement('canvas');
+  const maskCtx=maskCanvas.getContext('2d',{alpha:true,willReadFrequently:true});
+  if(!maskCtx){canvas.hidden=true;return;}
+
+  let cssW=0,cssH=0,dpr=1,maskData=null,cells=[],raf=0,lastFrame=0;
+  const STATE_MS=4400;
+
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const smooth=(t)=>{t=clamp(t,0,1);return t*t*(3-2*t)};
+  const hash=(x,y,seed=0)=>{
+    let n=(Math.imul(x+11,374761393)^Math.imul(y+17,668265263)^Math.imul(seed+23,2246822519))>>>0;
+    n=(n^(n>>>13))>>>0;n=Math.imul(n,1274126177)>>>0;n=(n^(n>>>16))>>>0;
+    return n/4294967295;
+  };
+
+  function sample(x,y){
+    if(!maskData||x<0||y<0||x>=cssW||y>=cssH)return 0;
+    const ix=Math.min(cssW-1,Math.max(0,x|0));
+    const iy=Math.min(cssH-1,Math.max(0,y|0));
+    return maskData[(iy*cssW+ix)*4+3]>127?1:0;
+  }
+
+  function rebuildMask(){
+    maskCanvas.width=Math.max(1,Math.round(cssW));
+    maskCanvas.height=Math.max(1,Math.round(cssH));
+    maskCtx.clearRect(0,0,cssW,cssH);
+    maskCtx.save();
+    maskCtx.setTransform(cssW/1000,0,0,cssH/850,0,0);
+    maskCtx.fillStyle='#000';
+    maskCtx.fill(silhouette);
+    maskCtx.restore();
+    maskData=maskCtx.getImageData(0,0,cssW,cssH).data;
+  }
+
+  function classifyCells(){
+    cells=[];
+    const cell=cssW<520?8:9.5;
+    const half=cell*.5;
+    const probe=cell*2.25;
+    const outsideProbe=cell*2.8;
+    let gy=0;
+    for(let y=half;y<cssH;y+=cell,gy++){
+      let gx=0;
+      for(let x=half;x<cssW;x+=cell,gx++){
+        const inside=sample(x,y)===1;
+        if(inside){
+          const core=sample(x-probe,y)&&sample(x+probe,y)&&sample(x,y-probe)&&sample(x,y+probe)&&sample(x-probe*.72,y-probe*.72)&&sample(x+probe*.72,y+probe*.72);
+          let nx=0,ny=0;
+          if(!core){
+            nx=sample(x-probe,y)-sample(x+probe,y);
+            ny=sample(x,y-probe)-sample(x,y+probe);
+            const len=Math.hypot(nx,ny)||1;nx/=len;ny/=len;
+          }
+          cells.push({type:core?'core':'edge',x,y,gx,gy,cell,nx,ny,tone:hash(gx,gy,41),phase:hash(gx,gy,79)*Math.PI*2});
+          continue;
+        }
+        const near=sample(x-outsideProbe,y)||sample(x+outsideProbe,y)||sample(x,y-outsideProbe)||sample(x,y+outsideProbe)||sample(x-outsideProbe*.72,y-outsideProbe*.72)||sample(x+outsideProbe*.72,y+outsideProbe*.72);
+        if(near&&hash(gx,gy,131)>.972){
+          let nx=sample(x-outsideProbe,y)-sample(x+outsideProbe,y);
+          let ny=sample(x,y-outsideProbe)-sample(x,y+outsideProbe);
+          const len=Math.hypot(nx,ny)||1;nx/=len;ny/=len;
+          cells.push({type:'outside',x,y,gx,gy,cell,nx:-nx,ny:-ny,tone:hash(gx,gy,173),phase:hash(gx,gy,211)*Math.PI*2});
+        }
+      }
+    }
+  }
+
   function resize(){
     const rect=canvas.getBoundingClientRect();
-    const dpr=Math.min(devicePixelRatio||1,1.75);
-    const w=Math.max(1,Math.round(rect.width*dpr));
-    const h=Math.max(1,Math.round(rect.height*dpr));
-    if(w===width&&h===height)return;
-    width=canvas.width=w;height=canvas.height=h;gl.viewport(0,0,w,h);
+    const nextW=Math.max(1,Math.round(rect.width));
+    const nextH=Math.max(1,Math.round(rect.height));
+    const nextDpr=Math.min(window.devicePixelRatio||1,1.6);
+    if(nextW===cssW&&nextH===cssH&&nextDpr===dpr)return false;
+    cssW=nextW;cssH=nextH;dpr=nextDpr;
+    canvas.width=Math.max(1,Math.round(cssW*dpr));
+    canvas.height=Math.max(1,Math.round(cssH*dpr));
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    rebuildMask();
+    classifyCells();
+    return true;
   }
+
+  function edgePresence(cell,epoch){
+    const base=hash(cell.gx,cell.gy,epoch+503);
+    return base>.20?1:0;
+  }
+
   function draw(ms=0){
+    raf=0;
     resize();
-    gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniform2f(resolution,width,height);gl.uniform1f(time,reduced?7.0:ms*.001);
-    gl.drawArrays(gl.TRIANGLES,0,3);
-    if(!reduced)raf=requestAnimationFrame(draw);
+    if(!reduced&&ms-lastFrame<32){raf=requestAnimationFrame(draw);return;}
+    lastFrame=ms;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssW,cssH);
+
+    const t=reduced?9200:ms;
+    const epoch=Math.floor(t/STATE_MS);
+    const epochProgress=(t%STATE_MS)/STATE_MS;
+    const stateBlend=smooth((epochProgress-.68)/.32);
+
+    for(const cell of cells){
+      const size=cell.cell*(cell.type==='outside'?.58:.70);
+      let alpha=0,dx=0,dy=0;
+      if(cell.type==='core'){
+        alpha=.42+cell.tone*.22;
+      }else if(cell.type==='edge'){
+        const a=edgePresence(cell,epoch);
+        const b=edgePresence(cell,epoch+1);
+        const present=a+(b-a)*stateBlend;
+        const drift=Math.sin(t*.00022+cell.phase)*1.15;
+        dx=cell.nx*drift;dy=cell.ny*drift;
+        alpha=present*(.30+cell.tone*.23);
+      }else{
+        const drift=1.8+1.4*Math.sin(t*.00017+cell.phase);
+        dx=cell.nx*drift;dy=cell.ny*drift;
+        alpha=.18+cell.tone*.18;
+      }
+      if(alpha<.015)continue;
+      const dark=cell.tone>.945;
+      ctx.fillStyle=dark?`rgba(31,82,181,${Math.min(alpha+.08,.72)})`:`rgba(82,155,244,${alpha})`;
+      ctx.fillRect(Math.round(cell.x+dx-size*.5),Math.round(cell.y+dy-size*.5),Math.max(2,Math.round(size)),Math.max(2,Math.round(size)));
+    }
+
+    if(!reduced&&!document.hidden)raf=requestAnimationFrame(draw);
   }
-  const observer='ResizeObserver' in window?new ResizeObserver(resize):null;
-  observer?.observe(canvas);
+
+  const resizeObserver='ResizeObserver' in window?new ResizeObserver(()=>{resize();if(reduced)draw(9200)}):null;
+  resizeObserver?.observe(canvas);
   document.addEventListener('visibilitychange',()=>{
     if(reduced)return;
-    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(!raf)raf=requestAnimationFrame(draw);
+    if(document.hidden){if(raf)cancelAnimationFrame(raf);raf=0;}
+    else if(!raf)raf=requestAnimationFrame(draw);
   });
-  raf=requestAnimationFrame(draw);
+  resize();
+  if(reduced)draw(9200);else raf=requestAnimationFrame(draw);
 })();
