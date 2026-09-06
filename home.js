@@ -78,7 +78,7 @@ const legacyTarget=location.hash;
 if(legacyTarget==='#projects'||legacyTarget==='#work')location.replace('./projects.html');
 if(legacyTarget==='#about')location.replace('./about.html');
 
-// Hero particle field: one explicit rasterized SVG path, sampled on a regular square grid.
+// Hero particle field: an explicit SVG-path mask with a continuously scrolling square lattice.
 (()=>{
   const canvas=document.querySelector('[data-hero-shader]');
   if(!canvas)return;
@@ -92,8 +92,10 @@ if(legacyTarget==='#about')location.replace('./about.html');
   const maskCtx=maskCanvas.getContext('2d',{alpha:true,willReadFrequently:true});
   if(!maskCtx){canvas.hidden=true;return;}
 
-  let cssW=0,cssH=0,dpr=1,maskData=null,cells=[],raf=0,lastFrame=0;
+  let cssW=0,cssH=0,dpr=1,maskData=null,raf=0,lastFrame=0;
   const STATE_MS=4400;
+  const FLOW_X=.0068;
+  const FLOW_Y=.0026;
 
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   const smooth=(t)=>{t=clamp(t,0,1);return t*t*(3-2*t)};
@@ -122,39 +124,6 @@ if(legacyTarget==='#about')location.replace('./about.html');
     maskData=maskCtx.getImageData(0,0,cssW,cssH).data;
   }
 
-  function classifyCells(){
-    cells=[];
-    const cell=cssW<520?8:9.5;
-    const half=cell*.5;
-    const probe=cell*2.25;
-    const outsideProbe=cell*2.8;
-    let gy=0;
-    for(let y=half;y<cssH;y+=cell,gy++){
-      let gx=0;
-      for(let x=half;x<cssW;x+=cell,gx++){
-        const inside=sample(x,y)===1;
-        if(inside){
-          const core=sample(x-probe,y)&&sample(x+probe,y)&&sample(x,y-probe)&&sample(x,y+probe)&&sample(x-probe*.72,y-probe*.72)&&sample(x+probe*.72,y+probe*.72);
-          let nx=0,ny=0;
-          if(!core){
-            nx=sample(x-probe,y)-sample(x+probe,y);
-            ny=sample(x,y-probe)-sample(x,y+probe);
-            const len=Math.hypot(nx,ny)||1;nx/=len;ny/=len;
-          }
-          cells.push({type:core?'core':'edge',x,y,gx,gy,cell,nx,ny,tone:hash(gx,gy,41),phase:hash(gx,gy,79)*Math.PI*2});
-          continue;
-        }
-        const near=sample(x-outsideProbe,y)||sample(x+outsideProbe,y)||sample(x,y-outsideProbe)||sample(x,y+outsideProbe)||sample(x-outsideProbe*.72,y-outsideProbe*.72)||sample(x+outsideProbe*.72,y+outsideProbe*.72);
-        if(near&&hash(gx,gy,131)>.972){
-          let nx=sample(x-outsideProbe,y)-sample(x+outsideProbe,y);
-          let ny=sample(x,y-outsideProbe)-sample(x,y+outsideProbe);
-          const len=Math.hypot(nx,ny)||1;nx/=len;ny/=len;
-          cells.push({type:'outside',x,y,gx,gy,cell,nx:-nx,ny:-ny,tone:hash(gx,gy,173),phase:hash(gx,gy,211)*Math.PI*2});
-        }
-      }
-    }
-  }
-
   function resize(){
     const rect=canvas.getBoundingClientRect();
     const nextW=Math.max(1,Math.round(rect.width));
@@ -166,13 +135,11 @@ if(legacyTarget==='#about')location.replace('./about.html');
     canvas.height=Math.max(1,Math.round(cssH*dpr));
     ctx.setTransform(dpr,0,0,dpr,0,0);
     rebuildMask();
-    classifyCells();
     return true;
   }
 
-  function edgePresence(cell,epoch){
-    const base=hash(cell.gx,cell.gy,epoch+503);
-    return base>.20?1:0;
+  function edgePresence(gx,gy,epoch){
+    return hash(gx,gy,epoch+503)>.20?1:0;
   }
 
   function draw(ms=0){
@@ -184,31 +151,69 @@ if(legacyTarget==='#about')location.replace('./about.html');
     ctx.clearRect(0,0,cssW,cssH);
 
     const t=reduced?9200:ms;
+    const spacing=cssW<520?8:9.5;
+    const half=spacing*.5;
+    const probe=spacing*2.25;
+    const outsideProbe=spacing*2.8;
     const epoch=Math.floor(t/STATE_MS);
     const epochProgress=(t%STATE_MS)/STATE_MS;
     const stateBlend=smooth((epochProgress-.68)/.32);
 
-    for(const cell of cells){
-      const size=cell.cell*(cell.type==='outside'?.58:.70);
-      let alpha=0,dx=0,dy=0;
-      if(cell.type==='core'){
-        alpha=.42+cell.tone*.22;
-      }else if(cell.type==='edge'){
-        const a=edgePresence(cell,epoch);
-        const b=edgePresence(cell,epoch+1);
-        const present=a+(b-a)*stateBlend;
-        const drift=Math.sin(t*.00022+cell.phase)*1.15;
-        dx=cell.nx*drift;dy=cell.ny*drift;
-        alpha=present*(.30+cell.tone*.23);
-      }else{
-        const drift=1.8+1.4*Math.sin(t*.00017+cell.phase);
-        dx=cell.nx*drift;dy=cell.ny*drift;
-        alpha=.18+cell.tone*.18;
+    const distanceX=reduced?0:t*FLOW_X;
+    const distanceY=reduced?0:t*FLOW_Y;
+    const wholeX=Math.floor(distanceX/spacing);
+    const wholeY=Math.floor(distanceY/spacing);
+    const shiftX=distanceX-wholeX*spacing;
+    const shiftY=distanceY-wholeY*spacing;
+
+    let row=0;
+    for(let y=-spacing+shiftY;y<cssH+spacing;y+=spacing,row++){
+      let col=0;
+      for(let x=-spacing+shiftX;x<cssW+spacing;x+=spacing,col++){
+        const gx=col-wholeX;
+        const gy=row-wholeY;
+        const inside=sample(x,y)===1;
+        const tone=hash(gx,gy,41);
+        let type='outside';
+        let alpha=0;
+        let nx=0,ny=0;
+
+        if(inside){
+          const core=sample(x-probe,y)&&sample(x+probe,y)&&sample(x,y-probe)&&sample(x,y+probe)&&sample(x-probe*.72,y-probe*.72)&&sample(x+probe*.72,y+probe*.72);
+          if(core){
+            type='core';
+            alpha=.43+tone*.24;
+          }else{
+            type='edge';
+            const a=edgePresence(gx,gy,epoch);
+            const b=edgePresence(gx,gy,epoch+1);
+            const present=a+(b-a)*stateBlend;
+            alpha=present*(.31+tone*.24);
+          }
+        }else{
+          const near=sample(x-outsideProbe,y)||sample(x+outsideProbe,y)||sample(x,y-outsideProbe)||sample(x,y+outsideProbe)||sample(x-outsideProbe*.72,y-outsideProbe*.72)||sample(x+outsideProbe*.72,y+outsideProbe*.72);
+          if(!near||hash(gx,gy,131)<=.974)continue;
+          alpha=.17+hash(gx,gy,173)*.18;
+        }
+
+        if(type!=='core'){
+          nx=sample(x-probe,y)-sample(x+probe,y);
+          ny=sample(x,y-probe)-sample(x,y+probe);
+          const len=Math.hypot(nx,ny)||1;nx/=len;ny/=len;
+          if(type==='outside'){nx=-nx;ny=-ny;}
+        }
+
+        const outward=type==='outside'?(2.2+1.1*Math.sin(t*.00022+hash(gx,gy,211)*Math.PI*2)):(type==='edge'?1.0*Math.sin(t*.00018+hash(gx,gy,79)*Math.PI*2):0);
+        const size=spacing*(type==='outside'?.56:.70);
+        const dark=tone>.93;
+        ctx.fillStyle=dark?`rgba(31,82,181,${Math.min(alpha+.08,.76)})`:`rgba(82,155,244,${alpha})`;
+        ctx.fillRect(
+          Math.round(x+nx*outward-size*.5),
+          Math.round(y+ny*outward-size*.5),
+          Math.max(2,Math.round(size)),
+          Math.max(2,Math.round(size))
+        );
       }
-      if(alpha<.015)continue;
-      const dark=cell.tone>.945;
-      ctx.fillStyle=dark?`rgba(31,82,181,${Math.min(alpha+.08,.72)})`:`rgba(82,155,244,${alpha})`;
-      ctx.fillRect(Math.round(cell.x+dx-size*.5),Math.round(cell.y+dy-size*.5),Math.max(2,Math.round(size)),Math.max(2,Math.round(size)));
     }
 
     if(!reduced&&!document.hidden)raf=requestAnimationFrame(draw);
