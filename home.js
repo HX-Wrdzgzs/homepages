@@ -83,19 +83,6 @@ if(legacyTarget==='#about')location.replace('./about.html');
 (()=>{
   const canvas=document.querySelector('[data-hero-shader]');
   if(!canvas)return;
-
-  const style=document.createElement('style');
-  style.textContent=`
-    .hero{position:relative;isolation:isolate;overflow:hidden}
-    .hero-copy,.product-window{position:relative;z-index:2}
-    .hero-shader{position:absolute;z-index:0;inset:0 0 0 38%;width:62%;height:100%;pointer-events:none;opacity:.9;mask-image:linear-gradient(90deg,transparent 0,#000 18%,#000 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%,#000 100%)}
-    .hero::after{content:"";position:absolute;z-index:1;inset:auto 0 0 35%;height:34%;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(255,255,255,.88) 78%,#fff)}
-    @media(max-width:1050px){.hero-shader{inset:0 0 auto 24%;width:76%;height:58%;opacity:.72}.hero::after{inset:20% 0 auto 18%;height:42%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.94) 76%,#fff)}}
-    @media(max-width:620px){.hero-shader{inset:0 -18% auto 22%;width:96%;height:50%;opacity:.58}.hero::after{inset:10% -10% auto 12%;height:44%}}
-    @media(prefers-reduced-motion:reduce){.hero-shader{opacity:.46}}
-  `;
-  document.head.appendChild(style);
-
   const gl=canvas.getContext('webgl2',{alpha:true,antialias:false,premultipliedAlpha:true,powerPreference:'high-performance'});
   if(!gl){canvas.hidden=true;return;}
 
@@ -135,6 +122,7 @@ if(legacyTarget==='#about')location.replace('./about.html');
     float aspect=u_resolution.x/max(u_resolution.y,1.0);
     vec2 p=vec2((uv.x-.5)*aspect,uv.y-.5);
 
+    // A loose asymmetric topology rather than a literal map: dense core, broken perimeter.
     float shape=0.0;
     shape+=blob(p,vec2(.16,.18),vec2(.31,.23))*1.10;
     shape+=blob(p,vec2(.38,.02),vec2(.24,.30))*.92;
@@ -147,24 +135,33 @@ if(legacyTarget==='#about')location.replace('./about.html');
     float wave=.5+.5*sin(p.x*8.0-p.y*5.0+u_time*.75);
     float field=shape*.74+drift*.23+detail*.11+wave*.045;
 
-    float grid=66.0;
+    // Coarser cells and a hard square profile make the particle structure readable at a glance.
+    float grid=43.0;
     vec2 g=uv*vec2(grid*aspect,grid);
     vec2 id=floor(g);
     vec2 cell=fract(g)-.5;
     float rnd=hash21(id);
-    float threshold=.52+(rnd-.5)*.20;
-    float alive=smoothstep(threshold,threshold+.07,field);
+    float threshold=.43+(rnd-.5)*.27;
+    float alive=smoothstep(threshold,threshold+.045,field);
 
-    float sq=1.0-smoothstep(.27,.37,max(abs(cell.x),abs(cell.y)));
-    float edge=pow(clamp(shape,0.0,1.0),.54);
-    float sparkle=.62+.38*sin(u_time*1.1+rnd*6.2831);
-    float alpha=sq*alive*mix(.25,1.0,edge)*mix(.58,1.0,sparkle);
+    float box=max(abs(cell.x),abs(cell.y));
+    float sq=1.0-smoothstep(.30,.36,box);
+    float core=pow(clamp(shape,0.0,1.0),.48);
+    float pulse=.78+.22*sin(u_time*1.35+rnd*6.2831);
+    float dropout=step(.12+.18*(1.0-core),hash21(id+floor(u_time*.45)));
+    float alpha=sq*alive*dropout*mix(.42,1.0,core)*pulse;
 
-    float dust=sq*step(.965,rnd)*smoothstep(.22,.72,drift)*(1.0-smoothstep(.38,.88,shape));
-    alpha=max(alpha,dust*.48);
+    // Deliberately detached squares make the dissolving perimeter unmistakable.
+    float dustBand=(1.0-smoothstep(.30,.82,shape))*smoothstep(.16,.70,drift);
+    float dust=sq*step(.91,rnd)*dustBand*(.55+.45*sin(u_time*1.7+rnd*11.0));
+    alpha=max(alpha,dust*.82);
 
-    vec3 blue=mix(vec3(.15,.39,.92),vec3(.08,.26,.68),clamp(uv.y*.75+detail*.25,0.0,1.0));
-    outColor=vec4(blue,alpha*.72);
+    // A few bright micro-particles sit on top of the larger field.
+    float spark=sq*step(.982,hash21(id+17.3))*smoothstep(.32,.72,field);
+    alpha=max(alpha,spark);
+
+    vec3 blue=mix(vec3(.18,.45,1.0),vec3(.035,.16,.52),clamp(uv.y*.62+detail*.38,0.0,1.0));
+    outColor=vec4(blue,alpha*.92);
   }`;
 
   const compile=(type,source)=>{
