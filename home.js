@@ -43,7 +43,6 @@ function setMenu(open){
   menuButton?.setAttribute('aria-label',open?'关闭菜单':'打开菜单');
   document.body.style.overflow=open?'hidden':'';
 }
-
 menuButton?.addEventListener('click',()=>setMenu(!sidebar?.classList.contains('is-open')));
 sidebarOverlay?.addEventListener('click',()=>setMenu(false));
 sidebar?.querySelectorAll('a').forEach((link)=>link.addEventListener('click',()=>setMenu(false)));
@@ -52,9 +51,16 @@ window.addEventListener('resize',()=>{if(innerWidth>900)setMenu(false)});
 
 const revealItems=document.querySelectorAll('.reveal');
 if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.07});
+  const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    }
+  }),{threshold:.07});
   revealItems.forEach((item)=>observer.observe(item));
-}else revealItems.forEach((item)=>item.classList.add('is-visible'));
+}else{
+  revealItems.forEach((item)=>item.classList.add('is-visible'));
+}
 
 const projectPreview={
   mizuki:{kicker:'ANDROID / MAIMAI DX',title:'Amia Sync Android',state:'重做中',desc:'舞萌 DX 的 Android 客户端。玩家信息、成绩和曲库都在手机上看，最近主要在重做界面和交互。',stack:['Kotlin','Android','FastAPI'],flow:['玩家数据','同步服务','Android'],metaLeft:'Amia-Sync-Android',metaRight:'UI 重做'},
@@ -65,12 +71,23 @@ const projectPreview={
 };
 const previewTabs=document.querySelectorAll('.workspace-tab[data-preview]');
 function renderPreview(key){
-  const data=projectPreview[key];if(!data)return;
+  const data=projectPreview[key];
+  if(!data)return;
   previewTabs.forEach((tab)=>tab.classList.toggle('is-active',tab.dataset.preview===key));
-  const set=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value};
-  set('[data-preview-kicker]',data.kicker);set('[data-preview-title]',data.title);set('[data-preview-state]',data.state);set('[data-preview-desc]',data.desc);set('[data-preview-meta-left]',data.metaLeft);set('[data-preview-meta-right]',data.metaRight);
-  const stack=document.querySelector('[data-preview-stack]');if(stack)stack.innerHTML=data.stack.map((item)=>`<span class="tech-chip">${item}</span>`).join('');
-  const flow=document.querySelector('[data-preview-flow]');if(flow)flow.innerHTML=data.flow.map((item)=>`<div class="flow-node">${item}</div>`).join('');
+  const set=(selector,value)=>{
+    const el=document.querySelector(selector);
+    if(el)el.textContent=value;
+  };
+  set('[data-preview-kicker]',data.kicker);
+  set('[data-preview-title]',data.title);
+  set('[data-preview-state]',data.state);
+  set('[data-preview-desc]',data.desc);
+  set('[data-preview-meta-left]',data.metaLeft);
+  set('[data-preview-meta-right]',data.metaRight);
+  const stack=document.querySelector('[data-preview-stack]');
+  if(stack)stack.innerHTML=data.stack.map((item)=>`<span class="tech-chip">${item}</span>`).join('');
+  const flow=document.querySelector('[data-preview-flow]');
+  if(flow)flow.innerHTML=data.flow.map((item)=>`<div class="flow-node">${item}</div>`).join('');
 }
 previewTabs.forEach((tab)=>tab.addEventListener('click',()=>renderPreview(tab.dataset.preview)));
 
@@ -78,25 +95,23 @@ const legacyTarget=location.hash;
 if(legacyTarget==='#projects'||legacyTarget==='#work')location.replace('./projects.html');
 if(legacyTarget==='#about')location.replace('./about.html');
 
-// Hero particle field: directional square-lattice flow with lightweight streak accents.
+// Hero particle field: HX logo mask, continuously streaming from right to left.
 (()=>{
   const canvas=document.querySelector('[data-hero-shader]');
   if(!canvas)return;
   const ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
-  if(!ctx||typeof Path2D==='undefined'){canvas.hidden=true;return;}
+  if(!ctx){canvas.hidden=true;return;}
 
-  const MASK_PATH='M 72 298 C 93 222 161 173 252 176 C 304 105 404 78 489 126 C 564 72 690 87 752 166 C 842 157 917 214 926 302 C 982 351 973 431 925 475 C 966 560 922 654 837 679 C 806 761 708 807 623 762 C 557 831 449 838 374 782 C 286 820 184 782 151 705 C 77 676 39 602 67 532 C 17 474 24 382 84 339 C 76 326 71 312 72 298 Z';
-  const silhouette=new Path2D(MASK_PATH);
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const maskCanvas=document.createElement('canvas');
   const maskCtx=maskCanvas.getContext('2d',{alpha:true,willReadFrequently:true});
   if(!maskCtx){canvas.hidden=true;return;}
 
-  let cssW=0,cssH=0,dpr=1,maskData=null,raf=0;
+  let cssW=0,cssH=0,dpr=1,maskData=null,rowRightEdge=null,raf=0;
   const STATE_MS=4200;
-  const FLOW_X=.0128;
-  const FLOW_Y=.0027;
-  const FLOW_LEN=Math.hypot(FLOW_X,FLOW_Y);
+  const FLOW_X=-.0145;
+  const FLOW_Y=0;
+  const FLOW_LEN=Math.hypot(FLOW_X,FLOW_Y)||1;
   const FLOW_DX=FLOW_X/FLOW_LEN;
   const FLOW_DY=FLOW_Y/FLOW_LEN;
   const PALETTE_STEPS=32;
@@ -111,7 +126,7 @@ if(legacyTarget==='#about')location.replace('./about.html');
   const makePalette=(r,g,b)=>Array.from({length:PALETTE_STEPS+1},(_,i)=>`rgba(${r},${g},${b},${(i/PALETTE_STEPS).toFixed(3)})`);
   const lightPalette=makePalette(82,155,244);
   const darkPalette=makePalette(31,82,181);
-  const trailPalette=makePalette(84,186,255);
+  const trailPalette=makePalette(82,194,255);
   const alphaIndex=(alpha)=>Math.round(clamp(alpha,0,1)*PALETTE_STEPS);
 
   function sample(x,y){
@@ -121,6 +136,28 @@ if(legacyTarget==='#about')location.replace('./about.html');
     return maskData[(iy*cssW+ix)*4+3]>127?1:0;
   }
 
+  function drawHXMask(){
+    maskCtx.fillRect(140,180,92,500);
+    maskCtx.fillRect(390,180,92,500);
+    maskCtx.fillRect(140,385,342,90);
+
+    maskCtx.beginPath();
+    maskCtx.moveTo(560,180);
+    maskCtx.lineTo(668,180);
+    maskCtx.lineTo(875,680);
+    maskCtx.lineTo(767,680);
+    maskCtx.closePath();
+    maskCtx.fill();
+
+    maskCtx.beginPath();
+    maskCtx.moveTo(767,180);
+    maskCtx.lineTo(875,180);
+    maskCtx.lineTo(668,680);
+    maskCtx.lineTo(560,680);
+    maskCtx.closePath();
+    maskCtx.fill();
+  }
+
   function rebuildMask(){
     maskCanvas.width=Math.max(1,Math.round(cssW));
     maskCanvas.height=Math.max(1,Math.round(cssH));
@@ -128,9 +165,21 @@ if(legacyTarget==='#about')location.replace('./about.html');
     maskCtx.save();
     maskCtx.setTransform(cssW/1000,0,0,cssH/850,0,0);
     maskCtx.fillStyle='#000';
-    maskCtx.fill(silhouette);
+    drawHXMask();
     maskCtx.restore();
     maskData=maskCtx.getImageData(0,0,cssW,cssH).data;
+
+    rowRightEdge=new Int32Array(cssH);
+    rowRightEdge.fill(-1);
+    for(let y=0;y<cssH;y++){
+      const rowOffset=y*cssW*4;
+      for(let x=cssW-1;x>=0;x--){
+        if(maskData[rowOffset+x*4+3]>127){
+          rowRightEdge[y]=x;
+          break;
+        }
+      }
+    }
   }
 
   function resize(){
@@ -161,8 +210,9 @@ if(legacyTarget==='#about')location.replace('./about.html');
 
     const t=reduced?9200:ms;
     const spacing=cssW<520?9:10;
-    const probe=spacing*2.2;
-    const outsideProbe=spacing*2.65;
+    const probe=spacing*2.05;
+    const outsideProbe=spacing*2.45;
+    const wakeLength=spacing*(cssW<520?8:12);
     const epoch=Math.floor(t/STATE_MS);
     const epochProgress=(t%STATE_MS)/STATE_MS;
     const stateBlend=smooth((epochProgress-.68)/.32);
@@ -177,7 +227,7 @@ if(legacyTarget==='#about')location.replace('./about.html');
     let row=0;
     for(let y=-spacing+shiftY;y<cssH+spacing;y+=spacing,row++){
       let col=0;
-      for(let x=-spacing+shiftX;x<cssW+spacing;x+=spacing,col++){
+      for(let x=-spacing+shiftX;x<cssW+wakeLength+spacing;x+=spacing,col++){
         const gx=col-wholeX;
         const gy=row-wholeY;
         const inside=sample(x,y)===1;
@@ -186,69 +236,86 @@ if(legacyTarget==='#about')location.replace('./about.html');
         let alpha=0;
         let nx=0,ny=0;
         let left=0,right=0,up=0,down=0;
+        let wakeDistance=0;
+        let inDirectionalWake=false;
 
         if(inside){
           left=sample(x-probe,y);right=sample(x+probe,y);up=sample(x,y-probe);down=sample(x,y+probe);
           const core=left&&right&&up&&down;
           if(core){
             type='core';
-            alpha=.43+tone*.24;
+            alpha=.46+tone*.23;
           }else{
             type='edge';
             const a=edgePresence(gx,gy,epoch);
             const b=edgePresence(gx,gy,epoch+1);
             const present=a+(b-a)*stateBlend;
-            alpha=present*(.31+tone*.24);
+            alpha=present*(.34+tone*.25);
           }
         }else{
           left=sample(x-outsideProbe,y);right=sample(x+outsideProbe,y);up=sample(x,y-outsideProbe);down=sample(x,y+outsideProbe);
-          if(!(left||right||up||down)||hash(gx,gy,131)<=.974)continue;
-          alpha=.17+hash(gx,gy,173)*.18;
+          const iy=Math.min(cssH-1,Math.max(0,y|0));
+          const rightEdge=rowRightEdge?.[iy]??-1;
+          wakeDistance=rightEdge>=0?x-rightEdge:0;
+          inDirectionalWake=rightEdge>=0&&wakeDistance>0&&wakeDistance<wakeLength;
+          const edgeNear=left||right||up||down;
+
+          if(inDirectionalWake){
+            const fade=1-wakeDistance/wakeLength;
+            const threshold=.50+(1-fade)*.30;
+            if(hash(gx,gy,131)<=threshold)continue;
+            alpha=(.12+hash(gx,gy,173)*.24)*fade;
+          }else{
+            if(!edgeNear||hash(gx,gy,131)<=.982)continue;
+            alpha=.10+hash(gx,gy,173)*.14;
+          }
         }
 
-        if(type!=='core'){
-          nx=left-right;
-          ny=up-down;
+        if(type!=='core'&&!inDirectionalWake){
+          nx=left-right;ny=up-down;
           const len=Math.hypot(nx,ny)||1;nx/=len;ny/=len;
           if(type==='outside'){nx=-nx;ny=-ny;}
         }
 
-        const outward=type==='outside'?(2.15+1.0*Math.sin(t*.00022+hash(gx,gy,211)*Math.PI*2)):(type==='edge'?.9*Math.sin(t*.00018+hash(gx,gy,79)*Math.PI*2):0);
-        const size=spacing*(type==='outside'?.55:.69);
+        const outward=inDirectionalWake?0:(type==='outside'?(1.8+.8*Math.sin(t*.00022+hash(gx,gy,211)*Math.PI*2)):(type==='edge'?.75*Math.sin(t*.00018+hash(gx,gy,79)*Math.PI*2):0));
+        const size=spacing*(type==='outside'?.53:.70);
         const px=x+nx*outward;
         const py=y+ny*outward;
         const flowCoord=px*FLOW_DX+py*FLOW_DY;
-        const flowPulse=.5+.5*Math.sin(flowCoord*.155-t*.0049);
-        const directedAlpha=alpha*(.90+.18*flowPulse);
-        const streak=type!=='outside'&&!reduced&&hash(gx,gy,307)>.955;
+        const flowPulse=.5+.5*Math.sin(flowCoord*.17-t*.0055);
+        const directedAlpha=alpha*(.91+.20*flowPulse);
+        const streak=!reduced&&type!=='outside'&&hash(gx,gy,307)>.94;
 
         if(streak){
           const trailSize=size*.72;
-          const trailAlpha=directedAlpha*(.13+.12*flowPulse);
-          const tx1=px-FLOW_DX*spacing*.95;
-          const ty1=py-FLOW_DY*spacing*.95;
+          const trailAlpha=directedAlpha*(.16+.14*flowPulse);
+          const tx1=px-FLOW_DX*spacing*1.05;
+          const ty1=py-FLOW_DY*spacing*1.05;
+          const tx2=px-FLOW_DX*spacing*2.05;
+          const ty2=py-FLOW_DY*spacing*2.05;
+          const tx3=px-FLOW_DX*spacing*3.00;
+          const ty3=py-FLOW_DY*spacing*3.00;
+
           if(sample(tx1,ty1)){
             ctx.fillStyle=trailPalette[alphaIndex(trailAlpha)];
             ctx.fillRect(Math.round(tx1-trailSize*.5),Math.round(ty1-trailSize*.5),Math.max(2,Math.round(trailSize)),Math.max(2,Math.round(trailSize)));
           }
-          const tx2=px-FLOW_DX*spacing*1.75;
-          const ty2=py-FLOW_DY*spacing*1.75;
           if(sample(tx2,ty2)){
-            const farSize=trailSize*.72;
-            ctx.fillStyle=trailPalette[alphaIndex(trailAlpha*.52)];
-            ctx.fillRect(Math.round(tx2-farSize*.5),Math.round(ty2-farSize*.5),Math.max(2,Math.round(farSize)),Math.max(2,Math.round(farSize)));
+            const s=trailSize*.75;
+            ctx.fillStyle=trailPalette[alphaIndex(trailAlpha*.58)];
+            ctx.fillRect(Math.round(tx2-s*.5),Math.round(ty2-s*.5),Math.max(2,Math.round(s)),Math.max(2,Math.round(s)));
+          }
+          if(sample(tx3,ty3)){
+            const s=trailSize*.56;
+            ctx.fillStyle=trailPalette[alphaIndex(trailAlpha*.30)];
+            ctx.fillRect(Math.round(tx3-s*.5),Math.round(ty3-s*.5),Math.max(2,Math.round(s)),Math.max(2,Math.round(s)));
           }
         }
 
         const dark=tone>.93;
-        const finalAlpha=dark?Math.min(directedAlpha+.08,.80):directedAlpha;
+        const finalAlpha=dark?Math.min(directedAlpha+.08,.82):directedAlpha;
         ctx.fillStyle=(dark?darkPalette:lightPalette)[alphaIndex(finalAlpha)];
-        ctx.fillRect(
-          Math.round(px-size*.5),
-          Math.round(py-size*.5),
-          Math.max(2,Math.round(size)),
-          Math.max(2,Math.round(size))
-        );
+        ctx.fillRect(Math.round(px-size*.5),Math.round(py-size*.5),Math.max(2,Math.round(size)),Math.max(2,Math.round(size)));
       }
     }
 
