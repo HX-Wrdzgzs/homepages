@@ -49,8 +49,8 @@
     display:block;
     position:relative;
     width:calc(100% + 8px);
-    height:132px;
-    margin:15px -4px 14px;
+    height:164px;
+    margin:14px -4px 13px;
     overflow:hidden;
     pointer-events:none;
   }
@@ -76,9 +76,9 @@
 
 @media(max-width:420px){
   .hero-particle-mobile{
-    height:124px;
-    margin-top:14px;
-    margin-bottom:13px;
+    height:154px;
+    margin-top:13px;
+    margin-bottom:12px;
   }
 }
 
