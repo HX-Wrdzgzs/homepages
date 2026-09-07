@@ -6,12 +6,14 @@
   const ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
   if(!ctx){canvas.hidden=true;return;}
 
-  const mask=document.createElement('canvas');
-  const maskCtx=mask.getContext('2d',{alpha:true,willReadFrequently:true});
-  if(!maskCtx){canvas.hidden=true;return;}
+  const primaryMask=document.createElement('canvas');
+  const secondaryMask=document.createElement('canvas');
+  const primaryCtx=primaryMask.getContext('2d',{alpha:true,willReadFrequently:true});
+  const secondaryCtx=secondaryMask.getContext('2d',{alpha:true,willReadFrequently:true});
+  if(!primaryCtx||!secondaryCtx){canvas.hidden=true;return;}
 
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let cssW=0,cssH=0,dpr=1,maskData=null,raf=0,start=performance.now();
+  let cssW=0,cssH=0,dpr=1,primaryData=null,secondaryData=null,raf=0,start=performance.now();
 
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   const smooth=(v)=>{v=clamp(v,0,1);return v*v*(3-2*v);};
@@ -21,30 +23,34 @@
     return n/4294967295;
   };
 
-  function rebuildMask(){
-    mask.width=Math.max(1,cssW);
-    mask.height=Math.max(1,cssH);
-    maskCtx.clearRect(0,0,cssW,cssH);
-
-    const fontSize=Math.min(cssH*.74,cssW*.19);
-    maskCtx.save();
-    maskCtx.fillStyle='#000';
-    maskCtx.font=`900 ${fontSize}px "Arial Black",Arial,sans-serif`;
-    maskCtx.textBaseline='middle';
-    maskCtx.textAlign='center';
-    maskCtx.translate(cssW/2,cssH/2+fontSize*.015);
-    maskCtx.scale(1.08,1);
-    maskCtx.fillText('BA4THG',0,0,cssW*.91/1.08);
-    maskCtx.restore();
-
-    maskData=maskCtx.getImageData(0,0,cssW,cssH).data;
+  function drawTextMask(targetCanvas,targetCtx,text,fontSize,y,maxWidth,weight=900,stretch=1){
+    targetCanvas.width=Math.max(1,cssW);
+    targetCanvas.height=Math.max(1,cssH);
+    targetCtx.clearRect(0,0,cssW,cssH);
+    targetCtx.save();
+    targetCtx.fillStyle='#000';
+    targetCtx.font=`${weight} ${fontSize}px "Arial Black","Arial Narrow",Arial,sans-serif`;
+    targetCtx.textBaseline='middle';
+    targetCtx.textAlign='center';
+    targetCtx.translate(cssW/2,y);
+    targetCtx.scale(stretch,1);
+    targetCtx.fillText(text,0,0,maxWidth/stretch);
+    targetCtx.restore();
+    return targetCtx.getImageData(0,0,cssW,cssH).data;
   }
 
-  function sample(x,y){
-    if(!maskData||x<0||y<0||x>=cssW||y>=cssH)return 0;
+  function rebuildMasks(){
+    const primarySize=Math.min(cssH*.43,cssW*.19);
+    const secondarySize=Math.min(cssH*.205,cssW*.076);
+    primaryData=drawTextMask(primaryMask,primaryCtx,'BA4THG',primarySize,cssH*.35,cssW*.92,900,1.08);
+    secondaryData=drawTextMask(secondaryMask,secondaryCtx,'HX-Wrdzgzs',secondarySize,cssH*.74,cssW*.80,800,1.04);
+  }
+
+  function sample(data,x,y,threshold=92){
+    if(!data||x<0||y<0||x>=cssW||y>=cssH)return 0;
     const ix=clamp(x|0,0,cssW-1);
     const iy=clamp(y|0,0,cssH-1);
-    return maskData[(iy*cssW+ix)*4+3]>92?1:0;
+    return data[(iy*cssW+ix)*4+3]>threshold?1:0;
   }
 
   function resize(){
@@ -59,7 +65,7 @@
     canvas.height=Math.round(cssH*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.imageSmoothingEnabled=false;
-    rebuildMask();
+    rebuildMasks();
     return true;
   }
 
@@ -76,23 +82,24 @@
 
   function draw(now){
     raf=0;
-    if(!cssW||!cssH||!maskData)resize();
+    if(!cssW||!cssH||!primaryData||!secondaryData)resize();
     ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.clearRect(0,0,cssW,cssH);
 
-    const t=reduced?2650:now-start;
+    const t=reduced?3600:now-start;
     const spacing=cssW<390?4.35:4.8;
-    const speed=.0315;
+    // Deliberately slower, constant conveyor-like motion: closer to the steady Cloudflare-style flow than a fast scan.
+    const speed=.0225;
     const travel=t*speed;
     const whole=Math.floor(travel/spacing);
     const offset=travel-whole*spacing;
     const probe=spacing*2.15;
-    const scanX=(cssW+140)-((t*.070)%(cssW+280));
+    const scanX=(cssW+150)-((t*.043)%(cssW+300));
 
     let row=0;
     for(let y=spacing*.3;y<cssH-spacing*.1;y+=spacing,row++){
       let col=0;
-      for(let x=-spacing-offset;x<cssW+spacing;x+=spacing,col++){
+      for(let x=-spacing-offset;x<cssW+spacing*2.4;x+=spacing,col++){
         const gx=col+whole;
         const gy=row;
         const r1=hash(gx,gy,11);
@@ -101,43 +108,56 @@
         const r4=hash(gx,gy,79);
         const r5=hash(gx,gy,113);
 
-        const inside=sample(x,y);
-        const near=!inside&&(
-          sample(x-probe,y)||sample(x+probe,y)||sample(x,y-probe)||sample(x,y+probe)||
-          sample(x-probe*.7,y-probe*.7)||sample(x+probe*.7,y+probe*.7)
+        const inPrimary=sample(primaryData,x,y);
+        const inSecondary=sample(secondaryData,x,y,84);
+        const inside=inPrimary||inSecondary;
+        const nearPrimary=!inside&&(
+          sample(primaryData,x-probe,y)||sample(primaryData,x+probe,y)||sample(primaryData,x,y-probe)||sample(primaryData,x,y+probe)||
+          sample(primaryData,x-probe*.7,y-probe*.7)||sample(primaryData,x+probe*.7,y+probe*.7)
         );
+        const nearSecondary=!inside&&!nearPrimary&&(
+          sample(secondaryData,x-probe,y,84)||sample(secondaryData,x+probe,y,84)||sample(secondaryData,x,y-probe,84)||sample(secondaryData,x,y+probe,84)
+        );
+        const near=nearPrimary||nearSecondary;
 
-        const corridor=Math.exp(-Math.pow((y-cssH*.5)/(cssH*.38),2));
-        const wave=.5+.5*Math.sin(gx*.37+gy*.21+t*.00125);
-        const scanGlow=Math.exp(-Math.pow((x-scanX)/(spacing*7),2));
+        const corridor=Math.exp(-Math.pow((y-cssH*.51)/(cssH*.44),2));
+        const wave=.5+.5*Math.sin(gx*.34+gy*.19+t*.00095);
+        const scanGlow=Math.exp(-Math.pow((x-scanX)/(spacing*8.5),2));
         const rightFeed=smooth((x+cssW*.08)/(cssW*1.08));
 
         let keep=false,alpha=0,size=0;
-        if(inside){
-          keep=r1>.045;
-          alpha=(.61+r2*.34)*(.90+.10*wave)+scanGlow*.25;
-          size=spacing*(.44+r3*.44);
+        if(inPrimary){
+          keep=r1>.040;
+          alpha=(.63+r2*.34)*(.90+.10*wave)+scanGlow*.23;
+          size=spacing*(.45+r3*.44);
+        }else if(inSecondary){
+          keep=r1>.085;
+          alpha=(.48+r2*.30)*(.91+.09*wave)+scanGlow*.15;
+          size=spacing*(.35+r3*.34);
         }else if(near){
-          keep=r1>(.60-.08*corridor-.06*scanGlow);
-          alpha=(.11+r2*.23)*(1+.72*scanGlow);
-          size=spacing*(.30+r3*.31);
+          const secondaryBias=nearSecondary?.035:0;
+          keep=r1>(.60+secondaryBias-.08*corridor-.06*scanGlow);
+          alpha=(nearSecondary?.075:.11)+r2*(nearSecondary?.17:.23);
+          alpha*=1+.66*scanGlow;
+          size=spacing*((nearSecondary?.25:.30)+r3*(nearSecondary?.27:.31));
         }else{
           const cloudChance=.934-corridor*.043-rightFeed*.013-scanGlow*.024;
           keep=r1>cloudChance;
-          alpha=(.032+r2*.096)*(0.70+.30*corridor)*(1+.48*scanGlow);
+          alpha=(.032+r2*.096)*(0.70+.30*corridor)*(1+.44*scanGlow);
           size=spacing*(.20+r3*.23);
         }
         if(!keep)continue;
 
-        const py=y+(r4-.5)*spacing*.42+Math.sin(t*.00125+gx*.33+r5*5.1)*spacing*.10;
-        const px=x+(r5-.5)*spacing*.24+Math.sin(t*.00095+gy*.61+r3*4.4)*spacing*.035;
+        const py=y+(r4-.5)*spacing*.46+Math.sin(t*.00102+gx*.31+r5*5.1)*spacing*.11;
+        const px=x+(r5-.5)*spacing*.26+Math.sin(t*.00076+gy*.59+r3*4.4)*spacing*.04;
         const variant=r4>.92?2:(r4>.52?1:0);
 
-        if(!reduced&&inside&&r5>.76){
-          drawSquare(px+spacing*.66,py,size*.62,alpha*.19,1);
-          drawSquare(px+spacing*1.24,py,size*.39,alpha*.075,1);
+        if(!reduced&&inside&&r5>(inPrimary?.70:.78)){
+          drawSquare(px+spacing*.72,py,size*.64,alpha*.24,1);
+          drawSquare(px+spacing*1.42,py,size*.43,alpha*.11,1);
+          drawSquare(px+spacing*2.06,py,size*.28,alpha*.045,1);
         }
-        if(!reduced&&inside&&r4>.965){
+        if(!reduced&&inPrimary&&r4>.962){
           drawSquare(px-spacing*.46,py-spacing*.28,size*.30,alpha*.22,1);
         }
         drawSquare(px,py,size,clamp(alpha,0,.99),variant);
