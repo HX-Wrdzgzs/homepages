@@ -81,12 +81,12 @@
     ctx.clearRect(0,0,cssW,cssH);
 
     const t=reduced?2650:now-start;
-    const spacing=cssW<390?5:5.6;
+    const spacing=cssW<390?4.35:4.8;
     const speed=.0315;
     const travel=t*speed;
     const whole=Math.floor(travel/spacing);
     const offset=travel-whole*spacing;
-    const probe=spacing*2.1;
+    const probe=spacing*2.15;
     const scanX=(cssW+140)-((t*.070)%(cssW+280));
 
     let row=0;
@@ -114,18 +114,18 @@
 
         let keep=false,alpha=0,size=0;
         if(inside){
-          keep=r1>.11;
-          alpha=(.62+r2*.33)*(.90+.10*wave)+scanGlow*.24;
-          size=spacing*(.40+r3*.39);
+          keep=r1>.045;
+          alpha=(.61+r2*.34)*(.90+.10*wave)+scanGlow*.25;
+          size=spacing*(.44+r3*.44);
         }else if(near){
-          keep=r1>(.68-.07*corridor-.05*scanGlow);
-          alpha=(.10+r2*.21)*(1+.70*scanGlow);
-          size=spacing*(.26+r3*.29);
+          keep=r1>(.60-.08*corridor-.06*scanGlow);
+          alpha=(.11+r2*.23)*(1+.72*scanGlow);
+          size=spacing*(.30+r3*.31);
         }else{
-          const cloudChance=.938-corridor*.042-rightFeed*.012-scanGlow*.022;
+          const cloudChance=.934-corridor*.043-rightFeed*.013-scanGlow*.024;
           keep=r1>cloudChance;
-          alpha=(.030+r2*.090)*(0.70+.30*corridor)*(1+.45*scanGlow);
-          size=spacing*(.18+r3*.21);
+          alpha=(.032+r2*.096)*(0.70+.30*corridor)*(1+.48*scanGlow);
+          size=spacing*(.20+r3*.23);
         }
         if(!keep)continue;
 
@@ -133,9 +133,12 @@
         const px=x+(r5-.5)*spacing*.24+Math.sin(t*.00095+gy*.61+r3*4.4)*spacing*.035;
         const variant=r4>.92?2:(r4>.52?1:0);
 
-        if(!reduced&&inside&&r5>.88){
-          drawSquare(px+spacing*.72,py,size*.60,alpha*.22,1);
-          drawSquare(px+spacing*1.38,py,size*.38,alpha*.09,1);
+        if(!reduced&&inside&&r5>.76){
+          drawSquare(px+spacing*.66,py,size*.62,alpha*.19,1);
+          drawSquare(px+spacing*1.24,py,size*.39,alpha*.075,1);
+        }
+        if(!reduced&&inside&&r4>.965){
+          drawSquare(px-spacing*.46,py-spacing*.28,size*.30,alpha*.22,1);
         }
         drawSquare(px,py,size,clamp(alpha,0,.99),variant);
       }
