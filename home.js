@@ -98,25 +98,25 @@ if(legacyTarget==='#about')location.replace('./about.html');
 
   function drawBA4THGMask(){
     maskCtx.save();
-    maskCtx.strokeStyle='#000';maskCtx.fillStyle='#000';maskCtx.lineWidth=48;maskCtx.lineCap='square';maskCtx.lineJoin='miter';
-    const top=285,mid=425,bot=565;
+    maskCtx.strokeStyle='#000';maskCtx.fillStyle='#000';maskCtx.lineWidth=58;maskCtx.lineCap='square';maskCtx.lineJoin='miter';
+    const top=220,mid=425,bot=630;
     // B
-    maskCtx.beginPath();maskCtx.moveTo(95,bot);maskCtx.lineTo(95,top);maskCtx.lineTo(155,top);maskCtx.bezierCurveTo(218,top,218,mid-8,155,mid-8);maskCtx.lineTo(95,mid-8);maskCtx.moveTo(155,mid-8);maskCtx.bezierCurveTo(225,mid-8,225,bot,155,bot);maskCtx.lineTo(95,bot);maskCtx.stroke();
+    maskCtx.beginPath();maskCtx.moveTo(55,bot);maskCtx.lineTo(55,top);maskCtx.lineTo(135,top);maskCtx.bezierCurveTo(220,top,220,mid-10,135,mid-10);maskCtx.lineTo(55,mid-10);maskCtx.moveTo(135,mid-10);maskCtx.bezierCurveTo(230,mid-10,230,bot,135,bot);maskCtx.lineTo(55,bot);maskCtx.stroke();
     // A
-    maskCtx.beginPath();maskCtx.moveTo(250,bot);maskCtx.lineTo(315,top);maskCtx.lineTo(380,bot);maskCtx.moveTo(278,458);maskCtx.lineTo(352,458);maskCtx.stroke();
+    maskCtx.beginPath();maskCtx.moveTo(220,bot);maskCtx.lineTo(300,top);maskCtx.lineTo(380,bot);maskCtx.moveTo(252,475);maskCtx.lineTo(348,475);maskCtx.stroke();
     // 4
-    maskCtx.beginPath();maskCtx.moveTo(485,top);maskCtx.lineTo(420,460);maskCtx.lineTo(525,460);maskCtx.moveTo(500,top);maskCtx.lineTo(500,bot);maskCtx.stroke();
+    maskCtx.beginPath();maskCtx.moveTo(485,top);maskCtx.lineTo(400,480);maskCtx.lineTo(535,480);maskCtx.moveTo(505,top);maskCtx.lineTo(505,bot);maskCtx.stroke();
     // T
-    maskCtx.beginPath();maskCtx.moveTo(565,top);maskCtx.lineTo(690,top);maskCtx.moveTo(628,top);maskCtx.lineTo(628,bot);maskCtx.stroke();
+    maskCtx.beginPath();maskCtx.moveTo(555,top);maskCtx.lineTo(720,top);maskCtx.moveTo(638,top);maskCtx.lineTo(638,bot);maskCtx.stroke();
     // H
-    maskCtx.beginPath();maskCtx.moveTo(735,top);maskCtx.lineTo(735,bot);maskCtx.moveTo(835,top);maskCtx.lineTo(835,bot);maskCtx.moveTo(735,425);maskCtx.lineTo(835,425);maskCtx.stroke();
+    maskCtx.beginPath();maskCtx.moveTo(735,top);maskCtx.lineTo(735,bot);maskCtx.moveTo(870,top);maskCtx.lineTo(870,bot);maskCtx.moveTo(735,425);maskCtx.lineTo(870,425);maskCtx.stroke();
     // G
-    maskCtx.beginPath();maskCtx.arc(920,425,105,.42*Math.PI,1.58*Math.PI,false);maskCtx.moveTo(920,425);maskCtx.lineTo(982,425);maskCtx.lineTo(982,520);maskCtx.stroke();
+    maskCtx.beginPath();maskCtx.arc(990,425,142,.42*Math.PI,1.58*Math.PI,false);maskCtx.moveTo(990,425);maskCtx.lineTo(1080,425);maskCtx.lineTo(1080,555);maskCtx.stroke();
     maskCtx.restore();
   }
 
   function rebuildMask(){
-    maskCanvas.width=Math.max(1,Math.round(cssW));maskCanvas.height=Math.max(1,Math.round(cssH));maskCtx.clearRect(0,0,cssW,cssH);maskCtx.save();maskCtx.setTransform(cssW/1100,0,0,cssH/850,0,0);drawBA4THGMask();maskCtx.restore();maskData=maskCtx.getImageData(0,0,cssW,cssH).data;
+    maskCanvas.width=Math.max(1,Math.round(cssW));maskCanvas.height=Math.max(1,Math.round(cssH));maskCtx.clearRect(0,0,cssW,cssH);maskCtx.save();maskCtx.setTransform(cssW/1160,0,0,cssH/850,0,0);drawBA4THGMask();maskCtx.restore();maskData=maskCtx.getImageData(0,0,cssW,cssH).data;
     rowRightEdge=new Int32Array(cssH);rowRightEdge.fill(-1);
     for(let y=0;y<cssH;y++){const rowOffset=y*cssW*4;for(let x=cssW-1;x>=0;x--){if(maskData[rowOffset+x*4+3]>127){rowRightEdge[y]=x;break;}}}
   }
