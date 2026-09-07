@@ -1,16 +1,19 @@
 # Photos for mizuki.top
 
-这个目录用于 `journal.html` 的公开照片墙。
+这个目录存放 `journal.html` 照片区使用的公开图片。
 
-## 上传方式
+## 上传
 
-1. 登录拥有 `HX-Wrdzgzs/homepages` 写入权限的 GitHub 账号；
-2. 打开：`https://github.com/HX-Wrdzgzs/homepages/upload/main/assets/posts`；
-3. 上传图片并提交到 `main`；
-4. `journal.html` 会通过 GitHub Contents API 自动读取本目录中的图片文件。
+1. 登录有 `HX-Wrdzgzs/homepages` 写入权限的 GitHub 账号。
+2. 打开仓库中的 `assets/posts/` 目录。
+3. 选择 **Add file → Upload files**。
+4. 上传图片并提交到 `main`。
+5. 上传完成后，把新图片加入 `journal.html` 的照片列表。
 
-支持展示的扩展名：`.avif`、`.webp`、`.png`、`.jpg`、`.jpeg`、`.gif`。
+目前照片页直接引用仓库内的静态图片，不再请求 GitHub Contents API，因此仅上传文件不会自动出现在页面上。
 
-建议使用便于排序的文件名，例如：`2026-09-08-example.webp`。
+建议图片使用 `.jpg`、`.webp` 或 `.png`，文件名尽量包含日期，例如：
 
-不要在前端代码中写入 GitHub Token。上传鉴权由 GitHub 登录会话和仓库权限负责。
+`2026-09-08-example.jpg`
+
+公开页面不提供上传入口，也不在前端保存 GitHub Token。
