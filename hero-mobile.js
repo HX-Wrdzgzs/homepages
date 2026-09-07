@@ -67,10 +67,10 @@
     if(alpha<.012)return;
     const s=Math.max(2,Math.round(size));
     ctx.fillStyle=variant===2
-      ?`rgba(31,82,181,${alpha})`
+      ?`rgba(18,76,204,${alpha})`
       :variant===1
-        ?`rgba(82,194,255,${alpha})`
-        :`rgba(82,155,244,${alpha})`;
+        ?`rgba(52,214,255,${alpha})`
+        :`rgba(46,124,255,${alpha})`;
     ctx.fillRect(Math.round(x-s/2),Math.round(y-s/2),s,s);
   }
 
@@ -114,30 +114,30 @@
 
         let keep=false,alpha=0,size=0;
         if(inside){
-          keep=r1>.15;
-          alpha=(.52+r2*.35)*(.88+.12*wave)+scanGlow*.16;
-          size=spacing*(.38+r3*.38);
+          keep=r1>.11;
+          alpha=(.62+r2*.33)*(.90+.10*wave)+scanGlow*.24;
+          size=spacing*(.40+r3*.39);
         }else if(near){
-          keep=r1>(.67-.08*corridor-.05*scanGlow);
-          alpha=(.075+r2*.18)*(1+.55*scanGlow);
-          size=spacing*(.26+r3*.28);
+          keep=r1>(.68-.07*corridor-.05*scanGlow);
+          alpha=(.10+r2*.21)*(1+.70*scanGlow);
+          size=spacing*(.26+r3*.29);
         }else{
-          const cloudChance=.935-corridor*.045-rightFeed*.014-scanGlow*.025;
+          const cloudChance=.938-corridor*.042-rightFeed*.012-scanGlow*.022;
           keep=r1>cloudChance;
-          alpha=(.028+r2*.095)*(0.72+.28*corridor)*(1+.55*scanGlow);
+          alpha=(.030+r2*.090)*(0.70+.30*corridor)*(1+.45*scanGlow);
           size=spacing*(.18+r3*.21);
         }
         if(!keep)continue;
 
         const py=y+(r4-.5)*spacing*.42+Math.sin(t*.00125+gx*.33+r5*5.1)*spacing*.10;
         const px=x+(r5-.5)*spacing*.24+Math.sin(t*.00095+gy*.61+r3*4.4)*spacing*.035;
-        const variant=r4>.94?2:(r4>.58?1:0);
+        const variant=r4>.92?2:(r4>.52?1:0);
 
-        if(!reduced&&inside&&r5>.90){
-          drawSquare(px+spacing*.72,py,size*.58,alpha*.16,1);
-          drawSquare(px+spacing*1.38,py,size*.36,alpha*.06,1);
+        if(!reduced&&inside&&r5>.88){
+          drawSquare(px+spacing*.72,py,size*.60,alpha*.22,1);
+          drawSquare(px+spacing*1.38,py,size*.38,alpha*.09,1);
         }
-        drawSquare(px,py,size,clamp(alpha,0,.94),variant);
+        drawSquare(px,py,size,clamp(alpha,0,.99),variant);
       }
     }
 
