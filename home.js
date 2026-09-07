@@ -79,68 +79,180 @@ const legacyTarget=location.hash;
 if(legacyTarget==='#projects'||legacyTarget==='#work')location.replace('./projects.html');
 if(legacyTarget==='#about')location.replace('./about.html');
 
-// Hero particle field: fixed-vector BA4THG mask, continuously streaming from right to left.
+// Hero particle field: BA4THG stays readable while a dense square stream rolls right-to-left.
 (()=>{
   const canvas=document.querySelector('[data-hero-shader]');if(!canvas)return;
   const ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});if(!ctx){canvas.hidden=true;return;}
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const maskCanvas=document.createElement('canvas');
   const maskCtx=maskCanvas.getContext('2d',{alpha:true,willReadFrequently:true});if(!maskCtx){canvas.hidden=true;return;}
-  let cssW=0,cssH=0,dpr=1,maskData=null,rowRightEdge=null,raf=0;
-  const STATE_MS=4200,FLOW_X=-.0145,FLOW_Y=0,FLOW_LEN=Math.hypot(FLOW_X,FLOW_Y)||1,FLOW_DX=FLOW_X/FLOW_LEN,FLOW_DY=FLOW_Y/FLOW_LEN,PALETTE_STEPS=32;
+
+  let cssW=0,cssH=0,dpr=1,maskData=null,rowRightEdge=null,raf=0,start=performance.now();
+  const FLOW_X=-.052,FLOW_Y=0,FLOW_LEN=Math.hypot(FLOW_X,FLOW_Y)||1,FLOW_DX=FLOW_X/FLOW_LEN,FLOW_DY=FLOW_Y/FLOW_LEN;
+  const PALETTE_STEPS=40;
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  const smooth=(t)=>{t=clamp(t,0,1);return t*t*(3-2*t)};
+  const smooth=(t)=>{t=clamp(t,0,1);return t*t*(3-2*t);};
   const hash=(x,y,seed=0)=>{let n=(Math.imul(x+11,374761393)^Math.imul(y+17,668265263)^Math.imul(seed+23,2246822519))>>>0;n=(n^(n>>>13))>>>0;n=Math.imul(n,1274126177)>>>0;n=(n^(n>>>16))>>>0;return n/4294967295;};
   const makePalette=(r,g,b)=>Array.from({length:PALETTE_STEPS+1},(_,i)=>`rgba(${r},${g},${b},${(i/PALETTE_STEPS).toFixed(3)})`);
-  const lightPalette=makePalette(82,155,244),darkPalette=makePalette(31,82,181),trailPalette=makePalette(82,194,255);
+  const mainPalette=makePalette(49,132,255),cyanPalette=makePalette(55,205,255),deepPalette=makePalette(20,77,191),trailPalette=makePalette(67,190,255);
   const alphaIndex=(alpha)=>Math.round(clamp(alpha,0,1)*PALETTE_STEPS);
-  function sample(x,y){if(!maskData||x<0||y<0||x>=cssW||y>=cssH)return 0;const ix=Math.min(cssW-1,Math.max(0,x|0)),iy=Math.min(cssH-1,Math.max(0,y|0));return maskData[(iy*cssW+ix)*4+3]>127?1:0;}
+
+  function sample(x,y){
+    if(!maskData||x<0||y<0||x>=cssW||y>=cssH)return 0;
+    const ix=Math.min(cssW-1,Math.max(0,x|0)),iy=Math.min(cssH-1,Math.max(0,y|0));
+    return maskData[(iy*cssW+ix)*4+3]>127?1:0;
+  }
 
   function drawBA4THGMask(){
     maskCtx.save();
     maskCtx.strokeStyle='#000';maskCtx.fillStyle='#000';maskCtx.lineWidth=58;maskCtx.lineCap='square';maskCtx.lineJoin='miter';
     const top=220,mid=425,bot=630;
-    // B
     maskCtx.beginPath();maskCtx.moveTo(55,bot);maskCtx.lineTo(55,top);maskCtx.lineTo(135,top);maskCtx.bezierCurveTo(220,top,220,mid-10,135,mid-10);maskCtx.lineTo(55,mid-10);maskCtx.moveTo(135,mid-10);maskCtx.bezierCurveTo(230,mid-10,230,bot,135,bot);maskCtx.lineTo(55,bot);maskCtx.stroke();
-    // A
     maskCtx.beginPath();maskCtx.moveTo(220,bot);maskCtx.lineTo(300,top);maskCtx.lineTo(380,bot);maskCtx.moveTo(252,475);maskCtx.lineTo(348,475);maskCtx.stroke();
-    // 4
     maskCtx.beginPath();maskCtx.moveTo(485,top);maskCtx.lineTo(400,480);maskCtx.lineTo(535,480);maskCtx.moveTo(505,top);maskCtx.lineTo(505,bot);maskCtx.stroke();
-    // T
     maskCtx.beginPath();maskCtx.moveTo(555,top);maskCtx.lineTo(720,top);maskCtx.moveTo(638,top);maskCtx.lineTo(638,bot);maskCtx.stroke();
-    // H
     maskCtx.beginPath();maskCtx.moveTo(735,top);maskCtx.lineTo(735,bot);maskCtx.moveTo(870,top);maskCtx.lineTo(870,bot);maskCtx.moveTo(735,425);maskCtx.lineTo(870,425);maskCtx.stroke();
-    // G
     maskCtx.beginPath();maskCtx.arc(990,425,142,.42*Math.PI,1.58*Math.PI,false);maskCtx.moveTo(990,425);maskCtx.lineTo(1080,425);maskCtx.lineTo(1080,555);maskCtx.stroke();
     maskCtx.restore();
   }
 
   function rebuildMask(){
-    maskCanvas.width=Math.max(1,Math.round(cssW));maskCanvas.height=Math.max(1,Math.round(cssH));maskCtx.clearRect(0,0,cssW,cssH);maskCtx.save();maskCtx.setTransform(cssW/1160,0,0,cssH/850,0,0);drawBA4THGMask();maskCtx.restore();maskData=maskCtx.getImageData(0,0,cssW,cssH).data;
+    maskCanvas.width=Math.max(1,Math.round(cssW));maskCanvas.height=Math.max(1,Math.round(cssH));
+    maskCtx.clearRect(0,0,cssW,cssH);
+    maskCtx.save();maskCtx.setTransform(cssW/1160,0,0,cssH/850,0,0);drawBA4THGMask();maskCtx.restore();
+    maskData=maskCtx.getImageData(0,0,cssW,cssH).data;
     rowRightEdge=new Int32Array(cssH);rowRightEdge.fill(-1);
-    for(let y=0;y<cssH;y++){const rowOffset=y*cssW*4;for(let x=cssW-1;x>=0;x--){if(maskData[rowOffset+x*4+3]>127){rowRightEdge[y]=x;break;}}}
-  }
-  function resize(){const rect=canvas.getBoundingClientRect(),nextW=Math.max(1,Math.round(rect.width)),nextH=Math.max(1,Math.round(rect.height)),dprCap=nextW<700?1.18:1.38,nextDpr=Math.min(window.devicePixelRatio||1,dprCap);if(nextW===cssW&&nextH===cssH&&nextDpr===dpr)return false;cssW=nextW;cssH=nextH;dpr=nextDpr;canvas.width=Math.max(1,Math.round(cssW*dpr));canvas.height=Math.max(1,Math.round(cssH*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingEnabled=false;rebuildMask();return true;}
-  function edgePresence(gx,gy,epoch){return hash(gx,gy,epoch+503)>.20?1:0;}
-  function draw(ms=0){
-    raf=0;if(!cssW||!cssH||!maskData)resize();ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,cssW,cssH);
-    const t=reduced?9200:ms,spacing=cssW<520?9:10,probe=spacing*2.05,outsideProbe=spacing*2.45,wakeLength=spacing*(cssW<520?8:12),epoch=Math.floor(t/STATE_MS),epochProgress=(t%STATE_MS)/STATE_MS,stateBlend=smooth((epochProgress-.68)/.32);
-    const distanceX=reduced?0:t*FLOW_X,distanceY=reduced?0:t*FLOW_Y,wholeX=Math.floor(distanceX/spacing),wholeY=Math.floor(distanceY/spacing),shiftX=distanceX-wholeX*spacing,shiftY=distanceY-wholeY*spacing;
-    let row=0;
-    for(let y=-spacing+shiftY;y<cssH+spacing;y+=spacing,row++){
-      let col=0;
-      for(let x=-spacing+shiftX;x<cssW+wakeLength+spacing;x+=spacing,col++){
-        const gx=col-wholeX,gy=row-wholeY,inside=sample(x,y)===1,tone=hash(gx,gy,41);let type='outside',alpha=0,nx=0,ny=0,left=0,right=0,up=0,down=0,wakeDistance=0,inDirectionalWake=false;
-        if(inside){left=sample(x-probe,y);right=sample(x+probe,y);up=sample(x,y-probe);down=sample(x,y+probe);const core=left&&right&&up&&down;if(core){type='core';alpha=.52+tone*.25;}else{type='edge';const a=edgePresence(gx,gy,epoch),b=edgePresence(gx,gy,epoch+1),present=a+(b-a)*stateBlend;alpha=present*(.42+tone*.28);}}
-        else{left=sample(x-outsideProbe,y);right=sample(x+outsideProbe,y);up=sample(x,y-outsideProbe);down=sample(x,y+outsideProbe);const iy=Math.min(cssH-1,Math.max(0,y|0)),rightEdge=rowRightEdge?.[iy]??-1;wakeDistance=rightEdge>=0?x-rightEdge:0;inDirectionalWake=rightEdge>=0&&wakeDistance>0&&wakeDistance<wakeLength;const edgeNear=left||right||up||down;if(inDirectionalWake){const fade=1-wakeDistance/wakeLength,threshold=.50+(1-fade)*.30;if(hash(gx,gy,131)<=threshold)continue;alpha=(.12+hash(gx,gy,173)*.24)*fade;}else{if(!edgeNear||hash(gx,gy,131)<=.982)continue;alpha=.10+hash(gx,gy,173)*.14;}}
-        if(type!=='core'&&!inDirectionalWake){nx=left-right;ny=up-down;const len=Math.hypot(nx,ny)||1;nx/=len;ny/=len;if(type==='outside'){nx=-nx;ny=-ny;}}
-        const outward=inDirectionalWake?0:(type==='outside'?(1.8+.8*Math.sin(t*.00022+hash(gx,gy,211)*Math.PI*2)):(type==='edge'?.75*Math.sin(t*.00018+hash(gx,gy,79)*Math.PI*2):0)),size=spacing*(type==='outside'?.53:.70),px=x+nx*outward,py=y+ny*outward,flowCoord=px*FLOW_DX+py*FLOW_DY,flowPulse=.5+.5*Math.sin(flowCoord*.17-t*.0055),directedAlpha=alpha*(.91+.20*flowPulse),streak=!reduced&&type!=='outside'&&hash(gx,gy,307)>.94;
-        if(streak){const trailSize=size*.72,trailAlpha=directedAlpha*(.16+.14*flowPulse),tx1=px-FLOW_DX*spacing*1.05,ty1=py-FLOW_DY*spacing*1.05,tx2=px-FLOW_DX*spacing*2.05,ty2=py-FLOW_DY*spacing*2.05,tx3=px-FLOW_DX*spacing*3,ty3=py-FLOW_DY*spacing*3;if(sample(tx1,ty1)){ctx.fillStyle=trailPalette[alphaIndex(trailAlpha)];ctx.fillRect(Math.round(tx1-trailSize*.5),Math.round(ty1-trailSize*.5),Math.max(2,Math.round(trailSize)),Math.max(2,Math.round(trailSize)));}if(sample(tx2,ty2)){const s=trailSize*.75;ctx.fillStyle=trailPalette[alphaIndex(trailAlpha*.58)];ctx.fillRect(Math.round(tx2-s*.5),Math.round(ty2-s*.5),Math.max(2,Math.round(s)),Math.max(2,Math.round(s)));}if(sample(tx3,ty3)){const s=trailSize*.56;ctx.fillStyle=trailPalette[alphaIndex(trailAlpha*.30)];ctx.fillRect(Math.round(tx3-s*.5),Math.round(ty3-s*.5),Math.max(2,Math.round(s)),Math.max(2,Math.round(s)));}}
-        const dark=tone>.93,finalAlpha=dark?Math.min(directedAlpha+.08,.88):directedAlpha;ctx.fillStyle=(dark?darkPalette:lightPalette)[alphaIndex(finalAlpha)];ctx.fillRect(Math.round(px-size*.5),Math.round(py-size*.5),Math.max(2,Math.round(size)),Math.max(2,Math.round(size)));
+    for(let y=0;y<cssH;y++){
+      const rowOffset=y*cssW*4;
+      for(let x=cssW-1;x>=0;x--){
+        if(maskData[rowOffset+x*4+3]>127){rowRightEdge[y]=x;break;}
       }
     }
+  }
+
+  function resize(){
+    const rect=canvas.getBoundingClientRect();
+    const nextW=Math.max(1,Math.round(rect.width)),nextH=Math.max(1,Math.round(rect.height));
+    const dprCap=nextW<760?1.22:1.45,nextDpr=Math.min(window.devicePixelRatio||1,dprCap);
+    if(nextW===cssW&&nextH===cssH&&nextDpr===dpr)return false;
+    cssW=nextW;cssH=nextH;dpr=nextDpr;
+    canvas.width=Math.max(1,Math.round(cssW*dpr));canvas.height=Math.max(1,Math.round(cssH*dpr));
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingEnabled=false;
+    rebuildMask();
+    return true;
+  }
+
+  function drawSquare(x,y,size,alpha,palette=mainPalette){
+    if(alpha<.012)return;
+    const s=Math.max(2,Math.round(size));
+    ctx.fillStyle=palette[alphaIndex(alpha)];
+    ctx.fillRect(Math.round(x-s*.5),Math.round(y-s*.5),s,s);
+  }
+
+  function draw(ms=0){
+    raf=0;
+    if(!cssW||!cssH||!maskData)resize();
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssW,cssH);
+
+    const t=reduced?2600:ms-start;
+    const spacing=cssW<760?9:10;
+    const probe=spacing*2.1;
+    const outsideProbe=spacing*2.65;
+    const wakeLength=spacing*(cssW<760?16:21);
+    const distanceX=reduced?0:t*FLOW_X;
+    const wholeX=Math.floor(distanceX/spacing);
+    const shiftX=distanceX-wholeX*spacing;
+    const scanX=(cssW+wakeLength)-((t*.094)%(cssW+wakeLength*1.8));
+    const secondaryScan=(cssW+wakeLength*.5)-((t*.061+cssW*.38)%(cssW+wakeLength*1.45));
+
+    let row=0;
+    for(let y=-spacing;y<cssH+spacing;y+=spacing,row++){
+      let col=0;
+      for(let x=-spacing+shiftX;x<cssW+wakeLength+spacing;x+=spacing,col++){
+        const gx=col-wholeX,gy=row;
+        const tone=hash(gx,gy,41);
+        const inside=sample(x,y)===1;
+        const left=sample(x-outsideProbe,y),right=sample(x+outsideProbe,y),up=sample(x,y-outsideProbe),down=sample(x,y+outsideProbe);
+        const edgeNear=left||right||up||down;
+        const iy=Math.min(cssH-1,Math.max(0,y|0));
+        const rightEdge=rowRightEdge?.[iy]??-1;
+        const wakeDistance=rightEdge>=0?x-rightEdge:0;
+        const inWake=rightEdge>=0&&wakeDistance>0&&wakeDistance<wakeLength;
+        const corridor=Math.exp(-Math.pow((y-cssH*.50)/(cssH*.36),2));
+        const inRightFeed=x>cssW*.56&&corridor>.06;
+        const scanGlow=Math.max(
+          Math.exp(-Math.pow((x-scanX)/(spacing*5.4),2)),
+          Math.exp(-Math.pow((x-secondaryScan)/(spacing*7.2),2))*.62
+        );
+
+        let alpha=0,size=spacing*.64,palette=mainPalette;
+
+        if(inside){
+          const innerLeft=sample(x-probe,y),innerRight=sample(x+probe,y),innerUp=sample(x,y-probe),innerDown=sample(x,y+probe);
+          const core=innerLeft&&innerRight&&innerUp&&innerDown;
+          const keepThreshold=core?.06:.18;
+          if(hash(gx,gy,73)<keepThreshold)continue;
+          alpha=(core?.58:.48)+tone*(core?.28:.30)+scanGlow*.20;
+          size=spacing*(core?.68:.61);
+          if(tone>.91)palette=deepPalette;
+          else if(tone>.64||scanGlow>.54)palette=cyanPalette;
+        }else if(inWake){
+          const fade=smooth(1-wakeDistance/wakeLength);
+          const keep=.38+(1-fade)*.34;
+          if(hash(gx,gy,131)<keep)continue;
+          alpha=(.11+hash(gx,gy,173)*.27)*fade*(1+scanGlow*.78);
+          size=spacing*(.38+hash(gx,gy,199)*.22);
+          palette=hash(gx,gy,211)>.70?cyanPalette:mainPalette;
+        }else if(edgeNear){
+          if(hash(gx,gy,131)<.955)continue;
+          alpha=(.07+hash(gx,gy,173)*.16)*(1+scanGlow*.6);
+          size=spacing*(.34+hash(gx,gy,199)*.18);
+        }else if(inRightFeed){
+          const feedChance=.987-corridor*.020-scanGlow*.018;
+          if(hash(gx,gy,131)<feedChance)continue;
+          alpha=(.035+hash(gx,gy,173)*.09)*(0.65+corridor*.55)*(1+scanGlow*.85);
+          size=spacing*(.26+hash(gx,gy,199)*.18);
+          palette=hash(gx,gy,211)>.78?cyanPalette:mainPalette;
+        }else continue;
+
+        const jitterY=Math.sin(t*.00105+gx*.31+hash(gx,gy,251)*6.28)*spacing*.055;
+        const px=x;
+        const py=y+jitterY;
+        const pulse=.76+.24*Math.sin((px*-FLOW_DX)*.12-t*.0022+hash(gx,gy,281)*1.7);
+        const finalAlpha=clamp(alpha*(.92+.14*pulse),0,.98);
+
+        const streak=!reduced&&hash(gx,gy,307)>(inside?.89:.82);
+        if(streak){
+          const tailCount=inside?3:2;
+          for(let k=1;k<=tailCount;k++){
+            const tx=px-FLOW_DX*spacing*(k*.78);
+            const ty=py-FLOW_DY*spacing*(k*.78);
+            const tailAlpha=finalAlpha*(inside?.18:.14)*Math.pow(.53,k-1);
+            drawSquare(tx,ty,size*Math.pow(.77,k),tailAlpha,trailPalette);
+          }
+        }
+
+        drawSquare(px,py,size,finalAlpha,palette);
+      }
+    }
+
     if(!reduced&&!document.hidden)raf=requestAnimationFrame(draw);
   }
-  const resizeObserver='ResizeObserver' in window?new ResizeObserver(()=>{const changed=resize();if(reduced&&changed)draw(9200);}):null;
-  resizeObserver?.observe(canvas);window.addEventListener('resize',()=>{if(!resizeObserver)resize()},{passive:true});document.addEventListener('visibilitychange',()=>{if(reduced)return;if(document.hidden){if(raf)cancelAnimationFrame(raf);raf=0;}else if(!raf)raf=requestAnimationFrame(draw);});resize();if(reduced)draw(9200);else raf=requestAnimationFrame(draw);
+
+  const resizeObserver='ResizeObserver' in window?new ResizeObserver(()=>{
+    const changed=resize();
+    if(reduced&&changed)draw(2600);
+  }):null;
+  resizeObserver?.observe(canvas);
+  window.addEventListener('resize',()=>{if(!resizeObserver)resize()},{passive:true});
+  document.addEventListener('visibilitychange',()=>{
+    if(reduced)return;
+    if(document.hidden){if(raf)cancelAnimationFrame(raf);raf=0;}
+    else if(!raf)raf=requestAnimationFrame(draw);
+  });
+
+  resize();
+  if(reduced)draw(2600);
+  else raf=requestAnimationFrame(draw);
 })();
