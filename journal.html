@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="HX-Wrdzgzs 的日志、照片与播客页面。" />
+  <meta name="description" content="HX-Wrdzgzs 的日志、照片与音频。" />
   <title>日志 / 播客 · HX-Wrdzgzs</title>
-  <link rel="stylesheet" href="./home.css?v=20260908-1" />
+  <link rel="stylesheet" href="./home.css?v=20260908-2" />
   <link rel="stylesheet" href="./layout.css?v=20260905-3" data-hx-layout />
   <style>
     .journal-hero{padding:72px 0 42px;border-bottom:1px solid var(--line,#e8e8e8)}
@@ -14,16 +14,11 @@
     .journal-card{padding:24px;border:1px solid var(--line,#e8e8e8);border-radius:20px;background:#fff}
     .journal-card small{display:block;margin-bottom:12px;color:#6b7280;font-size:12px;letter-spacing:.12em}
     .journal-card h3{margin:0 0 10px;font-size:20px}.journal-card p{margin:0;color:#666;line-height:1.75}
-    .photo-toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:22px}
-    .photo-note{margin:0;color:#6b7280;line-height:1.7}
     .photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
     .photo-item{margin:0;border:1px solid var(--line,#e8e8e8);border-radius:18px;overflow:hidden;background:#fff}
     .photo-item a{display:block;background:#f5f5f5}.photo-item img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
-    .photo-item figcaption{padding:12px 14px;color:#666;font-size:13px;overflow-wrap:anywhere}
-    .photo-empty{padding:28px;border:1px dashed #d7d7d7;border-radius:18px;color:#777;background:#fafafa}
-    .maintain-box{margin-top:22px;padding:18px 20px;border:1px solid var(--line,#e8e8e8);border-radius:16px;background:#fafafa;color:#666;line-height:1.75}
     @media(max-width:900px){.journal-grid,.photo-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:640px){.journal-hero{padding-top:38px}.journal-grid,.photo-grid{grid-template-columns:1fr}.photo-toolbar{align-items:flex-start;flex-direction:column}}
+    @media(max-width:640px){.journal-hero{padding-top:38px}.journal-grid,.photo-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -36,9 +31,8 @@
         <a class="sidebar-link" href="./projects.html"><span class="sidebar-icon">&lt;&gt;</span><span>项目</span></a>
         <a class="sidebar-link" href="./about.html"><span class="sidebar-icon">i</span><span>关于</span></a>
       </nav></section>
-      <section class="sidebar-group"><p class="sidebar-label">发布</p><nav class="sidebar-nav">
-        <a class="sidebar-link" href="https://github.com/HX-Wrdzgzs/homepages/upload/main/assets/posts" target="_blank" rel="noreferrer"><span class="sidebar-icon">＋</span><span>上传图片</span><span class="external">↗</span></a>
-        <a class="sidebar-link" href="https://github.com/HX-Wrdzgzs/homepages" target="_blank" rel="noreferrer"><span class="sidebar-icon">GH</span><span>仓库</span><span class="external">↗</span></a>
+      <section class="sidebar-group"><p class="sidebar-label">链接</p><nav class="sidebar-nav">
+        <a class="sidebar-link" href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer"><span class="sidebar-icon">GH</span><span>GitHub</span><span class="external">↗</span></a>
       </nav></section>
     </div>
     <div class="sidebar-footer">个人主页<br>© 2026 HX-Wrdzgzs</div>
@@ -50,37 +44,47 @@
     <main class="app-shell">
       <section class="journal-hero reveal">
         <p class="eyebrow"><span class="eyebrow-dot"></span> JOURNAL / PODCAST</p>
-        <h1 class="page-title">日志、照片，还有偶尔想留下来的声音。</h1>
-        <p class="page-lead">这里不按项目分类，也不追求固定更新频率。开发过程、设备折腾、无线电、照片和音频，都可以成为一条记录。</p>
+        <h1 class="page-title">日志 / 照片 / 音频</h1>
+        <p class="page-lead">开发记录、照片和音频内容放在这里。</p>
       </section>
 
       <section class="about-copy reveal">
         <h2>01 / 内容</h2>
         <div class="journal-grid">
-          <article class="journal-card"><small>BUILD LOG</small><h3>开发记录</h3><p>记录改了什么、为什么改、哪里失败过，以及最后留下来的方案。</p></article>
-          <article class="journal-card"><small>PHOTO</small><h3>照片</h3><p>图片直接存放在站点仓库中。上传后，下面的照片墙会自动读取并展示。</p></article>
-          <article class="journal-card"><small>AUDIO</small><h3>播客 / 音频</h3><p>有适合用声音表达的内容再发；暂时不把“做播客”本身当成更新任务。</p></article>
+          <article class="journal-card"><small>BUILD LOG</small><h3>开发记录</h3><p>记录项目修改、问题和处理结果。</p></article>
+          <article class="journal-card"><small>PHOTO</small><h3>照片</h3><p>站内保存的照片集中展示在下面。</p></article>
+          <article class="journal-card"><small>AUDIO</small><h3>音频</h3><p>音频内容会按条目整理。</p></article>
         </div>
       </section>
 
       <section class="about-copy reveal">
-        <h2>02 / 照片墙</h2>
-        <div class="photo-toolbar">
-          <p class="photo-note">图片来源：<code>assets/posts/</code>。页面只读取公开仓库内容，不在浏览器中保存 GitHub Token。</p>
-          <a class="button primary" href="https://github.com/HX-Wrdzgzs/homepages/upload/main/assets/posts" target="_blank" rel="noreferrer">上传图片（GitHub） ↗</a>
+        <h2>02 / 照片</h2>
+        <div class="photo-grid">
+          <figure class="photo-item"><a href="./assets/posts/DJI_0140.JPG" target="_blank" rel="noreferrer"><img src="./assets/posts/DJI_0140.JPG" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/IMG_20260905_113606.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/IMG_20260905_113606.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/IMG_20260831_121714.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/IMG_20260831_121714.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/IMG_20260829_105331.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/IMG_20260829_105331.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/IMG_20260823_182503.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/IMG_20260823_182503.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/dji_fly_20260823_181834_174_1787480391199_photo_optimized.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/dji_fly_20260823_181834_174_1787480391199_photo_optimized.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/dji_fly_20260823_181844_176_1787480395071_photo_optimized.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/dji_fly_20260823_181844_176_1787480395071_photo_optimized.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/dji_fly_20260823_182116_178_1787480486854_photo_optimized.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/dji_fly_20260823_182116_178_1787480486854_photo_optimized.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/Image_1788136624320_699.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788136624320_699.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/Image_1788302483244_116.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788302483244_116.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/Image_1788351332091_478.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788351332091_478.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/Image_1788528987017_157.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788528987017_157.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/Image_1788779069195_33.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788779069195_33.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/Image_1788779070505_355.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788779070505_355.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
+          <figure class="photo-item"><a href="./assets/posts/Image_1788779074004_354.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788779074004_354.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
         </div>
-        <div id="photo-gallery" class="photo-grid" aria-live="polite"><div class="photo-empty">正在读取照片列表……</div></div>
-        <div class="maintain-box"><strong>说明：</strong>上传入口使用 GitHub 自己的登录与仓库权限。只有拥有该仓库写入权限的账号才能真正提交图片，因此不会在静态站前端暴露访问令牌。图片提交到 <code>main/assets/posts/</code> 后，会自动出现在这里。</div>
       </section>
 
       <section class="about-copy reveal">
-        <h2>03 / 文字与音频</h2>
-        <div class="prose"><p>文字日志和音频条目会按内容逐步整理。这里先把内容入口和照片发布流程搭好，不用空白模板伪装成已经有很多文章。</p><p>如果以后日志数量变多，再把条目拆成独立页面和归档，不在一开始就引入复杂 CMS。</p></div>
+        <h2>03 / 音频</h2>
+        <div class="prose"><p>暂时没有整理公开音频条目。</p></div>
       </section>
     </main>
     <footer class="site-footer"><div class="footer-inner app-shell"><span>© 2026 HX-Wrdzgzs</span><div class="footer-links"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div></div></footer>
   </div>
   <script src="./home.js?v=20260905-4"></script>
-  <script src="./journal.js?v=20260908-1"></script>
 </body>
 </html>
