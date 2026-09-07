@@ -16,7 +16,7 @@ function ensureSidebarExtras(){
   if(!scroll.querySelector('[data-sidebar-sites]')){
     const group=document.createElement('section');
     group.className='sidebar-group';
-    group.setAttribute('data-sidebar-sites','');
+    group.setAttribute('data-sidebar-sites]','');
     group.innerHTML='<p class="sidebar-label">站点</p><nav class="sidebar-nav"><a class="sidebar-link" href="https://hx.mizuki.top" target="_blank" rel="noreferrer"><span class="sidebar-icon">HX</span><span>Hong Xing</span><span class="external">↗</span></a><a class="sidebar-link" href="https://qso.mizuki.top" target="_blank" rel="noreferrer"><span class="sidebar-icon">Q</span><span>QSO 档案</span><span class="external">↗</span></a><a class="sidebar-link" href="https://qsl.mizuki.top" target="_blank" rel="noreferrer"><span class="sidebar-icon">QSL</span><span>QSL 卡片</span><span class="external">↗</span></a><a class="sidebar-link" href="https://help.mizuki.top/status" target="_blank" rel="noreferrer"><span class="sidebar-icon">S</span><span>服务状态</span><span class="external">↗</span></a></nav>';
     scroll.appendChild(group);
   }
@@ -95,7 +95,7 @@ const legacyTarget=location.hash;
 if(legacyTarget==='#projects'||legacyTarget==='#work')location.replace('./projects.html');
 if(legacyTarget==='#about')location.replace('./about.html');
 
-// Hero particle field: HX logo mask, continuously streaming from right to left.
+// Hero particle field: BA4THG wordmark mask, continuously streaming from right to left.
 (()=>{
   const canvas=document.querySelector('[data-hero-shader]');
   if(!canvas)return;
@@ -136,26 +136,13 @@ if(legacyTarget==='#about')location.replace('./about.html');
     return maskData[(iy*cssW+ix)*4+3]>127?1:0;
   }
 
-  function drawHXMask(){
-    maskCtx.fillRect(140,180,92,500);
-    maskCtx.fillRect(390,180,92,500);
-    maskCtx.fillRect(140,385,342,90);
-
-    maskCtx.beginPath();
-    maskCtx.moveTo(560,180);
-    maskCtx.lineTo(668,180);
-    maskCtx.lineTo(875,680);
-    maskCtx.lineTo(767,680);
-    maskCtx.closePath();
-    maskCtx.fill();
-
-    maskCtx.beginPath();
-    maskCtx.moveTo(767,180);
-    maskCtx.lineTo(875,180);
-    maskCtx.lineTo(668,680);
-    maskCtx.lineTo(560,680);
-    maskCtx.closePath();
-    maskCtx.fill();
+  function drawBA4THGMask(){
+    maskCtx.save();
+    maskCtx.font='800 225px "Arial Narrow","Roboto Condensed",Arial,sans-serif';
+    maskCtx.textAlign='center';
+    maskCtx.textBaseline='middle';
+    maskCtx.fillText('BA4THG',500,430,850);
+    maskCtx.restore();
   }
 
   function rebuildMask(){
@@ -165,7 +152,7 @@ if(legacyTarget==='#about')location.replace('./about.html');
     maskCtx.save();
     maskCtx.setTransform(cssW/1000,0,0,cssH/850,0,0);
     maskCtx.fillStyle='#000';
-    drawHXMask();
+    drawBA4THGMask();
     maskCtx.restore();
     maskData=maskCtx.getImageData(0,0,cssW,cssH).data;
 
