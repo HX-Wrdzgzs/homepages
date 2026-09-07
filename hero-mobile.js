@@ -1,4 +1,6 @@
 (()=>{
+  const mobile=matchMedia('(max-width:620px)');
+  if(!mobile.matches)return;
   const canvas=document.querySelector('[data-hero-shader-mobile]');
   if(!canvas)return;
   const ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
