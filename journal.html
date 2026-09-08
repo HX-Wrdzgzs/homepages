@@ -4,21 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="HX-Wrdzgzs 的日志、照片与音频。" />
-  <title>日志 / 播客 · HX-Wrdzgzs</title>
+  <meta name="description" content="HX-Wrdzgzs 的照片。" />
+  <title>照片 · HX-Wrdzgzs</title>
   <link rel="stylesheet" href="./home.css?v=20260908-2" />
   <link rel="stylesheet" href="./layout.css?v=20260905-3" data-hx-layout />
   <style>
-    .journal-hero{padding:72px 0 42px;border-bottom:1px solid var(--line,#e8e8e8)}
-    .journal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-    .journal-card{padding:24px;border:1px solid var(--line,#e8e8e8);border-radius:20px;background:#fff}
-    .journal-card small{display:block;margin-bottom:12px;color:#6b7280;font-size:12px;letter-spacing:.12em}
-    .journal-card h3{margin:0 0 10px;font-size:20px}.journal-card p{margin:0;color:#666;line-height:1.75}
-    .photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-    .photo-item{margin:0;border:1px solid var(--line,#e8e8e8);border-radius:18px;overflow:hidden;background:#fff}
-    .photo-item a{display:block;background:#f5f5f5}.photo-item img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
-    @media(max-width:900px){.journal-grid,.photo-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:640px){.journal-hero{padding-top:38px}.journal-grid,.photo-grid{grid-template-columns:1fr}}
+    .photo-hero{padding:64px 0 34px;border-bottom:1px solid var(--line,#e8e8e8)}
+    .photo-hero .page-lead{max-width:720px}
+    .photo-section{padding:42px 0 88px}
+    .photo-grid{column-count:3;column-gap:16px}
+    .photo-item{display:inline-block;width:100%;margin:0 0 16px;break-inside:avoid;border:1px solid var(--line,#e8e8e8);border-radius:18px;overflow:hidden;background:#f5f5f5;vertical-align:top}
+    .photo-item a{display:block}
+    .photo-item img{display:block;width:100%;height:auto;max-width:100%}
+    @media(max-width:900px){.photo-grid{column-count:2}}
+    @media(max-width:560px){.photo-hero{padding-top:38px}.photo-section{padding-top:30px}.photo-grid{column-count:1}}
   </style>
 </head>
 <body>
@@ -27,7 +26,7 @@
     <div class="sidebar-scroll">
       <section class="sidebar-group"><p class="sidebar-label">导航</p><nav class="sidebar-nav">
         <a class="sidebar-link" href="./index.html"><span class="sidebar-icon">⌂</span><span>首页</span></a>
-        <a class="sidebar-link" href="./journal.html" aria-current="page"><span class="sidebar-icon">✎</span><span>日志 / 播客</span></a>
+        <a class="sidebar-link" href="./journal.html" aria-current="page"><span class="sidebar-icon">▧</span><span>照片</span></a>
         <a class="sidebar-link" href="./projects.html"><span class="sidebar-icon">&lt;&gt;</span><span>项目</span></a>
         <a class="sidebar-link" href="./about.html"><span class="sidebar-icon">i</span><span>关于</span></a>
       </nav></section>
@@ -42,23 +41,13 @@
 
   <div class="page-frame">
     <main class="app-shell">
-      <section class="journal-hero reveal">
-        <p class="eyebrow"><span class="eyebrow-dot"></span> JOURNAL / PODCAST</p>
-        <h1 class="page-title">日志 / 照片 / 音频</h1>
-        <p class="page-lead">开发记录、照片和音频内容放在这里。</p>
+      <section class="photo-hero reveal">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> PHOTOS</p>
+        <h1 class="page-title">照片</h1>
+        <p class="page-lead">目前放在站里的照片。</p>
       </section>
 
-      <section class="about-copy reveal">
-        <h2>01 / 内容</h2>
-        <div class="journal-grid">
-          <article class="journal-card"><small>BUILD LOG</small><h3>开发记录</h3><p>记录项目修改、问题和处理结果。</p></article>
-          <article class="journal-card"><small>PHOTO</small><h3>照片</h3><p>站内保存的照片集中展示在下面。</p></article>
-          <article class="journal-card"><small>AUDIO</small><h3>音频</h3><p>音频内容会按条目整理。</p></article>
-        </div>
-      </section>
-
-      <section class="about-copy reveal">
-        <h2>02 / 照片</h2>
+      <section class="photo-section reveal">
         <div class="photo-grid">
           <figure class="photo-item"><a href="./assets/posts/DJI_0140.JPG" target="_blank" rel="noreferrer"><img src="./assets/posts/DJI_0140.JPG" alt="照片" loading="lazy" decoding="async"></a></figure>
           <figure class="photo-item"><a href="./assets/posts/IMG_20260905_113606.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/IMG_20260905_113606.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
@@ -76,11 +65,6 @@
           <figure class="photo-item"><a href="./assets/posts/Image_1788779070505_355.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788779070505_355.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
           <figure class="photo-item"><a href="./assets/posts/Image_1788779074004_354.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788779074004_354.jpg" alt="照片" loading="lazy" decoding="async"></a></figure>
         </div>
-      </section>
-
-      <section class="about-copy reveal">
-        <h2>03 / 音频</h2>
-        <div class="prose"><p>暂时没有整理公开音频条目。</p></div>
       </section>
     </main>
     <footer class="site-footer"><div class="footer-inner app-shell"><span>© 2026 HX-Wrdzgzs</span><div class="footer-links"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div></div></footer>
