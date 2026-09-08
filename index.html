@@ -4,11 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="HX-Wrdzgzs 的个人主页。项目、开发记录、照片和音频。" />
+  <meta name="description" content="HX-Wrdzgzs 的个人主页。项目、照片、无线电和服务器。" />
   <title>HX-Wrdzgzs · 个人主页</title>
   <link rel="stylesheet" href="./home.css?v=20260908-2" />
   <link rel="stylesheet" href="./layout.css?v=20260905-3" data-hx-layout />
   <link rel="stylesheet" href="./hero-particles.css?v=20260908-1" />
+  <style>
+    .home-photo-grid{column-count:4;column-gap:14px;margin-top:24px}
+    .home-photo{display:inline-block;width:100%;margin:0 0 14px;break-inside:avoid;border:1px solid var(--line,#e8e8e8);border-radius:16px;overflow:hidden;background:#f5f5f5;vertical-align:top}
+    .home-photo img{display:block;width:100%;height:auto}
+    @media(max-width:900px){.home-photo-grid{column-count:2}}
+  </style>
 </head>
 <body>
   <aside class="site-sidebar" aria-label="网站菜单">
@@ -16,7 +22,7 @@
     <div class="sidebar-scroll">
       <section class="sidebar-group"><p class="sidebar-label">导航</p><nav class="sidebar-nav">
         <a class="sidebar-link" href="./index.html" aria-current="page"><span class="sidebar-icon">⌂</span><span>首页</span></a>
-        <a class="sidebar-link" href="./journal.html"><span class="sidebar-icon">✎</span><span>日志 / 播客</span></a>
+        <a class="sidebar-link" href="./journal.html"><span class="sidebar-icon">▧</span><span>照片</span></a>
         <a class="sidebar-link" href="./projects.html"><span class="sidebar-icon">&lt;&gt;</span><span>项目</span></a>
         <a class="sidebar-link" href="./about.html"><span class="sidebar-icon">i</span><span>关于</span></a>
       </nav></section>
@@ -53,13 +59,13 @@
           <p class="eyebrow"><span class="eyebrow-dot"></span> HX-Wrdzgzs / Personal site</p>
           <h1 class="page-title">你好，我是<br><span class="accent">HX-Wrdzgzs。</span></h1>
           <div class="hero-particle-mobile" aria-hidden="true"><canvas class="hero-shader-mobile" data-hero-shader-mobile></canvas></div>
-          <p class="page-lead">这是我的个人主页。主要整理项目、开发记录、照片和音频，也放一些无线电与服务器相关内容。</p>
+          <p class="page-lead">平时主要写 Python、Kotlin 和 C#。做 Android、Bot、Web 和一些 Windows 工具，也会维护服务器和无线电相关项目。</p>
           <div class="hero-actions">
-            <a class="button primary" href="./journal.html">日志 / 播客 <span>→</span></a>
-            <a class="button" href="./projects.html">项目</a>
+            <a class="button primary" href="./projects.html">项目 <span>→</span></a>
+            <a class="button" href="./journal.html">照片</a>
             <a class="button ghost" href="./about.html">关于</a>
           </div>
-          <div class="hero-meta"><span>开发记录</span><span>照片 / 音频</span><span>项目 / 无线电 / 服务器</span></div>
+          <div class="hero-meta"><span>Python / Kotlin / C#</span><span>Android / Bot / Web</span><span>服务器 / 无线电</span></div>
         </div>
         <div class="product-window" aria-label="最近在做">
           <div class="window-bar"><div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-path">最近在做</span><span class="window-path">2026</span></div>
@@ -73,7 +79,7 @@
             </aside>
             <div class="workspace-main">
               <div class="workspace-top"><div><p class="workspace-kicker" data-preview-kicker>ANDROID / MAIMAI DX</p><h2 class="workspace-title" data-preview-title>Amia Sync Android</h2></div><span class="status-pill"><i></i><span data-preview-state>重做中</span></span></div>
-              <p class="workspace-desc" data-preview-desc>舞萌 DX 的 Android 客户端。当前主要在调整界面、交互、成绩页和曲库相关页面。</p>
+              <p class="workspace-desc" data-preview-desc>舞萌 DX Android 客户端。当前在调整界面、交互、成绩页和曲库页面。</p>
               <div class="stack-row" data-preview-stack><span class="tech-chip">Kotlin</span><span class="tech-chip">Android</span><span class="tech-chip">FastAPI</span></div>
               <div class="workspace-flow"><div class="flow-label">流程</div><div class="flow-line" data-preview-flow><div class="flow-node">玩家数据</div><div class="flow-node">同步服务</div><div class="flow-node">Android</div></div></div>
               <div class="workspace-footer"><span data-preview-meta-left>Amia-Sync-Android</span><span data-preview-meta-right>UI 重做</span></div>
@@ -83,25 +89,16 @@
       </section>
 
       <section class="section app-shell reveal">
-        <div class="section-head"><div><span class="section-index">01 / 日志</span><h2>日志与照片</h2></div><p>开发记录、照片和音频集中放在日志页。</p></div>
-        <div class="secondary-grid">
-          <div class="info-panel"><h3>开发记录</h3><p>记录项目修改、遇到的问题和处理结果。</p><div class="topic-grid"><div class="topic"><strong>Build log</strong><span>开发过程</span></div><div class="topic"><strong>Notes</strong><span>短记录</span></div></div></div>
-          <div class="info-panel"><h3>照片与音频</h3><p>照片保存在站内；音频内容会按条目整理。</p><div class="topic-grid"><div class="topic"><strong>Photos</strong><span>照片</span></div><div class="topic"><strong>Audio</strong><span>音频</span></div></div></div>
-        </div>
-        <div class="hero-actions" style="margin-top:24px"><a class="button primary" href="./journal.html">打开日志 / 播客 <span>→</span></a></div>
-      </section>
-
-      <section class="section app-shell reveal">
-        <div class="section-head"><div><span class="section-index">02 / 项目</span><h2>最近的项目</h2></div><p>完整列表在项目页。</p></div>
+        <div class="section-head"><div><span class="section-index">01 / 项目</span><h2>最近的项目</h2></div><p><a href="./projects.html">查看全部项目 →</a></p></div>
         <div class="feature-grid">
-          <a class="feature-card" href="./projects/mizukisync.html"><span class="feature-number">01</span><span class="arrow">↗</span><h3>Amia Sync Android</h3><span class="feature-repo">Amia-Sync-Android</span><p>舞萌 DX 的 Android 客户端。当前主要在调整界面、交互、成绩页和曲库页面。</p><div class="feature-tags"><span>KOTLIN</span><span>ANDROID</span><span>FASTAPI</span></div></a>
-          <a class="feature-card" href="./projects/hx-ham.html"><span class="feature-number">02</span><span class="arrow">↗</span><h3>业余无线电点名助手</h3><span class="feature-repo">ham-checkin-assistant</span><p>中继点名现场使用的 Windows 本地工具，数据写入 SQLite，并可同步到 Excel。</p><div class="feature-tags"><span>PYTHON</span><span>SQLITE</span><span>EXCEL</span></div></a>
-          <a class="feature-card" href="./projects/retro-monitor.html"><span class="feature-number">03</span><span class="arrow">↗</span><h3>Retro Monitor</h3><span class="feature-repo">retro-monitor</span><p>采集 Windows 硬件状态，经 Home Assistant 转发到 ESP32-S3 桌面终端。</p><div class="feature-tags"><span>C#</span><span>HOME ASSISTANT</span><span>ESP32-S3</span></div></a>
+          <a class="feature-card" href="./projects/mizukisync.html"><span class="feature-number">01</span><span class="arrow">↗</span><h3>Amia Sync Android</h3><span class="feature-repo">Amia-Sync-Android</span><p>舞萌 DX Android 客户端，包含玩家信息、成绩和曲库页面。</p><div class="feature-tags"><span>KOTLIN</span><span>ANDROID</span><span>FASTAPI</span></div></a>
+          <a class="feature-card" href="./projects/hx-ham.html"><span class="feature-number">02</span><span class="arrow">↗</span><h3>业余无线电点名助手</h3><span class="feature-repo">ham-checkin-assistant</span><p>中继点名现场使用的 Windows 录入工具，数据保存到 SQLite，并可同步到 Excel。</p><div class="feature-tags"><span>PYTHON</span><span>SQLITE</span><span>EXCEL</span></div></a>
+          <a class="feature-card" href="./projects/retro-monitor.html"><span class="feature-number">03</span><span class="arrow">↗</span><h3>Retro Monitor</h3><span class="feature-repo">retro-monitor</span><p>采集 Windows 硬件状态，经 Home Assistant 转发到 ESP32-S3 显示。</p><div class="feature-tags"><span>C#</span><span>HOME ASSISTANT</span><span>ESP32-S3</span></div></a>
         </div>
       </section>
 
       <section class="section app-shell reveal">
-        <div class="section-head"><div><span class="section-index">03 / 近期</span><h2>正在维护</h2></div></div>
+        <div class="section-head"><div><span class="section-index">02 / 近期</span><h2>正在维护</h2></div></div>
         <div class="activity-list">
           <div class="activity-row"><div class="activity-state"><i></i> 正在改</div><div><h3>Amia-Sync-Android</h3><p>调整 UI、交互、成绩、曲库和设备相关页面。</p></div><span class="meta">ANDROID / UI</span></div>
           <div class="activity-row"><div class="activity-state"><i></i> 在做</div><div><h3>AuthLit 5</h3><p>身份与可信设备相关功能已接入 Sync。</p></div><span class="meta">IDENTITY / DEVICE</span></div>
@@ -113,20 +110,32 @@
       </section>
 
       <section class="section app-shell reveal">
-        <div class="section-head"><div><span class="section-index">04 / 其他</span><h2>其他内容</h2></div></div>
-        <div class="secondary-grid">
-          <div class="info-panel"><h3>服务器和网络</h3><p>PVE、Linux、Cloudflare、DNS、Tunnel 和自动化脚本。</p><div class="topic-grid"><div class="topic"><strong>Virtualization</strong><span>PVE / VM / LXC</span></div><div class="topic"><strong>Network</strong><span>DNS / Tunnel / Proxy</span></div><div class="topic"><strong>Deployment</strong><span>Cloudflare / Linux</span></div><div class="topic"><strong>Automation</strong><span>Python / PowerShell</span></div></div></div>
-          <div class="info-panel"><h3>无线电和音频</h3><p>QSO / QSL、点名工具、设备和音频处理实验。</p><div class="topic-grid"><div class="topic"><strong>Amateur Radio</strong><span>QSO / QSL / Tools</span></div><div class="topic"><strong>Audio</strong><span>Separation / SVC</span></div></div></div>
+        <div class="section-head"><div><span class="section-index">03 / 照片</span><h2>照片</h2></div><p><a href="./journal.html">查看全部照片 →</a></p></div>
+        <div class="home-photo-grid">
+          <a class="home-photo" href="./assets/posts/DJI_0140.JPG" target="_blank" rel="noreferrer"><img src="./assets/posts/DJI_0140.JPG" alt="照片" loading="lazy"></a>
+          <a class="home-photo" href="./assets/posts/IMG_20260905_113606.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/IMG_20260905_113606.jpg" alt="照片" loading="lazy"></a>
+          <a class="home-photo" href="./assets/posts/IMG_20260831_121714.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/IMG_20260831_121714.jpg" alt="照片" loading="lazy"></a>
+          <a class="home-photo" href="./assets/posts/Image_1788351332091_478.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788351332091_478.jpg" alt="照片" loading="lazy"></a>
+          <a class="home-photo" href="./assets/posts/Image_1788779069195_33.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/Image_1788779069195_33.jpg" alt="照片" loading="lazy"></a>
+          <a class="home-photo" href="./assets/posts/dji_fly_20260823_181844_176_1787480395071_photo_optimized.jpg" target="_blank" rel="noreferrer"><img src="./assets/posts/dji_fly_20260823_181844_176_1787480395071_photo_optimized.jpg" alt="照片" loading="lazy"></a>
         </div>
       </section>
 
       <section class="section app-shell reveal">
-        <div class="section-head"><div><span class="section-index">05 / 站点</span><h2>站点</h2></div><p>相关网站入口。</p></div>
+        <div class="section-head"><div><span class="section-index">04 / 其他</span><h2>服务器与无线电</h2></div></div>
+        <div class="secondary-grid">
+          <div class="info-panel"><h3>服务器和网络</h3><p>PVE、Linux、Cloudflare、DNS、Tunnel 和一些自动化脚本。</p><div class="topic-grid"><div class="topic"><strong>Virtualization</strong><span>PVE / VM / LXC</span></div><div class="topic"><strong>Network</strong><span>DNS / Tunnel / Proxy</span></div><div class="topic"><strong>Deployment</strong><span>Cloudflare / Linux</span></div><div class="topic"><strong>Automation</strong><span>Python / PowerShell</span></div></div></div>
+          <div class="info-panel"><h3>业余无线电</h3><p>QSO / QSL、点名工具、设备和相关软件。</p><div class="topic-grid"><div class="topic"><strong>QSO / QSL</strong><span>记录 / 卡片</span></div><div class="topic"><strong>Tools</strong><span>点名 / 固件 / Web</span></div></div></div>
+        </div>
+      </section>
+
+      <section class="section app-shell reveal">
+        <div class="section-head"><div><span class="section-index">05 / 站点</span><h2>站点</h2></div></div>
         <div class="site-link-grid">
-          <a class="site-link-card" href="https://hx.mizuki.top" target="_blank" rel="noreferrer"><span class="site-link-type">HONG XING</span><h3>hx.mizuki.top</h3><p>Hong Xing 项目、更新、生命周期和基础设施说明。</p><span class="site-link-arrow">↗</span></a>
+          <a class="site-link-card" href="https://hx.mizuki.top" target="_blank" rel="noreferrer"><span class="site-link-type">HONG XING</span><h3>hx.mizuki.top</h3><p>Hong Xing 项目网站。</p><span class="site-link-arrow">↗</span></a>
           <a class="site-link-card" href="https://help.mizuki.top" target="_blank" rel="noreferrer"><span class="site-link-type">DOCS</span><h3>help.mizuki.top</h3><p>Amia_晓山瑞希文档。</p><span class="site-link-arrow">↗</span></a>
-          <a class="site-link-card" href="https://qso.mizuki.top" target="_blank" rel="noreferrer"><span class="site-link-type">QSO</span><h3>qso.mizuki.top</h3><p>QSO 记录归档和查询。</p><span class="site-link-arrow">↗</span></a>
-          <a class="site-link-card" href="https://qsl.mizuki.top" target="_blank" rel="noreferrer"><span class="site-link-type">QSL</span><h3>qsl.mizuki.top</h3><p>QSL 卡片展示。</p><span class="site-link-arrow">↗</span></a>
+          <a class="site-link-card" href="https://qso.mizuki.top" target="_blank" rel="noreferrer"><span class="site-link-type">QSO</span><h3>qso.mizuki.top</h3><p>QSO 记录查询。</p><span class="site-link-arrow">↗</span></a>
+          <a class="site-link-card" href="https://qsl.mizuki.top" target="_blank" rel="noreferrer"><span class="site-link-type">QSL</span><h3>qsl.mizuki.top</h3><p>QSL 卡片。</p><span class="site-link-arrow">↗</span></a>
           <a class="site-link-card" href="https://help.mizuki.top/status" target="_blank" rel="noreferrer"><span class="site-link-type">STATUS</span><h3>服务状态</h3><p>Mizuki 相关服务状态。</p><span class="site-link-arrow">↗</span></a>
         </div>
       </section>
@@ -139,10 +148,8 @@
           <a class="site-link-card" href="https://ba4sbf.cn" target="_blank" rel="noreferrer"><span class="site-link-type">FRIEND</span><h3>BA4SBF</h3><p>ba4sbf.cn</p><span class="site-link-arrow">↗</span></a>
         </div>
       </section>
-
-      <section class="cta-band app-shell reveal"><div class="cta-inner"><div><h2>更多内容</h2><p>日志页和项目页分别整理记录与项目。</p></div><div class="hero-actions"><a class="button primary" href="./journal.html">日志 / 播客 <span>→</span></a><a class="button" href="./projects.html">项目</a></div></div></section>
     </main>
-    <footer class="site-footer"><div class="footer-inner app-shell"><span>© 2026 HX-Wrdzgzs</span><div class="footer-links"><a href="./journal.html">日志 / 播客</a><a href="./projects.html">项目</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div></div></footer>
+    <footer class="site-footer"><div class="footer-inner app-shell"><span>© 2026 HX-Wrdzgzs</span><div class="footer-links"><a href="./journal.html">照片</a><a href="./projects.html">项目</a><a href="./about.html">关于</a><a href="https://github.com/HX-Wrdzgzs" target="_blank" rel="noreferrer">GitHub ↗</a></div></div></footer>
   </div>
   <script src="./home.js?v=20260906-4"></script>
   <script src="./hero-mobile.js?v=20260908-1"></script>
