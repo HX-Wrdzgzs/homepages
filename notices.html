@@ -5,10 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#ffffff" />
   <meta name="description" content="HongXing（江苏）服务公告、服务器集群事件记录与恢复信息。" />
-  <title>服务公告 · HX-Wrdzgzs</title>
-  <link rel="stylesheet" href="./home.css?v=20260927-1" />
-  <link rel="stylesheet" href="./layout.css?v=20260927-1" data-hx-layout />
-  <link rel="stylesheet" href="./fluent.css?v=20260927-1" data-hx-fluent />
+  <title>服务公告与事件记录 · HX-Wrdzgzs</title>
+  <link rel="canonical" href="https://hx.mizuki.top/notices.html" />
+  <meta property="og:title" content="服务公告与事件记录 · HX-Wrdzgzs" />
+  <meta property="og:description" content="HongXing 服务集群攻击处置、恢复公告与历史事件时间线。" />
+  <meta property="og:url" content="https://hx.mizuki.top/notices.html" />
+  <link rel="stylesheet" href="./home.css?v=20260927-2" />
+  <link rel="stylesheet" href="./layout.css?v=20260927-2" data-hx-layout />
+  <link rel="stylesheet" href="./fluent.css?v=20260927-2" data-hx-fluent />
 </head>
 <body>
   <aside class="site-sidebar" aria-label="网站菜单">
@@ -23,6 +27,7 @@
           <a class="sidebar-link" href="./index.html"><span class="sidebar-icon">⌂</span><span>首页</span></a>
           <a class="sidebar-link" href="./projects.html"><span class="sidebar-icon">&lt;&gt;</span><span>项目</span></a>
           <a class="sidebar-link" href="./notices.html" aria-current="page"><span class="sidebar-icon">!</span><span>公告</span></a>
+          <a class="sidebar-link" href="./lifecycle.html"><span class="sidebar-icon">T</span><span>生命周期</span></a>
           <a class="sidebar-link" href="./photos.html"><span class="sidebar-icon">▧</span><span>照片</span></a>
           <a class="sidebar-link" href="./about.html"><span class="sidebar-icon">i</span><span>关于</span></a>
         </nav>
@@ -50,12 +55,12 @@
           <div class="reveal">
             <p class="ms-kicker">HONGXING / SERVICE ADVISORIES</p>
             <h1>服务公告</h1>
-            <p>记录 HongXing（江苏）服务集群的重大中断、处置与恢复信息。这里保存公告原文与时间线，不将历史公告状态冒充为实时状态。</p>
+            <p>记录 HongXing（江苏）服务集群的重大中断、处置与恢复信息。这里保存公告原文与事件时间线；实时在线状态仍以服务状态页和监控面板为准。</p>
           </div>
           <aside class="notice-current reveal">
-            <small>最新公告记录 · 2026-09-24</small>
+            <small>最新已发布公告 · 2026-09-24</small>
             <strong>主要处置工作已结束</strong>
-            <p>公告显示所有服务器集群已重新开放；当时除 Amia ALL SRV 外，其余主要服务均已恢复运行。</p>
+            <p>公告记录称所有服务器集群已重新开放；当时除 Amia ALL SRV 外，其余主要服务均已恢复运行。此处不等同于实时监控结果。</p>
           </aside>
         </div>
       </section>
@@ -81,6 +86,13 @@
           <div class="notice-timeline-item"><time>处置期间</time><div><h3>防护策略扩大阻断范围</h3><p>安全系统临时执行“拒绝所有流量”措施，部分内网流量一并被拦截，因此部分内部服务也受到影响。</p></div></div>
           <div class="notice-timeline-item"><time>约 43 小时后</time><div><h3>完成主要调查与恢复</h3><p>团队称已完成对事件的调查并确认主要攻击来源，所有服务器集群重新开放。</p></div></div>
           <div class="notice-timeline-item"><time>2026-09-24</time><div><h3>发布恢复公告</h3><p>除 Amia ALL SRV 外，其余主要服务均已恢复运行；Amia ALL SRV 于当晚开始陆续恢复，同时完成 PJSK v3 模块更新。</p></div></div>
+        </div>
+      </section>
+
+      <section class="notice-bridge app-shell reveal">
+        <div class="notice-bridge-inner">
+          <div><strong>需要查看产品生命周期？</strong><p>公告记录事件处置；产品、固件与服务的阶段变化单独整理在生命周期时间线中。</p></div>
+          <a href="./lifecycle.html">查看生命周期 →</a>
         </div>
       </section>
 
@@ -139,18 +151,26 @@
           <p>待确认服务环境安全后，我们将逐步恢复验证、下载、调用、云端存储及其他受影响服务。</p>
           <p>如后续调查或服务恢复情况出现重大变化，我们将继续发布公告。</p>
           <p>感谢理解与配合。</p>
-          <div class="notice-signature">HongXing（江苏）开发团队<br>2026年9月22日</div>
+          <div class="notice-signature">HongXing（江苏）开发团队<br>2026年9月22日 17:00（北京时间）</div>
         </article>
       </section>
+
+      <section class="notice-bridge app-shell reveal">
+        <div class="notice-bridge-inner">
+          <div><strong>实时状态与历史公告分开查看</strong><p>本页内容是公告归档。服务当前是否在线、节点是否有异常，请打开帮助文档的功能状态页或 Komari 监控。</p></div>
+          <a href="https://help.mizuki.top/status" target="_blank" rel="noreferrer">打开服务状态 ↗</a>
+        </div>
+      </section>
+
     </main>
 
     <footer class="site-footer">
       <div class="footer-inner app-shell">
         <span>© 2026 HX-Wrdzgzs</span>
-        <div class="footer-links"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a href="./photos.html">照片</a><a href="https://help.mizuki.top/status" target="_blank" rel="noreferrer">服务状态 ↗</a></div>
+        <div class="footer-links"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a href="./notices.html">公告</a><a href="./lifecycle.html">生命周期</a><a href="./photos.html">照片</a><a href="https://help.mizuki.top/status" target="_blank" rel="noreferrer">服务状态 ↗</a></div>
       </div>
     </footer>
   </div>
-  <script src="./home.js?v=20260927-1"></script>
+  <script src="./home.js?v=20260927-2"></script>
 </body>
 </html>
