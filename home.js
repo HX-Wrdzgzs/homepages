@@ -3,14 +3,14 @@
     if (!document.querySelector('link[data-hx-layout]')) {
       const layout = document.createElement('link');
       layout.rel = 'stylesheet';
-      layout.href = '/layout.css?v=20260927-2';
+      layout.href = '/layout.css?v=20260927-1';
       layout.setAttribute('data-hx-layout', '');
       document.head.appendChild(layout);
     }
     if (!document.querySelector('link[data-hx-fluent]')) {
       const fluent = document.createElement('link');
       fluent.rel = 'stylesheet';
-      fluent.href = '/fluent.css?v=20260927-2';
+      fluent.href = '/fluent.css?v=20260927-1';
       fluent.setAttribute('data-hx-fluent', '');
       document.head.appendChild(fluent);
     }
@@ -31,18 +31,6 @@
       link.innerHTML = '<span class="sidebar-icon">!</span><span>公告</span>';
       const projectLink = [...firstNav.querySelectorAll('a')].find(a => a.getAttribute('href')?.includes('projects.html'));
       if (projectLink?.nextSibling) firstNav.insertBefore(link, projectLink.nextSibling);
-      else firstNav.appendChild(link);
-    }
-
-
-    if (firstNav && !firstNav.querySelector('a[href$="lifecycle.html"]')) {
-      const link = document.createElement('a');
-      link.className = 'sidebar-link';
-      const prefix = location.pathname.includes('/projects/') ? '../' : './';
-      link.href = `${prefix}lifecycle.html`;
-      link.innerHTML = '<span class="sidebar-icon">T</span><span>生命周期</span>';
-      const noticeLink = firstNav.querySelector('a[href$="notices.html"]');
-      if (noticeLink?.nextSibling) firstNav.insertBefore(link, noticeLink.nextSibling);
       else firstNav.appendChild(link);
     }
 
